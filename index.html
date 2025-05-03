@@ -56,7 +56,13 @@ img.story-image-smaller {  /* this selects all images with the story-image-small
 max-width: 100%;
 height: auto;
 display: block;
-}</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="Step One Story Test 1" tags="" position="75,50" size="100,100">[[First linkage text test]]</tw-passagedata><tw-passagedata pid="2" name="First linkage text test" tags="" position="200,50" size="100,100">Second bubble created
+}
+tw-story[tags~="example-background"] {  /* the tag added in step 2 */
+  background-image: url(./images/DesktopImage1.jpg);  /* the image added in step 1 */
+  background-size: cover;  /* cover the whole element */
+  background-repeat: no-repeat;  /* do not repeat the background image */
+}
+</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="Step One Story Test 1" tags="" position="75,50" size="100,100">[[First linkage text test]]</tw-passagedata><tw-passagedata pid="2" name="First linkage text test" tags="" position="200,50" size="100,100">Second bubble created
 
 
 [[click-replace test]]
@@ -78,10 +84,10 @@ display: block;
 </tw-passagedata><tw-passagedata pid="7" name="Delay + flicker test" tags="" position="450,175" size="100,100">I dream of cats (t8n-delay: 7s) + (t8n: &quot;flicker&quot;) [and turtles]
 
 [[Add images test]]
-</tw-passagedata><tw-passagedata pid="8" name="Add images test" tags="" position="325,175" size="100,100">&lt;img class=&quot;story-image&quot; src=&quot;./images/Homer.jpg&quot; alt=&quot;an example&quot; /&gt;
+</tw-passagedata><tw-passagedata pid="8" name="Add images test" tags="example-background" position="325,175" size="100,100">&lt;img class=&quot;story-image&quot; src=&quot;./images/Homer.jpg&quot; alt=&quot;an example&quot; /&gt;
 
 [[Change the Story Stylesheet]]
-</tw-passagedata><tw-passagedata pid="9" name="Change the Story Stylesheet" tags="" position="200,175" size="100,100">Added to Stylesheet:
+</tw-passagedata><tw-passagedata pid="9" name="Change the Story Stylesheet" tags="example-background" position="200,175" size="100,100">Added to Stylesheet:
 
 @import url(&#39;https://fonts.googleapis.com/css2?family=Homemade+Apple&amp;display=swap&#39;);
 
@@ -116,8 +122,11 @@ tw-passage {
 [[Image Properties]]
 </tw-passagedata><tw-passagedata pid="12" name="Image Properties" tags="" position="200,300" size="100,100">[[Scaling Images by Class]]
 [[Scaling Images with Style]]
-[[Images with the CSS Grid Layout Left Text]]
-[[Images with the CSS Grid Layout RightText]]</tw-passagedata><tw-passagedata pid="13" name="Scaling Images by Class" tags="" position="75,425" size="100,100">&lt;img class=&quot;story-image-smaller&quot; src=&quot;./images/Homer.jpg&quot; alt=&quot;an example&quot; /&gt;</tw-passagedata><tw-passagedata pid="14" name="Scaling Images with Style" tags="" position="200,425" size="100,100">&lt;img style=&quot;width: 30%;&quot; src=&quot;./images/Homer.jpg&quot; alt=&quot;an example&quot; /&gt;</tw-passagedata><tw-passagedata pid="15" name="Images with the CSS Grid Layout Left Text" tags="" position="325,425" size="100,100">&lt;div class=&quot;story-room&quot;&gt;&lt;div class=&quot;story-text&quot;&gt;This is example text.&lt;/div&gt;&lt;div class=&quot;story-image&quot;&gt;&lt;img src=&quot;./images/Homer.jpg&quot; alt=&quot;an example&quot; /&gt;&lt;/div&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="16" name="Images with the CSS Grid Layout RightText" tags="" position="450,425" size="100,100"></tw-passagedata></tw-storydata>
+[[Images with the CSS Grid Layout - Text Position Text]]
+[[Background Images Using Tags]]</tw-passagedata><tw-passagedata pid="13" name="Scaling Images by Class" tags="" position="75,425" size="100,100">&lt;img class=&quot;story-image-smaller&quot; src=&quot;./images/Homer.jpg&quot; alt=&quot;an example&quot; /&gt;</tw-passagedata><tw-passagedata pid="14" name="Scaling Images with Style" tags="" position="200,425" size="100,100">&lt;img style=&quot;width: 30%;&quot; src=&quot;./images/Homer.jpg&quot; alt=&quot;an example&quot; /&gt;</tw-passagedata><tw-passagedata pid="15" name="Images with the CSS Grid Layout - Text Position Text" tags="" position="325,425" size="100,100">&lt;div class=&quot;story-room&quot;&gt;&lt;div class=&quot;story-text&quot;&gt;This is example text.&lt;/div&gt;&lt;div class=&quot;story-image&quot;&gt;&lt;img src=&quot;./images/Homer.jpg&quot; alt=&quot;an example&quot; /&gt;&lt;/div&gt;&lt;/div&gt;
+
+
+If you want the image to appear on the left and the text on the right, then swap the values for grid-column in the style sheet</tw-passagedata><tw-passagedata pid="16" name="Background Images Using Tags" tags="" position="450,425" size="100,100">[[Add images test]] </tw-passagedata></tw-storydata>
 <script title="Twine engine code" data-main="harlowe">(function(){"use strict";
 var require,define;!function(){var e={},r={};require=function(i){var n=e[i];return n&&(r[i]=n[1].apply(void 0,n[0].map(require)),e[i]=void 0),r[i]},(define=function(r,i,n){if("function"==typeof r)return r();e[r]=[i,n]}).amd=!0}();/*!
  * https://github.com/paulmillr/es6-shim
