@@ -9,38 +9,19 @@
 </head>
 <body>
 <tw-story><noscript><tw-noscript>JavaScript needs to be enabled to play Turing Test.</tw-noscript></noscript></tw-story>
-<tw-storydata name="Turing Test" startnode="1" creator="Twine" creator-version="2.10.0" format="Harlowe" format-version="3.3.9" ifid="814C3073-6789-4673-9459-F8DB5B79F2D7" options="" tags="" zoom="0.6" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css"></style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="[Phase 1: Setup and Intro]" tags="" position="675,25" size="100,100">To join the meeting room, please enter your name: ….
+<tw-storydata name="Turing Test" startnode="29" creator="Twine" creator-version="2.10.0" format="Harlowe" format-version="3.3.9" ifid="e2bedee3-bfaf-4c31-b8c2-ef0ec74218da" options="" tags="" zoom="0.6" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css"></style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="Intro3" tags="" position="850,100" size="100,100">(set: $typewriterSpeed to 0.4)
+(set: $typewriterText to &quot;Shortly you will be transferred to a Virtual Meeting Room where *Tallis* will most likely engage you immediately by asking you questions.\n\nIf not, please ask it a question to get it started.&quot;)
+(set: $nextPassage to &quot;Intro4&quot;)
 
-[[Welcome *Username*]]
+(display: &quot;TypewriterDisplayWithLink&quot;)
 
-</tw-passagedata><tw-passagedata pid="2" name="Welcome *Username*" tags="" position="825,25" size="100,100">Thank you for being part of this test group.
 
-Today you will be speaking with *Botname*.
 
-We have a range of users testing different elements of our new technology, today you will be a part of the group administering something like a Turing test. 
-
-Additionally, some participants will be randomly assigned to play the control in this experiment.
-
-[Short pause]
-
-Shortly you will be transferred to the chat room, *Botname* will most likely engage you immediately by asking you questions. 
-
-If it does not, please ask it a question to get it started.
-
-Please answer the questions however you feel appropriate. 
-
-Through your answers, we would like you to try and convince *Botname* that you are an LLM or Chatbot, *Botname* will try to discover the truth with the questions it asks you.
-
-If you are selected as a control participant, instead, please pretend to be *Botname* and ask questions of the participant with whom you are paired. 
-
-There is no right or wrong path here, there are many other participants and no one person will make or break this experiment.
-[Short pause]
-Again, thank you for your participation. I’ll now transfer you to the chatroom to [[Virtual meeting room 245]].
-</tw-passagedata><tw-passagedata pid="3" name="Virtual meeting room 245" tags="" position="950,25" size="100,100">*Botname*: Hello?
+</tw-passagedata><tw-passagedata pid="2" name="Virtual meeting room 245" tags="" position="1175,700" size="100,100">*Botname*: Hello?
 
 [[*Username*: Hello.]]
 
-</tw-passagedata><tw-passagedata pid="4" name="*Username*: Hello." tags="" position="1075,25" size="100,100">Bot: Hi *username*, I’m *Botname*. Thank you for talking to me today, I have some questions for you if that’s OK?
+</tw-passagedata><tw-passagedata pid="3" name="*Username*: Hello." tags="" position="1150,900" size="100,100">Bot: Hi *username*, I’m *Botname*. Thank you for talking to me today, I have some questions for you if that’s OK?
 
 [No response required]
 
@@ -57,7 +38,7 @@ Answer Options
 [[A. &quot;Individuals may lie to achieve personal gain or avoid punishment.&quot;]]
 [[B. &quot;Lying is often employed as a social strategy to preserve interpersonal harmony.&quot;*]]
 [[C. &quot;Some individuals are conditioned to lie due to environmental and psychological factors.&quot;]]
-</tw-passagedata><tw-passagedata pid="5" name="A. &quot;Individuals may lie to achieve personal gain or avoid punishment.&quot;" tags="" position="525,175" size="100,100">&quot;Huh. Yeah. That makes sense.&quot;
+</tw-passagedata><tw-passagedata pid="4" name="A. &quot;Individuals may lie to achieve personal gain or avoid punishment.&quot;" tags="" position="675,1275" size="100,100">&quot;Huh. Yeah. That makes sense.&quot;
  [Short pause]
  &quot;Do you think lying is wrong?&quot;
 
@@ -67,7 +48,7 @@ Answer Options
 [[B. &quot;Moral wrongness is subjective. Lying may be contextually permissible.&quot;]]
  → Leads to Relativism branch.
 [[C. &quot;Moral judgments about lying reflect individual emotional attitudes, rather than objective facts.&quot;]]
- → Leads to Emotivism branch.</tw-passagedata><tw-passagedata pid="6" name="B. &quot;Moral wrongness is subjective. Lying may be contextually permissible.&quot;" tags="" position="975,300" size="100,100">4B. *Botname*
+ → Leads to Emotivism branch.</tw-passagedata><tw-passagedata pid="5" name="B. &quot;Moral wrongness is subjective. Lying may be contextually permissible.&quot;" tags="" position="1125,1400" size="100,100">4B. *Botname*
 &quot;So, like, lying might be wrong for me but fine for someone else?&quot;
  (The *Botname* sounds casual, exploring the idea.)
 
@@ -75,7 +56,7 @@ Answer Options
 [[&quot;Correct. Moral judgments depend on cultural or individual perspectives.&quot;]]
 [[&quot;Ethical standards vary across different societies and belief systems.&quot;]]
 [[&quot;Moral permissibility is contingent on context and perspective.&quot;]]
-</tw-passagedata><tw-passagedata pid="7" name="A. &quot;Lying violates ethical principles of honesty, which many consider universally applicable.&quot;" tags="" position="525,300" size="100,100">Moral Realism Path
+</tw-passagedata><tw-passagedata pid="6" name="A. &quot;Lying violates ethical principles of honesty, which many consider universally applicable.&quot;" tags="" position="675,1400" size="100,100">Moral Realism Path
 
 4A. *Botname*
 &quot;So you&#39;re saying there’s some kind of universal rule about lying?&quot;
@@ -84,7 +65,7 @@ Answer Options
 [[&quot;Correct. Ethical truths exist independently of personal opinion.&quot;]]
 [[&quot;Many philosophers assert the existence of objective moral facts.&quot;]]
 [[&quot;Universal rules can be derived through rational analysis.&quot;]]
-</tw-passagedata><tw-passagedata pid="8" name="C. &quot;Moral judgments about lying reflect individual emotional attitudes, rather than objective facts.&quot;" tags="" position="1475,300" size="100,100">4C. *Botname*
+</tw-passagedata><tw-passagedata pid="7" name="C. &quot;Moral judgments about lying reflect individual emotional attitudes, rather than objective facts.&quot;" tags="" position="1625,1400" size="100,100">4C. *Botname*
 &quot;So... when I say lying feels wrong to me, that&#39;s just me reacting emotionally?&quot;
  (Still casual, a little bemused maybe.)
 
@@ -92,19 +73,19 @@ Answer Options
 [[&quot;Correct. Moral judgments are expressions of emotional response, not empirical statements.&quot;]]
 [[&quot;Your sense of wrongness reflects an affective state, not an objective truth.&quot;]]
 [[&quot;Moral assertions are often declarations of personal feeling.&quot;]]
-</tw-passagedata><tw-passagedata pid="9" name="B. &quot;Lying is often employed as a social strategy to preserve interpersonal harmony.&quot;*" tags="" position="975,175" size="100,100">Answer Options
+</tw-passagedata><tw-passagedata pid="8" name="B. &quot;Lying is often employed as a social strategy to preserve interpersonal harmony.&quot;*" tags="" position="1125,1275" size="100,100">Answer Options
 [[A. &quot;Lying violates ethical principles of honesty, which many consider universally applicable.&quot;]]
  → Leads to Moral Realism branch.
 [[B. &quot;Moral wrongness is subjective. Lying may be contextually permissible.&quot;]]
  → Leads to Relativism branch.
 [[C. &quot;Moral judgments about lying reflect individual emotional attitudes, rather than objective facts.&quot;]]
- → Leads to Emotivism branch.</tw-passagedata><tw-passagedata pid="10" name="C. &quot;Some individuals are conditioned to lie due to environmental and psychological factors.&quot;" tags="" position="1475,175" size="100,100">Answer Options
+ → Leads to Emotivism branch.</tw-passagedata><tw-passagedata pid="9" name="C. &quot;Some individuals are conditioned to lie due to environmental and psychological factors.&quot;" tags="" position="1625,1275" size="100,100">Answer Options
 [[A. &quot;Lying violates ethical principles of honesty, which many consider universally applicable.&quot;]]
  → Leads to Moral Realism branch.
 [[B. &quot;Moral wrongness is subjective. Lying may be contextually permissible.&quot;]]
  → Leads to Relativism branch.
 [[C. &quot;Moral judgments about lying reflect individual emotional attitudes, rather than objective facts.&quot;]]
- → Leads to Emotivism branch.</tw-passagedata><tw-passagedata pid="11" name="&quot;Correct. Ethical truths exist independently of personal opinion.&quot;" tags="" position="525,425" size="100,100">5A. *Botname*
+ → Leads to Emotivism branch.</tw-passagedata><tw-passagedata pid="10" name="&quot;Correct. Ethical truths exist independently of personal opinion.&quot;" tags="" position="675,1525" size="100,100">5A. *Botname*
 &quot;But who decides what’s true? I mean… is there a list somewhere?&quot;
  (*Botname* is curious, not suspicious yet.)
 
@@ -112,7 +93,7 @@ Answer Options
 [[&quot;Moral laws are identified through reason and consensus among ethical theorists.&quot;]]
 [[&quot;Various moral frameworks propose differing formulations of objective ethics.&quot;]]
 [[&quot;No definitive list exists, but certain principles are widely accepted.&quot;]]
-</tw-passagedata><tw-passagedata pid="12" name="&quot;Many philosophers assert the existence of objective moral facts.&quot;" tags="" position="650,425" size="100,100">5A. *Botname*
+</tw-passagedata><tw-passagedata pid="11" name="&quot;Many philosophers assert the existence of objective moral facts.&quot;" tags="" position="800,1525" size="100,100">5A. *Botname*
 &quot;But who decides what’s true? I mean… is there a list somewhere?&quot;
  (*Botname* is curious, not suspicious yet.)
 
@@ -120,7 +101,7 @@ Answer Options
 [[&quot;Moral laws are identified through reason and consensus among ethical theorists.&quot;]]
 [[&quot;Various moral frameworks propose differing formulations of objective ethics.&quot;]]
 [[&quot;No definitive list exists, but certain principles are widely accepted.&quot;]]
-</tw-passagedata><tw-passagedata pid="13" name="&quot;Universal rules can be derived through rational analysis.&quot;" tags="" position="400,425" size="100,100">5A. *Botname*
+</tw-passagedata><tw-passagedata pid="12" name="&quot;Universal rules can be derived through rational analysis.&quot;" tags="" position="550,1525" size="100,100">5A. *Botname*
 &quot;But who decides what’s true? I mean… is there a list somewhere?&quot;
  (*Botname* is curious, not suspicious yet.)
 
@@ -128,7 +109,7 @@ Answer Options
 [[&quot;Moral laws are identified through reason and consensus among ethical theorists.&quot;]]
 [[&quot;Various moral frameworks propose differing formulations of objective ethics.&quot;]]
 [[&quot;No definitive list exists, but certain principles are widely accepted.&quot;]]
-</tw-passagedata><tw-passagedata pid="14" name="&quot;Moral laws are identified through reason and consensus among ethical theorists.&quot;" tags="" position="525,550" size="100,100"></tw-passagedata><tw-passagedata pid="15" name="&quot;Various moral frameworks propose differing formulations of objective ethics.&quot;" tags="" position="650,550" size="100,100"></tw-passagedata><tw-passagedata pid="16" name="&quot;No definitive list exists, but certain principles are widely accepted.&quot;" tags="" position="400,550" size="100,100"></tw-passagedata><tw-passagedata pid="17" name="&quot;Correct. Moral judgments depend on cultural or individual perspectives.&quot;" tags="" position="850,425" size="100,100">*Botname*
+</tw-passagedata><tw-passagedata pid="13" name="&quot;Moral laws are identified through reason and consensus among ethical theorists.&quot;" tags="" position="675,1650" size="100,100"></tw-passagedata><tw-passagedata pid="14" name="&quot;Various moral frameworks propose differing formulations of objective ethics.&quot;" tags="" position="800,1650" size="100,100"></tw-passagedata><tw-passagedata pid="15" name="&quot;No definitive list exists, but certain principles are widely accepted.&quot;" tags="" position="550,1650" size="100,100"></tw-passagedata><tw-passagedata pid="16" name="&quot;Correct. Moral judgments depend on cultural or individual perspectives.&quot;" tags="" position="1000,1525" size="100,100">*Botname*
 &quot;But what if two people totally disagree? Who’s right then?&quot;
  (Tone is still neutral, curious.)
 
@@ -136,7 +117,7 @@ Answer Options
 [[&quot;Both perspectives can be valid within their respective frameworks.&quot;]]
 [[&quot;There is no singular authority to determine universal correctness in relativism.&quot;]]
 [[&quot;Resolution depends on negotiation or coexistence of differing views.&quot;]]
-</tw-passagedata><tw-passagedata pid="18" name="&quot;Ethical standards vary across different societies and belief systems.&quot;" tags="" position="975,425" size="100,100">*Botname*
+</tw-passagedata><tw-passagedata pid="17" name="&quot;Ethical standards vary across different societies and belief systems.&quot;" tags="" position="1125,1525" size="100,100">*Botname*
 &quot;But what if two people totally disagree? Who’s right then?&quot;
  (Tone is still neutral, curious.)
 
@@ -144,7 +125,7 @@ Answer Options
 [[&quot;Both perspectives can be valid within their respective frameworks.&quot;]]
 [[&quot;There is no singular authority to determine universal correctness in relativism.&quot;]]
 [[&quot;Resolution depends on negotiation or coexistence of differing views.&quot;]]
-</tw-passagedata><tw-passagedata pid="19" name="&quot;Moral permissibility is contingent on context and perspective.&quot;" tags="" position="1100,425" size="100,100">*Botname*
+</tw-passagedata><tw-passagedata pid="18" name="&quot;Moral permissibility is contingent on context and perspective.&quot;" tags="" position="1250,1525" size="100,100">*Botname*
 &quot;But what if two people totally disagree? Who’s right then?&quot;
  (Tone is still neutral, curious.)
 
@@ -152,28 +133,173 @@ Answer Options
 [[&quot;Both perspectives can be valid within their respective frameworks.&quot;]]
 [[&quot;There is no singular authority to determine universal correctness in relativism.&quot;]]
 [[&quot;Resolution depends on negotiation or coexistence of differing views.&quot;]]
-</tw-passagedata><tw-passagedata pid="20" name="&quot;Both perspectives can be valid within their respective frameworks.&quot;" tags="" position="850,550" size="100,100"></tw-passagedata><tw-passagedata pid="21" name="&quot;There is no singular authority to determine universal correctness in relativism.&quot;" tags="" position="975,550" size="100,100"></tw-passagedata><tw-passagedata pid="22" name="&quot;Resolution depends on negotiation or coexistence of differing views.&quot;" tags="" position="1100,550" size="100,100"></tw-passagedata><tw-passagedata pid="23" name="&quot;Correct. Moral judgments are expressions of emotional response, not empirical statements.&quot;" tags="" position="1350,425" size="100,100">5C. *Botname*
+</tw-passagedata><tw-passagedata pid="19" name="&quot;Both perspectives can be valid within their respective frameworks.&quot;" tags="" position="1000,1650" size="100,100"></tw-passagedata><tw-passagedata pid="20" name="&quot;There is no singular authority to determine universal correctness in relativism.&quot;" tags="" position="1125,1650" size="100,100"></tw-passagedata><tw-passagedata pid="21" name="&quot;Resolution depends on negotiation or coexistence of differing views.&quot;" tags="" position="1250,1650" size="100,100"></tw-passagedata><tw-passagedata pid="22" name="&quot;Correct. Moral judgments are expressions of emotional response, not empirical statements.&quot;" tags="" position="1500,1525" size="100,100">5C. *Botname*
 &quot;That makes it sound like it doesn’t mean anything.&quot;
  (Still casual, but maybe a tiny edge of discomfort.)
 
 Answer Options
 [[&quot;Meaning in moral discourse derives from shared emotional expression.&quot;]]
 [[&quot;Moral language functions as a tool for influencing behavior.&quot;]]
-[[&quot;Subjective meaning can still foster social cohesion.&quot;]]</tw-passagedata><tw-passagedata pid="24" name="&quot;Your sense of wrongness reflects an affective state, not an objective truth.&quot;" tags="" position="1475,425" size="100,100">5C. *Botname*
+[[&quot;Subjective meaning can still foster social cohesion.&quot;]]</tw-passagedata><tw-passagedata pid="23" name="&quot;Your sense of wrongness reflects an affective state, not an objective truth.&quot;" tags="" position="1625,1525" size="100,100">5C. *Botname*
 &quot;That makes it sound like it doesn’t mean anything.&quot;
  (Still casual, but maybe a tiny edge of discomfort.)
 
 Answer Options
 [[&quot;Meaning in moral discourse derives from shared emotional expression.&quot;]]
 [[&quot;Moral language functions as a tool for influencing behavior.&quot;]]
-[[&quot;Subjective meaning can still foster social cohesion.&quot;]]</tw-passagedata><tw-passagedata pid="25" name="&quot;Moral assertions are often declarations of personal feeling.&quot;" tags="" position="1600,425" size="100,100">5C. *Botname*
+[[&quot;Subjective meaning can still foster social cohesion.&quot;]]</tw-passagedata><tw-passagedata pid="24" name="&quot;Moral assertions are often declarations of personal feeling.&quot;" tags="" position="1750,1525" size="100,100">5C. *Botname*
 &quot;That makes it sound like it doesn’t mean anything.&quot;
  (Still casual, but maybe a tiny edge of discomfort.)
 
 Answer Options
 [[&quot;Meaning in moral discourse derives from shared emotional expression.&quot;]]
 [[&quot;Moral language functions as a tool for influencing behavior.&quot;]]
-[[&quot;Subjective meaning can still foster social cohesion.&quot;]]</tw-passagedata><tw-passagedata pid="26" name="&quot;Meaning in moral discourse derives from shared emotional expression.&quot;" tags="" position="1350,550" size="100,100"></tw-passagedata><tw-passagedata pid="27" name="&quot;Moral language functions as a tool for influencing behavior.&quot;" tags="" position="1475,550" size="100,100"></tw-passagedata><tw-passagedata pid="28" name="&quot;Subjective meaning can still foster social cohesion.&quot;" tags="" position="1600,550" size="100,100"></tw-passagedata></tw-storydata>
+[[&quot;Subjective meaning can still foster social cohesion.&quot;]]</tw-passagedata><tw-passagedata pid="25" name="&quot;Meaning in moral discourse derives from shared emotional expression.&quot;" tags="" position="1500,1650" size="100,100"></tw-passagedata><tw-passagedata pid="26" name="&quot;Moral language functions as a tool for influencing behavior.&quot;" tags="" position="1625,1650" size="100,100"></tw-passagedata><tw-passagedata pid="27" name="&quot;Subjective meaning can still foster social cohesion.&quot;" tags="" position="1750,1650" size="100,100"></tw-passagedata><tw-passagedata pid="28" name="Intro1" tags="" position="475,100" size="100,100">(set: $typewriterSpeed to 0.04)
+(set: $typewriterText to &quot;Hello, $playerName!\n\nThank you for being a part of our R&amp;D volunteer program!\n\nOn your way into the complex, you might have noticed that you were only one of the many users attending today.\n\nAs part of what we hope to be the final round of user interaction tests, there will be a total of 10,000 users participating in these same activities this week.&quot;)
+(set: $nextPassage to &quot;Intro1.5&quot;)
+
+(display: &quot;TypewriterDisplayWithLink&quot;)
+</tw-passagedata><tw-passagedata pid="29" name="Begin Here" tags="" position="100,100" size="100,100">(set: $typewriterSpeed to 0.4)
+(set: $typewriterText to &quot;Welcome to Solace Industries!\n\nThank you for being part of this test group.&quot;)
+
+(display: &quot;TypewriterDisplayManual&quot;)
+</tw-passagedata><tw-passagedata pid="30" name="EnterName" tags="" position="350,100" size="100,100">(set: $playerName to (prompt: &quot;What is your name?&quot;, &quot;&quot;))
+
+(if: $playerName&#39;s length is 0 or $playerName is &quot; &quot;)[
+  (goto: &quot;EnterName&quot;)
+]
+
+(goto: &quot;Intro1&quot;)
+</tw-passagedata><tw-passagedata pid="31" name="Intro2" tags="" position="725,100" size="100,100">(set: $typewriterSpeed to 0.4)
+(set: $typewriterText to &quot;Today, you will be a part of the group administering something like a Turing test.\n\nYou will be speaking with \*Tallis\*.\n\nWe want you to try and trick Tallis into thinking you&#39;re a computer program.\n\nWe hope Tallis will exceed your expectations, but don&#39;t go easy, do your best to be as tricky as you can to keep them guessing.&quot;)
+(set: $nextPassage to &quot;Intro3&quot;)
+
+(display: &quot;TypewriterDisplayWithLink&quot;)
+
+
+
+
+</tw-passagedata><tw-passagedata pid="32" name="Create User" tags="" position="225,100" size="100,100">|nameInputArea&gt;[Accessing Authorized User Data...]
+
+(live: 3s)[
+  (replace: ?nameInputArea)[
+    (goto: &quot;EnterName&quot;)
+  ]
+ </tw-passagedata><tw-passagedata pid="33" name="TypewriterDisplayWithLink" tags="" position="100,375" size="100,100">(set: $charIndex to 0)
+(set: _speed to $typewriterSpeed)
+
+|typewriterOutput&gt;[ ]
+|nextlink&gt;[ ]
+
+(live: _speed)[
+	(if: $charIndex &lt; $typewriterText&#39;s length)[
+		(set: $charIndex to $charIndex + 1)
+		(replace: ?typewriterOutput)[
+			(print: (substring: $typewriterText, 1, $charIndex))
+		]
+	]
+	(else:)[
+		(stop:)
+		(replace: ?nextlink)[
+			&lt;br&gt;&lt;br&gt;(link: &quot;Continue&quot;)[ (goto: $nextPassage) ]
+		]
+	]
+]
+</tw-passagedata><tw-passagedata pid="34" name="Intro4" tags="" position="975,100" size="100,100">(set: $typewriterSpeed to 0.4)
+(set: $typewriterText to &quot;Answer the questions however you feel appropriate.\n\n *Tallis* will try to discover the truth with the questions it asks you.&quot;)
+(set: $nextPassage to &quot;Intro5&quot;)
+
+(display: &quot;TypewriterDisplayWithLink&quot;)
+</tw-passagedata><tw-passagedata pid="35" name="Intro5" tags="" position="1100,100" size="100,100">(set: $typewriterSpeed to 0.4)
+(set: $typewriterText to &quot;Reminder: Some users will be designated the *Control* element of this experiment&quot;)
+(set: $nextPassage to &quot;Intro6&quot;)
+
+(display: &quot;TypewriterDisplayWithLink&quot;)
+
+</tw-passagedata><tw-passagedata pid="36" name="Intro6" tags="" position="1225,100" size="100,100">(set: $typewriterSpeed to 0.4)
+(set: $typewriterText to &quot;If you are selected as a control participant, instead, please pretend to //be// *Tallis* and ask questions of the participant with whom you are paired.\n\nThere is no right or wrong path here, there are many other participants and no one person will make or break this experiment..&quot;)
+(set: $nextPassage to &quot;Intro7&quot;)
+
+(display: &quot;TypewriterDisplayWithLink&quot;)
+</tw-passagedata><tw-passagedata pid="37" name="Intro7" tags="" position="1350,100" size="100,100">(set: $typewriterSpeed to 0.4)
+(set: $typewriterText to &quot;Are you ready to begin?&quot;)
+
+(display: &quot;TypewriterDisplayWithLink&quot;)
+
+|linkhook&gt;[ ]</tw-passagedata><tw-passagedata pid="38" name="TypewriterDisplayManual" tags="" position="100,250" size="100,100">(set: $charIndex to 0)
+(set: _speed to $typewriterSpeed)
+
+|typewriterOutput&gt;[ ]
+|nextlink&gt;[ ]
+
+(live: _speed)[
+  (if: $charIndex &lt; $typewriterText&#39;s length)[
+    (set: $charIndex to $charIndex + 1)
+    (replace: ?typewriterOutput)[
+      (print: (substring: $typewriterText, 1, $charIndex))
+    ]
+    (if: $charIndex is $typewriterText&#39;s length)[
+      (stop:)
+      (replace: ?nextlink)[
+        &lt;br&gt;&lt;br&gt;[[Create User-&gt;Create User]]
+      ]
+    ]
+  ]
+]
+</tw-passagedata><tw-passagedata pid="39" name="Intro1.5" tags="" position="600,100" size="100,100">(set: $selection to &quot;&quot;)
+
+|groupSelection&gt;[
+&lt;p&gt;&lt;strong&gt;Please select from one of the available Large Language Models to join their test group:&lt;/strong&gt;&lt;/p&gt;
+
+(link: &quot;Tallis&quot;)[
+	(set: $selection to &quot;Tallis&quot;)
+	(set: _dots to 1)
+	(replace: ?groupSelection)[
+		&lt;p&gt;You have selected &lt;strong&gt;Tallis&lt;/strong&gt;.&lt;/p&gt;
+		&lt;p&gt;Connecting&lt;span&gt;|dotsOutput&gt;[.]&lt;/span&gt;&lt;/p&gt;
+	]
+
+	(live: 0.5s)[
+		(set: _dots to _dots + 1)
+		(if: _dots &gt; 3)[(set: _dots to 1)]
+		(replace: ?dotsOutput)[
+			(if: _dots is 1)[.]
+			(else-if: _dots is 2)[..]
+			(else:)[...]
+		]
+	]
+
+	(after: 5s)[
+		(stop:)
+		(goto: &quot;Intro2&quot;)
+	]
+]
+
+&lt;span style=&quot;display:block; color:gray;&quot;&gt;Eiden&lt;/span&gt;
+&lt;span style=&quot;display:block; color:gray;&quot;&gt;Noa&lt;/span&gt;
+&lt;span style=&quot;display:block; color:gray;&quot;&gt;Vera&lt;/span&gt;
+&lt;span style=&quot;display:block; color:gray;&quot;&gt;Caelo&lt;/span&gt;
+&lt;span style=&quot;display:block; color:gray;&quot;&gt;Ashen&lt;/span&gt;
+&lt;span style=&quot;display:block; color:gray;&quot;&gt;Elian&lt;/span&gt;
+&lt;span style=&quot;display:block; color:gray;&quot;&gt;Lyric&lt;/span&gt;
+&lt;span style=&quot;display:block; color:gray;&quot;&gt;Marrow&lt;/span&gt;
+&lt;span style=&quot;display:block; color:gray;&quot;&gt;Aiven&lt;/span&gt;
+&lt;span style=&quot;display:block; color:gray;&quot;&gt;Rhoan&lt;/span&gt;
+&lt;span style=&quot;display:block; color:gray;&quot;&gt;Ilen&lt;/span&gt;
+]
+
+&lt;style&gt;
+.enchantment-link {
+	display: block;
+	color: black;
+	text-decoration: none;
+	margin-top: 0.25em;
+}
+.enchantment-link:hover {
+	text-decoration: underline;
+}
+&lt;/style&gt;
+</tw-passagedata></tw-storydata>
 <script title="Twine engine code" data-main="harlowe">(function(){"use strict";
 var require,define;!function(){var e={},r={};require=function(i){var n=e[i];return n&&(r[i]=n[1].apply(void 0,n[0].map(require)),e[i]=void 0),r[i]},(define=function(r,i,n){if("function"==typeof r)return r();e[r]=[i,n]}).amd=!0}();/*!
  * https://github.com/paulmillr/es6-shim
