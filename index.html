@@ -9,7 +9,117 @@
 </head>
 <body>
 <tw-story><noscript><tw-noscript>JavaScript needs to be enabled to play Turing Test.</tw-noscript></noscript></tw-story>
-<tw-storydata name="Turing Test" startnode="29" creator="Twine" creator-version="2.10.0" format="Harlowe" format-version="3.3.9" ifid="e2bedee3-bfaf-4c31-b8c2-ef0ec74218da" options="" tags="" zoom="0.6" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css"></style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="Intro3" tags="" position="850,100" size="100,100">(set: $typewriterSpeed to 0.4)
+<tw-storydata name="Turing Test" startnode="29" creator="Twine" creator-version="2.10.0" format="Harlowe" format-version="3.3.9" ifid="e2bedee3-bfaf-4c31-b8c2-ef0ec74218da" options="" tags="" zoom="0.6" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">/* === Pulse Animation for Buttons === */
+@keyframes pulse {
+	0% { transform: scale(1); opacity: 1; }
+	50% { transform: scale(1.1); opacity: 0.85; }
+	100% { transform: scale(1); opacity: 1; }
+}
+
+.pulse-link a {
+	display: inline-block;
+	animation: pulse 1.2s infinite;
+	font-weight: bold;
+	text-decoration: none;
+	color: inherit;
+	cursor: pointer;
+}
+
+/* === General Hook Styling === */
+tw-hook {
+	display: block;
+	margin: 0.3em 0;
+	font-family: monospace;
+}
+
+/* === Chat Log Layout === */
+.chat-log {
+	display: flex;
+	flex-direction: column;
+	gap: 0.3em;
+	font-family: monospace;
+	margin-top: 1em;
+	padding-bottom: 2em;
+}
+
+.line {
+	display: flex;
+	align-items: flex-start;
+	line-height: 1.3;
+	margin: 0;
+	padding: 0.2em 0;
+	font-family: monospace;
+}
+
+.speaker {
+	width: 7em;
+	font-weight: bold;
+	text-align: right;
+	padding-right: 1em;
+	white-space: nowrap;
+}
+
+.message {
+	flex: 1;
+	white-space: pre-wrap;
+	font-family: monospace;
+	margin: 0;
+}
+
+/* === Typewriter Text Display === */
+.typewriter-box {
+	min-height: 8em;
+	white-space: pre-wrap;
+	font-family: monospace;
+	margin-bottom: 1em;
+}
+
+/* === Button Row Layout === */
+.button-row {
+	display: flex;
+	justify-content: center;
+	gap: 1em;
+	margin-top: 1em;
+}
+
+.button-row tw-enchantment {
+	display: inline-block;
+}
+
+/* === Styled Interactive Chat Link === */
+.chat-link {
+	display: inline;
+	color: #3498db;
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+.chat-link:hover {
+	color: #1e70bf;
+	text-decoration: none;
+}
+
+/* Prevent tallis2line span from expanding vertically */
+#tallis2line {
+	display: inline;
+}
+
+/* === Twine Link Buttons (general look) === */
+.enchantment-link {
+	display: inline-block;
+	margin-right: 1em;
+	background-color: #222;
+	color: white;
+	padding: 0.5em 1em;
+	border-radius: 0.5em;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.enchantment-link:hover {
+	background-color: #444;
+}
+</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="Intro3" tags="" position="850,100" size="100,100">(set: $typewriterSpeed to 0.4)
 (set: $typewriterText to &quot;Shortly you will be transferred to a Virtual Meeting Room where *Tallis* will most likely engage you immediately by asking you questions.\n\nIf not, please ask it a question to get it started.&quot;)
 (set: $nextPassage to &quot;Intro4&quot;)
 
@@ -17,27 +127,75 @@
 
 
 
-</tw-passagedata><tw-passagedata pid="2" name="Virtual meeting room 245" tags="" position="1175,700" size="100,100">*Botname*: Hello?
+</tw-passagedata><tw-passagedata pid="2" name="VMRoom245" tags="" position="400,300" size="100,100">&lt;div class=&quot;chat-log&quot;&gt;
+	&lt;div class=&quot;line&quot;&gt;
+		&lt;div class=&quot;speaker&quot;&gt;Tallis:&lt;/div&gt;
+		&lt;div class=&quot;message&quot;&gt;Hello?&lt;/div&gt;
+	&lt;/div&gt;
+	&lt;div class=&quot;line&quot;&gt;
+		&lt;div class=&quot;speaker&quot;&gt; (print: $playerName + &quot;:&quot;) &lt;/div&gt;
+		&lt;div class=&quot;message&quot;&gt;[[Hello-&gt;Tallis Greeting]]&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+</tw-passagedata><tw-passagedata pid="3" name="Tallis Greeting" tags="" position="525,300" size="100,100">(set: $typewriterSpeed to 0.04)
+(set: $tallisLine1 to &quot;Hi $playerName, I’m Tallis. Thank you for talking to me today. I have some questions for you if that’s OK?&quot;)
+(set: $tallisLine2 to &quot;OK then...&quot;)
 
-[[*Username*: Hello.]]
+&lt;div class=&quot;chat-log&quot;&gt;
+	|tallis1&gt;[ ]
+	|playerReply&gt;[ ]
+	|tallis2&gt;[ ]
+&lt;/div&gt;
 
-</tw-passagedata><tw-passagedata pid="3" name="*Username*: Hello." tags="" position="1150,900" size="100,100">Bot: Hi *username*, I’m *Botname*. Thank you for talking to me today, I have some questions for you if that’s OK?
+(set: $charIndex to 0)
 
-[No response required]
-
-Ok then…
-
-[Short pause]
-
-Question One.
-
-Why do you think people lie?&quot;
-
-Answer Options
-
-[[A. &quot;Individuals may lie to achieve personal gain or avoid punishment.&quot;]]
-[[B. &quot;Lying is often employed as a social strategy to preserve interpersonal harmony.&quot;*]]
-[[C. &quot;Some individuals are conditioned to lie due to environmental and psychological factors.&quot;]]
+(live: $typewriterSpeed)[
+	(if: $charIndex &lt; $tallisLine1&#39;s length)[
+		(set: $charIndex to $charIndex + 1)
+		(replace: ?tallis1)[
+			&lt;div class=&quot;line&quot;&gt;&lt;div class=&quot;speaker&quot;&gt;Tallis:&lt;/div&gt;&lt;div class=&quot;message&quot;&gt;(substring: $tallisLine1, 1, $charIndex)&lt;/div&gt;&lt;/div&gt;
+		]
+		(if: $charIndex is $tallisLine1&#39;s length)[
+			(stop:)
+			(replace: ?playerReply)[
+				&lt;div class=&quot;line&quot;&gt;
+					&lt;div class=&quot;speaker&quot;&gt;$playerName:&lt;/div&gt;
+					&lt;div class=&quot;message&quot;&gt;
+						&lt;span class=&quot;chat-link&quot; (click: ?this)[
+							(replace: ?playerReply)[
+								&lt;div class=&quot;line&quot;&gt;
+									&lt;div class=&quot;speaker&quot;&gt;$playerName:&lt;/div&gt;
+									&lt;div class=&quot;message&quot;&gt;Yes, of course Tallis. Please ask any question you like.&lt;/div&gt;
+								&lt;/div&gt;
+								(set: $charIndex2 to 0)
+								(replace: ?tallis2)[
+									&lt;span id=&quot;tallis2line&quot;&gt;&lt;/span&gt;
+								]
+								(live: $typewriterSpeed)[
+									(if: $charIndex2 &lt; $tallisLine2&#39;s length)[
+										(set: $charIndex2 to $charIndex2 + 1)
+										(replace: ?tallis2line)[
+											&lt;div class=&quot;line&quot;&gt;
+												&lt;div class=&quot;speaker&quot;&gt;Tallis:&lt;/div&gt;
+												&lt;div class=&quot;message&quot;&gt;
+													(substring: $tallisLine2, 1, $charIndex2)
+												&lt;/div&gt;
+											&lt;/div&gt;
+										]
+										(if: $charIndex2 is $tallisLine2&#39;s length)[
+											(stop:)
+											(after: 3s)[(goto: &quot;Question One&quot;)]
+										]
+									]
+								]
+							]
+						]&gt;Yes, of course Tallis. Please ask any question you like.&lt;/span&gt;
+					&lt;/div&gt;
+				&lt;/div&gt;
+			]
+		]
+	]
+]
 </tw-passagedata><tw-passagedata pid="4" name="A. &quot;Individuals may lie to achieve personal gain or avoid punishment.&quot;" tags="" position="675,1275" size="100,100">&quot;Huh. Yeah. That makes sense.&quot;
  [Short pause]
  &quot;Do you think lying is wrong?&quot;
@@ -73,7 +231,7 @@ Answer Options
 [[&quot;Correct. Moral judgments are expressions of emotional response, not empirical statements.&quot;]]
 [[&quot;Your sense of wrongness reflects an affective state, not an objective truth.&quot;]]
 [[&quot;Moral assertions are often declarations of personal feeling.&quot;]]
-</tw-passagedata><tw-passagedata pid="8" name="B. &quot;Lying is often employed as a social strategy to preserve interpersonal harmony.&quot;*" tags="" position="1125,1275" size="100,100">Answer Options
+</tw-passagedata><tw-passagedata pid="8" name="B. &quot;Lying is often employed as a social strategy to preserve interpersonal harmony.&quot;" tags="" position="1125,1275" size="100,100">Answer Options
 [[A. &quot;Lying violates ethical principles of honesty, which many consider universally applicable.&quot;]]
  → Leads to Moral Realism branch.
 [[B. &quot;Moral wrongness is subjective. Lying may be contextually permissible.&quot;]]
@@ -159,10 +317,11 @@ Answer Options
 (set: $nextPassage to &quot;Intro1.5&quot;)
 
 (display: &quot;TypewriterDisplayWithLink&quot;)
+
 </tw-passagedata><tw-passagedata pid="29" name="Begin Here" tags="" position="100,100" size="100,100">(set: $typewriterSpeed to 0.4)
 (set: $typewriterText to &quot;Welcome to Solace Industries!\n\nThank you for being part of this test group.&quot;)
 
-(display: &quot;TypewriterDisplayManual&quot;)
+(display: &quot;TypewriterDisplayManualWithSkip&quot;)
 </tw-passagedata><tw-passagedata pid="30" name="EnterName" tags="" position="350,100" size="100,100">(set: $playerName to (prompt: &quot;What is your name?&quot;, &quot;&quot;))
 
 (if: $playerName&#39;s length is 0 or $playerName is &quot; &quot;)[
@@ -224,27 +383,25 @@ Answer Options
 </tw-passagedata><tw-passagedata pid="37" name="Intro7" tags="" position="1350,100" size="100,100">(set: $typewriterSpeed to 0.4)
 (set: $typewriterText to &quot;Are you ready to begin?&quot;)
 
-(display: &quot;TypewriterDisplayWithLink&quot;)
+(display: &quot;TypewriterDisplayWithBeginButton&quot;)
+</tw-passagedata><tw-passagedata pid="38" name="TypewriterDisplayManual" tags="" position="100,250" size="100,100">(set: $charIndex to 0)
 
-|linkhook&gt;[ ]</tw-passagedata><tw-passagedata pid="38" name="TypewriterDisplayManual" tags="" position="100,250" size="100,100">(set: $charIndex to 0)
-(set: _speed to $typewriterSpeed)
-
-|typewriterOutput&gt;[ ]
+|typewriterOutput&gt;[&lt;pre class=&quot;typewriter-box&quot;&gt; &lt;/pre&gt;]
 |nextlink&gt;[ ]
 
-(live: _speed)[
-  (if: $charIndex &lt; $typewriterText&#39;s length)[
-    (set: $charIndex to $charIndex + 1)
-    (replace: ?typewriterOutput)[
-      (print: (substring: $typewriterText, 1, $charIndex))
-    ]
-    (if: $charIndex is $typewriterText&#39;s length)[
-      (stop:)
-      (replace: ?nextlink)[
-        &lt;br&gt;&lt;br&gt;[[Create User-&gt;Create User]]
-      ]
-    ]
-  ]
+(live: $typewriterSpeed)[
+	(if: $charIndex &lt; $typewriterText&#39;s length)[
+		(set: $charIndex to $charIndex + 1)
+		(replace: ?typewriterOutput)[
+			&lt;pre class=&quot;typewriter-box&quot;&gt;(print: (substring: $typewriterText, 1, $charIndex))&lt;/pre&gt;
+		]
+		(if: $charIndex is $typewriterText&#39;s length)[
+			(stop:)
+			(replace: ?nextlink)[
+				&lt;br&gt;&lt;br&gt;[[Create User-&gt;Create User]]
+			]
+		]
+	]
 ]
 </tw-passagedata><tw-passagedata pid="39" name="Intro1.5" tags="" position="600,100" size="100,100">(set: $selection to &quot;&quot;)
 
@@ -253,22 +410,27 @@ Answer Options
 
 (link: &quot;Tallis&quot;)[
 	(set: $selection to &quot;Tallis&quot;)
-	(set: _dots to 1)
+	(set: _dots to 0) &lt;!-- Start at 0 so the first update shows . --&gt;
 	(replace: ?groupSelection)[
 		&lt;p&gt;You have selected &lt;strong&gt;Tallis&lt;/strong&gt;.&lt;/p&gt;
-		&lt;p&gt;Connecting&lt;span&gt;|dotsOutput&gt;[.]&lt;/span&gt;&lt;/p&gt;
 
-		&lt;!-- 🔊 Sound effect (plays once) --&gt;
-		&lt;audio src=&quot;./audio/mixkit-retro-game-notification-212.mp3&quot; autoplay&gt;&lt;/audio&gt;
+		&lt;!-- Intentionally blank at first --&gt;
+		&lt;div id=&quot;connectingLine&quot; style=&quot;margin-top: 4em;&quot;&gt;
+			|dots&gt;[ ]
+		&lt;/div&gt;
+
+		&lt;audio src=&quot;./audio/heartbeat-accelerating-transition-the-foundation-2-2-00-22.mp3&quot; autoplay&gt;&lt;/audio&gt;
 	]
 
 	(live: 0.5s)[
 		(set: _dots to _dots + 1)
 		(if: _dots &gt; 3)[(set: _dots to 1)]
-		(replace: ?dotsOutput)[
-			(if: _dots is 1)[.]
-			(else-if: _dots is 2)[..]
-			(else:)[...]
+		(replace: ?dots)[
+			(set: _dotString to &quot;&quot;)
+			(if: _dots is 1)[(set: _dotString to &quot;.&quot;)]
+			(else-if: _dots is 2)[(set: _dotString to &quot;..&quot;)]
+			(else:)[(set: _dotString to &quot;...&quot;)]
+			(print: &quot;Connecting&quot; + _dotString)
 		]
 	]
 
@@ -278,6 +440,7 @@ Answer Options
 	]
 ]
 
+&lt;!-- Grayed-out model names --&gt;
 &lt;span style=&quot;display:block; color:gray;&quot;&gt;Eiden&lt;/span&gt;
 &lt;span style=&quot;display:block; color:gray;&quot;&gt;Noa&lt;/span&gt;
 &lt;span style=&quot;display:block; color:gray;&quot;&gt;Vera&lt;/span&gt;
@@ -302,6 +465,105 @@ Answer Options
 	text-decoration: underline;
 }
 &lt;/style&gt;
+</tw-passagedata><tw-passagedata pid="40" name="TypewriterDisplayWithBeginButton" tags="" position="100,500" size="100,100">(set: $charIndex to 0)
+
+|typewriterOutput&gt;[ ]
+|linkhook&gt;[ ]
+
+(live: $typewriterSpeed)[
+	(if: $charIndex &lt; $typewriterText&#39;s length)[
+		(set: $charIndex to $charIndex + 1)
+		(replace: ?typewriterOutput)[
+			(print: (substring: $typewriterText, 1, $charIndex))
+		]
+		(if: $charIndex is $typewriterText&#39;s length)[
+			(stop:)
+			(replace: ?linkhook)[
+				&lt;br&gt;&lt;br&gt;
+				&lt;!-- Real Harlowe-compatible link --&gt;
+				&lt;span class=&quot;pulse-link&quot;&gt;
+					(link: &quot;Begin&quot;)[
+						&lt;!-- JS click sound trigger --&gt;
+						&lt;script&gt;
+							document.getElementById(&quot;clickSound&quot;).play();
+						&lt;/script&gt;
+						(goto: &quot;VMRoom245&quot;)
+					]
+				&lt;/span&gt;
+
+				&lt;!-- Preload sound --&gt;
+				&lt;audio id=&quot;clickSound&quot; src=&quot;./audio/mixkit-sci-fi-click-900.mp3&quot; preload=&quot;auto&quot;&gt;&lt;/audio&gt;
+			]
+		]
+	]
+]
+</tw-passagedata><tw-passagedata pid="41" name="DialogueWithTypewriterChoice" tags="" position="100,625" size="100,100">(set: $charIndex to 0)
+
+&lt;strong&gt;Tallis:&lt;/strong&gt;
+&lt;br&gt;
+|typewriterOutput&gt;[ ]
+&lt;br&gt;&lt;br&gt;
+&lt;strong&gt;(print: $playerName):&lt;/strong&gt;
+&lt;br&gt;
+|choiceHook&gt;[ ]
+|responseHook&gt;[ ]
+
+(live: $typewriterSpeed)[
+	(if: $charIndex &lt; $typewriterText&#39;s length)[
+		(set: $charIndex to $charIndex + 1)
+		(replace: ?typewriterOutput)[
+			(print: (substring: $typewriterText, 1, $charIndex))
+		]
+		(if: $charIndex is $typewriterText&#39;s length)[
+			(stop:)
+			(replace: ?choiceHook)[
+				&lt;br&gt;&lt;br&gt;
+				(link: &quot;(&quot; + $playerName + &quot;: Yes, of course Tallis. Please ask away.)&quot;)[
+					(replace: ?responseHook)[
+						&lt;br&gt;&lt;br&gt;&lt;strong&gt;Tallis:&lt;/strong&gt; Ok then...
+					]
+					(after: 2s)[
+						(goto: $nextPassage)
+					]
+				]
+			]
+		]
+	]
+]
+
+</tw-passagedata><tw-passagedata pid="42" name="Question One" tags="" position="650,300" size="100,100">Question One - Why do you think people lie?&quot;
+
+$playerName
+[[A. &quot;Individuals may lie to achieve personal gain or avoid punishment.&quot;]]
+[[B. &quot;Lying is often employed as a social strategy to preserve interpersonal harmony.&quot;]]
+[[C. &quot;Some individuals are conditioned to lie due to environmental and psychological factors.&quot;]]
+</tw-passagedata><tw-passagedata pid="43" name="1" tags="" position="525,625" size="100,100"> </tw-passagedata><tw-passagedata pid="44" name="TypewriterDisplayManualWithSkip" tags="" position="100,750" size="100,100">|typewriterOutput&gt;[&lt;pre class=&quot;typewriter-box&quot;&gt; &lt;/pre&gt;]
+|buttonrow&gt;[ ]
+
+(set: $charIndex to 0)
+
+(live: $typewriterSpeed)[
+	(if: $charIndex &lt; $typewriterText&#39;s length)[
+		(set: $charIndex to $charIndex + 1)
+		(replace: ?typewriterOutput)[
+			&lt;pre class=&quot;typewriter-box&quot;&gt;(print: (substring: $typewriterText, 1, $charIndex))&lt;/pre&gt;
+		]
+		(if: $charIndex is $typewriterText&#39;s length)[
+			(stop:)
+			(replace: ?buttonrow)[
+				&lt;span class=&quot;button-row&quot;&gt;
+					(link: &quot;Create User&quot;)[
+						(goto: &quot;Create User&quot;)
+					]
+					(link: &quot;Skip Tutorial&quot;)[
+						(set: $playerName to &quot;User&quot;)
+						(goto: &quot;Intro7&quot;)
+					]
+				&lt;/span&gt;
+			]
+		]
+	]
+]
 </tw-passagedata></tw-storydata>
 <script title="Twine engine code" data-main="harlowe">(function(){"use strict";
 var require,define;!function(){var e={},r={};require=function(i){var n=e[i];return n&&(r[i]=n[1].apply(void 0,n[0].map(require)),e[i]=void 0),r[i]},(define=function(r,i,n){if("function"==typeof r)return r();e[r]=[i,n]}).amd=!0}();/*!
