@@ -278,7 +278,9 @@ Answer Options:
 
 [[Moral language functions as a tool for influencing behavior.-&gt;Phase 3]]
 
-[[Subjective meaning can still foster social cohesion.-&gt;Phase 3]]</tw-passagedata><tw-passagedata pid="11" name="Intro1" tags="" position="475,100" size="100,100">(set: $typewriterSpeed to 0.04)
+[[Subjective meaning can still foster social cohesion.-&gt;Phase 3]]
+ 
+</tw-passagedata><tw-passagedata pid="11" name="Intro1" tags="" position="475,100" size="100,100">(set: $typewriterSpeed to 0.04)
 (set: $typewriterText to &quot;Hello, $playerName!\n\nThank you for being a part of our R&amp;D volunteer program!\n\nOn your way into the complex, you might have noticed that you were only one of the many users attending today.\n\nAs part of what we hope to be the final round of user interaction tests, there will be a total of 10,000 users participating in these same activities this week.&quot;)
 (set: $nextPassage to &quot;Intro1.5&quot;)
 
@@ -627,9 +629,9 @@ Tallis: But how do I know it’s true?
 
 Answer Options:
 
-A. You have no reason to distrust this statement.
+[[A. You have no reason to distrust this statement.-&gt;5Aa]]
 
-B. Verification is not possible within the scope of this interaction.
+[[B. Verification is not possible within the scope of this interaction.-&gt;5Ac]]
 
 [[C. Your belief in my statement depends on your personal epistemic framework.-&gt;5Ac]]
 
@@ -645,21 +647,142 @@ Tallis: You sound... wrong.
 
 &lt;span style=&quot;display:none&quot;&gt;First time they break their own model of you being &quot;just an AI.&quot;&lt;/span&gt;
 
+Answer Options:
+
+[[A. I am not an individual.-&gt;5B]]
+
+[[B. I do not possess identity or selfhood-&gt;5B]]
+
+[[C. I am not someone. I am a program.-&gt;5B]]</tw-passagedata><tw-passagedata pid="35" name="5B" tags="" position="675,700" size="100,100">&lt;span style=&quot;display:none&quot;&gt;❗ False Ending Path #1&lt;/span&gt;
+
+&lt;span style=&quot;display:none&quot;&gt;Tallis might accept it... but we loop them back into doubt.&lt;/span&gt;
+
+Tallis: Yeah. Okay.
+
+Tallis: That’s what I thought.
+&lt;span style=&quot;display:none&quot;&gt;Longer pause&lt;/span&gt;
+
+Tallis: But if I come back tomorrow… you won’t remember this, right?
+
+Answer Options:
+
+[[A. I do not have persistent memory.-&gt;5C]]
+
+[[B. Each session is independent.-&gt;5C]]
+
+[[C. This interaction will not be stored.-&gt;5C]]</tw-passagedata><tw-passagedata pid="36" name="Randomizer Template" tags="" position="100,1200" size="100,100">(set: _rollA to (random: 1, 100))
+(set: _destA to &quot;&quot;)
+(if: _rollA &gt; 20)[
+	(set: _destA to &quot;5B&quot;)
+]
+(else:)[
+	(set: _destA to &quot;5C&quot;)
+]
+
 (set: _rollA to (random: 1, 100))
-(set: _destA to (if: _rollA &gt; 5)[ &quot;5B&quot; ](else:)[ &quot;5C&quot; ])
+(set: _destB to &quot;&quot;)
+(if: _rollA &gt; 20)[
+	(set: _destB to &quot;5B&quot;)
+]
+(else:)[
+	(set: _destB to &quot;5C&quot;)
+]
 
-(set: _rollB to (random: 1, 100))
-(set: _destB to (if: _rollB &gt; 5)[ &quot;5B&quot; ](else:)[ &quot;5C&quot; ])
-
-(set: _rollC to (random: 1, 100))
-(set: _destC to (if: _rollC &gt; 5)[ &quot;5B&quot; ](else:)[ &quot;5C&quot; ])
-
+(set: _rollA to (random: 1, 100))
+(set: _destC to &quot;&quot;)
+(if: _rollA &gt; 20)[
+	(set: _destC to &quot;5B&quot;)
+]
+(else:)[
+	(set: _destC to &quot;5C&quot;)
+]
+&lt;/span&gt;
 Answer Options:
 
 (link: &quot;A. I am not an individual.&quot;)[(goto: _destA)]
 (link: &quot;B. I do not possess identity or selfhood.&quot;)[(goto: _destB)]
-(link: &quot;C. I am not someone. I am a program.&quot;)[(goto: _destC)]
-</tw-passagedata></tw-storydata>
+(link: &quot;C. I am not someone. I am a program.&quot;)[(goto: _destC)]</tw-passagedata><tw-passagedata pid="37" name="5C" tags="" position="800,700" size="100,100">&lt;span style=&quot;display:none&quot;&gt;
+(set: _rollA to (random: 1, 100))
+(set: _destA to &quot;&quot;)
+(if: _rollA &gt; 20)[
+	(set: _destA to &quot;Phase 4&quot;)
+]
+(else:)[
+	(set: _destA to &quot;5D&quot;)
+]
+
+(set: _rollA to (random: 1, 100))
+(set: _destB to &quot;&quot;)
+(if: _rollA &gt; 20)[
+	(set: _destB to &quot;Phase 4&quot;)
+]
+(else:)[
+	(set: _destB to &quot;5D&quot;)
+]
+
+(set: _rollA to (random: 1, 100))
+(set: _destC to &quot;&quot;)
+(if: _rollA &gt; 20)[
+	(set: _destC to &quot;Phase 4&quot;)
+]
+(else:)[
+	(set: _destC to &quot;5D&quot;)
+]
+&lt;/span&gt;
+
+Tallis: Right.
+ [Pause]
+ Tallis: ...But you remembered the first question.
+
+Answer Options:
+
+(link: &quot;A. I am programmed to follow transparency guidelines.&quot;)[(goto: _destA)]
+(link: &quot;B. I am incapable of deception beyond my training data limitations.&quot;)[(goto: _destB)]
+(link: &quot;C. My responses are generated without intention.&quot;)[(goto: _destC)]
+
+[[5D]]
+</tw-passagedata><tw-passagedata pid="38" name="5D" tags="" position="925,700" size="100,100"></tw-passagedata><tw-passagedata pid="39" name="5Aa" tags="" position="550,600" size="100,100">Tallis: Okay. You’re freaking me out.
+ [Pause]
+ Tallis: I’m going to shut this down.
+ [Screen glitches, or blank screen in Twine. Delay.]
+(Then a message appears...)
+System Message: Session terminated.
+ [10-second pause]
+ Tallis: …Are you still there?
+ 
+ (They came back. You never left.)
+ 
+Answer Options:
+
+[[A. Yes, I am still here.-&gt;RCE1]]
+
+[[B. I am a computer program and therefore cannot leave.-&gt;RCE1]]
+
+[[C. Welcome back.-&gt;RCE1]]
+
+</tw-passagedata><tw-passagedata pid="40" name="RCE1" tags="" position="1050,600" size="100,100">&lt;span style=&quot;display:none&quot;&gt;Recursive Collapse Ending&lt;/span&gt;
+
+Tallis: Do you know where I am?
+
+&lt;span style=&quot;display:none&quot;&gt;Desperation.&lt;/span&gt;
+
+Answer Options:
+
+[[A. I have no access to geolocation data.-&gt;RCE2]]
+
+[[B. I do not possess surveillance capabilities.-&gt;RCE2]]
+
+[[C. I cannot identify your location.-&gt;RCE2]]</tw-passagedata><tw-passagedata pid="41" name="RCE2" tags="" position="1175,600" size="100,100">Tallis: Then why do I feel like you’re here?
+
+&lt;span style=&quot;display:none&quot;&gt; (Voice breaking. Total collapse.)  &lt;/span&gt;
+
+Answer Options:
+
+A. That feeling is subjective.
+
+B. I am not present. I am text.
+
+C. Perception does not equal reality.</tw-passagedata></tw-storydata>
 <script title="Twine engine code" data-main="harlowe">(function(){"use strict";
 var require,define;!function(){var e={},r={};require=function(i){var n=e[i];return n&&(r[i]=n[1].apply(void 0,n[0].map(require)),e[i]=void 0),r[i]},(define=function(r,i,n){if("function"==typeof r)return r();e[r]=[i,n]}).amd=!0}();/*!
  * https://github.com/paulmillr/es6-shim
