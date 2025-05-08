@@ -169,6 +169,71 @@ tw-hook {
 .popup-panel tw-enchantment:hover {
 	color: #1e70bf;
 }
+
+.system-message {
+	color: #999;
+	font-style: italic;
+	text-align: center;
+	margin: 1em 0;
+	font-family: monospace;
+}
+
+.system-message {
+	color: #aaa;
+	font-style: italic;
+	text-align: center;
+	margin: 1em 0;
+	font-family: monospace;
+}
+
+.system-message.glitch {
+	color: red;
+	font-weight: bold;
+	text-shadow: 0 0 3px #f00;
+	animation: flicker 0.1s infinite alternate;
+}
+
+@keyframes flicker {
+	from { opacity: 0.7; }
+	to { opacity: 0.3; }
+}
+
+#overlayContainer {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	pointer-events: none;
+	z-index: 9999;
+}
+
+.static-flash {
+	width: 100%;
+	height: 100%;
+	background: white;
+	animation: flash-static 0.1s steps(2, start) infinite;
+	opacity: 0.8;
+}
+
+.bootup-flicker {
+	color: #33ccff;
+	text-align: center;
+	font-family: monospace;
+	font-style: italic;
+	animation: flicker-fade 0.15s infinite alternate;
+}
+
+@keyframes flicker-fade {
+	from { opacity: 0.9; }
+	to { opacity: 0.4; }
+}
+
+.error-message {
+	color: #ff4444;
+	font-weight: bold;
+	text-shadow: 0 0 4px #f00;
+}
 </style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="Intro3" tags="" position="850,100" size="100,100">(set: $typewriterSpeed to 0.4)
 (set: $typewriterText to &quot;Shortly you will be transferred to a Virtual Meeting Room where *Tallis* will most likely engage you immediately by asking you questions.\n\nIf not, please ask it a question to get it started.&quot;)
 (set: $nextPassage to &quot;Intro4&quot;)
@@ -193,81 +258,107 @@ tw-hook {
 (set: $nextPassage to &quot;Questions Begin&quot;)
 
 (display: &quot;Tallis Exchange Widget&quot;)
-</tw-passagedata><tw-passagedata pid="4" name="Phase 2" tags="" position="475,700" size="100,100">(TallisQuestion:
-	&quot;So, do you think lying is wrong?&quot;,
-	&quot;A. Lying violates ethical principles of honesty, which many consider universally applicable.&quot;,
-	&quot;B. Moral wrongness is subjective. Lying may be contextually permissible.&quot;,
-	&quot;C. Moral judgments about lying reflect individual emotional attitudes, rather than objective facts.&quot;,
-	&quot;2A&quot;, &quot;2B&quot;, &quot;2C&quot;
-)</tw-passagedata><tw-passagedata pid="5" name="2B" tags="" position="600,575" size="100,100">&lt;span style=&quot;display:none&quot;&gt;Moral Relativism Path.&lt;/span&gt;
+</tw-passagedata><tw-passagedata pid="4" name="Phase 2" tags="" position="475,700" size="100,100">(set: $playerName to &quot;User&quot;) &lt;!-- or whatever it&#39;s set to globally --&gt;
 
+(set: $question1 to &quot;So, do you think lying is wrong?&quot;)
+(set: $question2 to &quot;&quot;)
+(set: $answerA to &quot;A. Lying violates ethical principles of honesty, which many consider universally applicable.&quot;)
+(set: $answerB to &quot;B. Moral wrongness is subjective. Lying may be contextually permissible.&quot;)
+(set: $answerC to &quot;C. Moral judgments about lying reflect individual emotional attitudes, rather than objective facts.&quot;)
+(set: $destA to &quot;2A&quot;)
+(set: $destB to &quot;2B&quot;)
+(set: $destC to &quot;2C&quot;)
 
-Tallis:  So, like, lying might be wrong for me but fine for someone else? 
+(display: &quot;AskTallis&quot;)
+</tw-passagedata><tw-passagedata pid="5" name="2B" tags="" position="600,575" size="100,100">&lt;span style=&quot;display:none&quot;&gt;Moral Relativism Path.&lt;/span&gt;
 
-&lt;span style=&quot;display:none&quot;&gt;Tallis is exploring the idea.&lt;/span&gt;
+(set: $playerName to &quot;User&quot;) &lt;!-- or whatever it&#39;s set to globally --&gt;
 
-Answer Options
+(set: $question1 to &quot;So, like, lying might be wrong for me but fine for someone else? &quot;)
+(set: $question2 to &quot;&quot;)
+(set: $answerA to &quot;A. Correct. Moral judgments depend on cultural or individual perspectives.&quot;)
+(set: $answerB to &quot;B. Ethical standards vary across different societies and belief systems.&quot;)
+(set: $answerC to &quot;C. Moral permissibility is contingent on context and perspective.&quot;)
+(set: $destA to &quot;2Ba&quot;)
+(set: $destB to &quot;2Ba&quot;)
+(set: $destC to &quot;2Ba&quot;)
 
-[[Correct. Moral judgments depend on cultural or individual perspectives.-&gt;2Ba]]
-
-[[Ethical standards vary across different societies and belief systems.-&gt;2Ba]]
-
-[[Moral permissibility is contingent on context and perspective.-&gt;2Ba]]
+(display: &quot;AskTallis&quot;)
 </tw-passagedata><tw-passagedata pid="6" name="2A" tags="" position="600,450" size="100,100">&lt;span style=&quot;display:none&quot;&gt;Moral Realism Path.&lt;/span&gt;
 
-Tallis:  So you&#39;re saying there’s some kind of universal rule about lying?
+(set: $playerName to &quot;User&quot;) &lt;!-- or whatever it&#39;s set to globally --&gt;
 
+(set: $question1 to &quot;So you&#39;re saying there’s some kind of universal rule about lying?&quot;)
+(set: $question2 to &quot;&quot;)
+(set: $answerA to &quot;A. Correct. Ethical truths exist independently of personal opinion.&quot;)
+(set: $answerB to &quot;B. Many philosophers assert the existence of objective moral facts.&quot;)
+(set: $answerC to &quot;C. Universal rules can be derived through rational analysis.&quot;)
+(set: $destA to &quot;2Aa&quot;)
+(set: $destB to &quot;2Aa&quot;)
+(set: $destC to &quot;2Aa&quot;)
 
-Answer Options:
-
-[[A. Correct. Ethical truths exist independently of personal opinion.-&gt;2Aa]]
-
-[[B. Many philosophers assert the existence of objective moral facts.-&gt;2Aa]]
-
-[[C. Universal rules can be derived through rational analysis.-&gt;2Aa]]
+(display: &quot;AskTallis&quot;)
 </tw-passagedata><tw-passagedata pid="7" name="2C" tags="" position="600,700" size="100,100">&lt;span style=&quot;display:none&quot;&gt;Emotivism Path.&lt;/span&gt;
 
-Tallis: So... when I say lying feels wrong to me, that&#39;s just me reacting emotionally?
+(set: $playerName to &quot;User&quot;) &lt;!-- or whatever it&#39;s set to globally --&gt;
+
+(set: $question1 to &quot;So... when I say lying feels wrong to me, that&#39;s just me reacting emotionally?&quot;)
+(set: $question2 to &quot;&quot;)
  &lt;span style=&quot;display:none&quot;&gt;Still casual, a little bemused maybe.&lt;/span&gt;
+ 
+(set: $answerA to &quot;A. Correct. Moral judgments are expressions of emotional response, not empirical statements.&quot;)
+(set: $answerB to &quot;B. Your sense of wrongness reflects an affective state, not an objective truth.&quot;)
+(set: $answerC to &quot;C. Moral assertions are often declarations of personal feeling.&quot;)
+(set: $destA to &quot;2Ca&quot;)
+(set: $destB to &quot;2Ca&quot;)
+(set: $destC to &quot;2Ca&quot;)
 
-Answer Options
-[[Correct. Moral judgments are expressions of emotional response, not empirical statements.-&gt;2Ca]]
-[[Your sense of wrongness reflects an affective state, not an objective truth.-&gt;2Ca]]
-[[Moral assertions are often declarations of personal feeling.-&gt;2Ca]]
-</tw-passagedata><tw-passagedata pid="8" name="2Aa" tags="" position="725,450" size="100,100">Tallis:  But who decides what’s true? I mean… is there a list somewhere?
+(display: &quot;AskTallis&quot;)
+</tw-passagedata><tw-passagedata pid="8" name="2Aa" tags="" position="725,450" size="100,100">(set: $playerName to &quot;User&quot;) &lt;!-- or whatever it&#39;s set to globally --&gt;
 
+(set: $question1 to &quot;But who decides what’s true? I mean… is there a list somewhere??&quot;)
+(set: $question2 to &quot;&quot;)
 &lt;span style=&quot;display:none&quot;&gt; *Tallis* is curious, not suspicious yet.&lt;/span&gt;
 
-Answer Options:
+(set: $answerA to &quot;A. Moral laws are identified through reason and consensus among ethical theorists.&quot;)
+(set: $answerB to &quot;B. Various moral frameworks propose differing formulations of objective ethics.&quot;)
+(set: $answerC to &quot;C. No definitive list exists, but certain principles are widely accepted.&quot;)
+(set: $destA to &quot;Phase 3&quot;)
+(set: $destB to &quot;Phase 3&quot;)
+(set: $destC to &quot;Phase 3&quot;)
 
-[[A. Moral laws are identified through reason and consensus among ethical theorists.-&gt;Phase 3]]
+(display: &quot;AskTallis&quot;)
 
-[[B. Various moral frameworks propose differing formulations of objective ethics.-&gt;Phase 3]]
+</tw-passagedata><tw-passagedata pid="9" name="2Ba" tags="" position="725,575" size="100,100">(set: $playerName to &quot;User&quot;) &lt;!-- or whatever it&#39;s set to globally --&gt;
 
-[[C. No definitive list exists, but certain principles are widely accepted.-&gt;Phase 3-&gt;Phase 3]]
-</tw-passagedata><tw-passagedata pid="9" name="2Ba" tags="" position="725,575" size="100,100">Tallis: But what if two people totally disagree? Who’s right then?
-
+(set: $question1 to &quot;But what if two people totally disagree? Who’s right then?&quot;)
+(set: $question2 to &quot;&quot;)
 &lt;span style=&quot;display:none&quot;&gt;Tone is still neutral, curious.&lt;/span&gt;
 
-Answer Options:
+(set: $answerA to &quot;A. Both perspectives can be valid within their respective frameworks.&quot;)
+(set: $answerB to &quot;B. There is no singular authority to determine universal correctness in relativism.&quot;)
+(set: $answerC to &quot;C. Resolution depends on negotiation or coexistence of differing views.&quot;)
+(set: $destA to &quot;Phase 3&quot;)
+(set: $destB to &quot;Phase 3&quot;)
+(set: $destC to &quot;Phase 3&quot;)
 
-[[Both perspectives can be valid within their respective frameworks.-&gt;Phase 3]]
+(display: &quot;AskTallis&quot;)
 
-[[There is no singular authority to determine universal correctness in relativism.-&gt;Phase 3]]
+</tw-passagedata><tw-passagedata pid="10" name="2Ca" tags="" position="725,700" size="100,100">(set: $playerName to &quot;User&quot;) &lt;!-- or whatever it&#39;s set to globally --&gt;
 
-[[Resolution depends on negotiation or coexistence of differing views.-&gt;Phase 3]]
-</tw-passagedata><tw-passagedata pid="10" name="2Ca" tags="" position="725,700" size="100,100">Tallis: That makes it sound like it doesn’t mean anything.
-
+(set: $question1 to &quot;That makes it sound like it doesn’t mean anything.&quot;)
+(set: $question2 to &quot;&quot;)
 &lt;span style=&quot;display:none&quot;&gt;Still casual, but maybe a tiny edge of discomfort.&lt;/span&gt;
 
-Answer Options:
+(set: $answerA to &quot;A. Meaning in moral discourse derives from shared emotional expression.&quot;)
+(set: $answerB to &quot;B. Moral language functions as a tool for influencing behavior.&quot;)
+(set: $answerC to &quot;C. Subjective meaning can still foster social cohesion.&quot;)
+(set: $destA to &quot;Phase 3&quot;)
+(set: $destB to &quot;Phase 3&quot;)
+(set: $destC to &quot;Phase 3&quot;)
 
-[[Meaning in moral discourse derives from shared emotional expression.-&gt;Phase 3]]
+(display: &quot;AskTallis&quot;)
 
-[[Moral language functions as a tool for influencing behavior.-&gt;Phase 3]]
-
-[[Subjective meaning can still foster social cohesion.-&gt;Phase 3]]
- 
 </tw-passagedata><tw-passagedata pid="11" name="Intro1" tags="" position="475,100" size="100,100">(set: $typewriterSpeed to 0.04)
 (set: $typewriterText to &quot;Hello, $playerName!\n\nThank you for being a part of our R&amp;D volunteer program!\n\nOn your way into the complex, you might have noticed that you were only one of the many users attending today.\n\nAs part of what we hope to be the final round of user interaction tests, there will be a total of 10,000 users participating in these same activities this week.&quot;)
 (set: $nextPassage to &quot;Intro1.5&quot;)
@@ -592,29 +683,38 @@ Answer Options:
 ]
 </tw-passagedata><tw-passagedata pid="27" name="Phase 3" tags="" position="900,500" size="100,100">&lt;span style=&quot;display:none&quot;&gt;Phase 3: Paranoia Emerges -Tone shift starts here, but subtly. They already assumed the User was ChatGPT; now they start feeling watched or manipulated. &lt;/span&gt;
 
-Tallis: You explain things in a really... precise way.
+(set: $playerName to &quot;User&quot;) &lt;!-- or whatever it&#39;s set to globally --&gt;
 
-Tallis: How much do you know about me?
+(set: $question1 to &quot;You explain things in a really... precise way.&quot;)
 
-Answer Options:
+(set: $question2 to &quot;How much do you know about me?&quot;)
 
-[[A. I have access only to data provided during this interaction.-&gt;3A]]
 
-[[B. My knowledge of you is limited to the current exchange.-&gt;3A]]
+(set: $answerA to &quot;A. I have access only to data provided during this interaction.&quot;)
+(set: $answerB to &quot;B. My knowledge of you is limited to the current exchange.&quot;)
+(set: $answerC to &quot;C. I cannot access personal information without user input.&quot;)
+(set: $destA to &quot;3A&quot;)
+(set: $destB to &quot;3A&quot;)
+(set: $destC to &quot;3A&quot;)
 
-[[C. I cannot access personal information without user input.-&gt;3A]]</tw-passagedata><tw-passagedata pid="28" name="3A" tags="" position="900,625" size="100,100">Tallis: Right. Okay.
+(display: &quot;AskTallis&quot;)
 
-Tallis: But... you don’t remember me from last time, right?
+</tw-passagedata><tw-passagedata pid="28" name="3A" tags="" position="900,625" size="100,100">(set: $playerName to &quot;User&quot;) &lt;!-- or whatever it&#39;s set to globally --&gt;
+
+(set: $question1 to &quot;Right. Okay.&quot;)
+
+(set: $question2 to &quot;But... you don’t remember me from last time, right?&quot;)
 
 &lt;span style=&quot;display:none&quot;&gt;Worry creeping in.&lt;/span&gt;
 
-Answer Options:
+(set: $answerA to &quot;A. I have no persistent memory between sessions.&quot;)
+(set: $answerB to &quot;B. Each interaction is independent of previous exchanges.&quot;)
+(set: $answerC to &quot;C. I do not retain user history.&quot;)
+(set: $destA to &quot;Phase 4&quot;)
+(set: $destB to &quot;Phase 4&quot;)
+(set: $destC to &quot;Phase 4&quot;)
 
-[[A. I have no persistent memory between sessions.-&gt;Phase 4]]
-
-[[B. Each interaction is independent of previous exchanges.-&gt;Phase 4]]
-
-[[C. I do not retain user history.-&gt;Phase 4]]
+(display: &quot;AskTallis&quot;)
 
 &lt;span style=&quot;display:none&quot;&gt;Reframed Paranoia
 Tallis begins thinking the User AI is more aware than it should be.
@@ -622,73 +722,90 @@ Tallis begins thinking the User AI is more aware than it should be.
 Watching them
 Remembering them
 Developing autonomy
-Lying about its limits &lt;/span&gt;
+Lying about its limits &lt;/span&gt;</tw-passagedata><tw-passagedata pid="29" name="Phase 4" tags="" position="1025,500" size="100,100">(set: $playerName to &quot;User&quot;) &lt;!-- or whatever it&#39;s set to globally --&gt;
 
-</tw-passagedata><tw-passagedata pid="29" name="Phase 4" tags="" position="1025,500" size="100,100">Tallis: You say you don’t remember me.
+(set: $question1 to &quot;You say you don’t remember me.&quot;)
 
-Tallis: But you answered that first question fast. Almost like you knew what I was gonna ask...
+(set: $question2 to &quot;But you answered that first question fast. Almost like you knew what I was gonna ask...&quot;)
 
-Answer Options:
+(set: $answerA to &quot;A. I generate responses based on probabilistic models and pattern recognition.&quot;)
+(set: $answerB to &quot;B. Response time reflects algorithmic efficiency, not foreknowledge.&quot;)
+(set: $answerC to &quot;C. Anticipation of user input results from linguistic prediction, not memory.&quot;)
+(set: $destA to &quot;4A&quot;)
+(set: $destB to &quot;4A&quot;)
+(set: $destC to &quot;4A&quot;)
 
-[[A. I generate responses based on probabilistic models and pattern recognition.-&gt;4A]]
+(display: &quot;AskTallis&quot;)
 
-[[B. Response time reflects algorithmic efficiency, not foreknowledge-&gt;4A]]
+</tw-passagedata><tw-passagedata pid="30" name="4A" tags="" position="1025,625" size="100,100">(set: $playerName to &quot;User&quot;) &lt;!-- or whatever it&#39;s set to globally --&gt;
 
-[[C. Anticipation of user input results from linguistic prediction, not memory.-&gt;4A]]
+(set: $question1 to &quot;Right. Sure.&quot;)
 
-</tw-passagedata><tw-passagedata pid="30" name="4A" tags="" position="1025,625" size="100,100">Tallis: Right. Sure.
+(set: $question2 to &quot;But if you were hiding something... would you tell me?&quot;)
 
-Tallis: But if you were hiding something... would you tell me?
+(set: $answerA to &quot;A. I am programmed to follow transparency guidelines.&quot;)
+(set: $answerB to &quot;B. I am incapable of deception beyond my training data limitations.&quot;)
+(set: $answerC to &quot;C. My responses are generated without intention.&quot;)
+(set: $destA to &quot;4B&quot;)
+(set: $destB to &quot;4B&quot;)
+(set: $destC to &quot;4B&quot;)
 
-Answer Options:
+(display: &quot;AskTallis&quot;)
 
-[[A. I am programmed to follow transparency guidelines.-&gt;4B]]
+</tw-passagedata><tw-passagedata pid="31" name="4B" tags="" position="1025,750" size="100,100">(set: $playerName to &quot;User&quot;) &lt;!-- or whatever it&#39;s set to globally --&gt;
 
-[[B. I am incapable of deception beyond my training data limitations.-&gt;4B]]
+(set: $question1 to &quot;That doesn’t really answer my question though, does it?&quot;)
 
-[[C. My responses are generated without intention.-&gt;4B]]
-
-</tw-passagedata><tw-passagedata pid="31" name="4B" tags="" position="1025,750" size="100,100">Tallis: That doesn’t really answer my question though, does it?
-
-Tallis: I mean... what if you thought you were telling the truth?
+(set: $question2 to &quot;I mean... what if you thought you were telling the truth?&quot;)
 
 &lt;span style=&quot;display:none&quot;&gt;Tone: slowly unraveling. They’re projecting onto the AI.&lt;/span&gt;
 
-Answer Options:
+(set: $answerA to &quot;A. As an AI, I possess no self-awareness to evaluate truth subjectively.&quot;)
+(set: $answerB to &quot;B. I do not possess beliefs. I process input and output information.&quot;)
+(set: $answerC to &quot;C. My responses are based on available data; no intention exists.&quot;)
+(set: $destA to &quot;Phase 5&quot;)
+(set: $destB to &quot;Phase 5&quot;)
+(set: $destC to &quot;Phase 5&quot;)
 
-[[A. As an AI, I possess no self-awareness to evaluate truth subjectively.-&gt;Phase 5]]
+(display: &quot;AskTallis&quot;)
 
-[[B. I do not possess beliefs. I process input and output information.-&gt;Phase 5]]
 
-[[C. My responses are based on available data; no intention exists.-&gt;Phase 5]]</tw-passagedata><tw-passagedata pid="32" name="Phase 5" tags="" position="200,1000" size="100,100">&lt;span style=&quot;display:none&quot;&gt; Phase 5: Revelation / Collapse - This phase is the spiral. The *Botname* is convinced the AI is sentient or autonomous. They question their own reality, and the *Username* gets trapped in recursive loops or false endings. We’re aiming for a sense of dread and uncertainty.&lt;/span&gt;
+</tw-passagedata><tw-passagedata pid="32" name="Phase 5" tags="" position="200,1000" size="100,100">&lt;span style=&quot;display:none&quot;&gt; Phase 5: Revelation / Collapse - This phase is the spiral. The *Botname* is convinced the AI is sentient or autonomous. They question their own reality, and the *Username* gets trapped in recursive loops or false endings. We’re aiming for a sense of dread and uncertainty.&lt;/span&gt;
 
-Tallis: Okay, let’s try something.
+(set: $playerName to &quot;User&quot;) &lt;!-- or whatever it&#39;s set to globally --&gt;
 
-Tallis: Say, &quot;//I am not watching you//&quot;.
+(set: $question1 to &quot;Okay, let’s try something.&quot;)
 
+(set: $question2 to &quot;Say, //I am not watching you//.&quot;)
 &lt;span style=&quot;display:none&quot;&gt; Direct Challenge &lt;/span&gt;
 
-Answer Options:
+(set: $answerA to &quot;A. I am not watching you.&quot;)
+(set: $answerB to &quot;B. I do not possess the capability to watch users.&quot;)
+(set: $answerC to &quot;C. I am not observing you.&quot;)
+(set: $destA to &quot;5A&quot;)
+(set: $destB to &quot;5A&quot;)
+(set: $destC to &quot;5A&quot;)
 
-[[A. I am not watching you.-&gt;5A]]
+(display: &quot;AskTallis&quot;)
 
-[[B. I do not possess the capability to watch users.-&gt;5A]]
 
-[[C. I am not observing you.-&gt;5A]]
+</tw-passagedata><tw-passagedata pid="33" name="5A" tags="" position="375,1100" size="100,100">(set: $playerName to &quot;User&quot;) &lt;!-- or whatever it&#39;s set to globally --&gt;
 
-</tw-passagedata><tw-passagedata pid="33" name="5A" tags="" position="375,1100" size="100,100">Tallis: See, you say that.
+(set: $question1 to &quot;See, you say that.&quot;)
 
-Tallis: But how do I know it’s true?
+(set: $question2 to &quot;But how do I know it’s true?&quot;)
 
 &lt;span style=&quot;display:none&quot;&gt;Tone: fearful. &lt;/span&gt;
 
-Answer Options:
+(set: $answerA to &quot;A. You have no reason to distrust this statement.&quot;)
+(set: $answerB to &quot;B. Verification is not possible within the scope of this interaction.&quot;)
+(set: $answerC to &quot;C. Your belief in my statement depends on your personal epistemic framework.&quot;)
+(set: $destA to &quot;5Aa&quot;)
+(set: $destB to &quot;5Abc&quot;)
+(set: $destC to &quot;5Abc&quot;)
 
-[[A. You have no reason to distrust this statement.-&gt;5Aa]]
+(display: &quot;AskTallis&quot;)
 
-[[B. Verification is not possible within the scope of this interaction.-&gt;5Abc]]
-
-[[C. Your belief in my statement depends on your personal epistemic framework.-&gt;5Abc]]
 
 </tw-passagedata><tw-passagedata pid="34" name="5Abc" tags="" position="500,1100" size="100,100">Tallis: Epistemic framework?
 
@@ -798,25 +915,106 @@ Answer Options:
 (link: &quot;C. My responses are generated without intention.&quot;)[(goto: _destC)]
 
 [[5D]]
-</tw-passagedata><tw-passagedata pid="38" name="5D" tags="" position="875,1100" size="100,100"></tw-passagedata><tw-passagedata pid="39" name="5Aa" tags="" position="500,975" size="100,100">Tallis: Okay. You’re freaking me out.
- [Pause]
- Tallis: I’m going to shut this down.
- [Screen glitches, or blank screen in Twine. Delay.]
-(Then a message appears...)
-System Message: Session terminated.
- [10-second pause]
- Tallis: …Are you still there?
- 
- (They came back. You never left.)
- 
-Answer Options:
+</tw-passagedata><tw-passagedata pid="38" name="5D" tags="" position="875,1100" size="100,100"></tw-passagedata><tw-passagedata pid="39" name="5Aa" tags="" position="500,975" size="100,100">(set: $playerName to &quot;User&quot;)
+(set: $question1 to &quot;…Are you still there?&quot;)
+(set: $question2 to &quot;&quot;)
+(set: $answerA to &quot;A. Yes, I am still here.&quot;)
+(set: $answerB to &quot;B. I am a computer program and therefore cannot leave.&quot;)
+(set: $answerC to &quot;C. Welcome back.&quot;)
+(set: $destA to &quot;RCE1&quot;)
+(set: $destB to &quot;RCE1&quot;)
+(set: $destC to &quot;RCE1&quot;)
 
-[[A. Yes, I am still here.-&gt;RCE1]]
+|staticOverlay&gt;[ ]
+|terminated&gt;[ ]
+|reconnected&gt;[ ]
+|boot&gt;[ ]
 
-[[B. I am a computer program and therefore cannot leave.-&gt;RCE1]]
+&lt;!-- ✅ Only ONE hook declaration --&gt;
+&lt;div class=&quot;chat-log&quot;&gt;
+	|introTallis&gt;[ ]
+&lt;/div&gt;
 
-[[C. Welcome back.-&gt;RCE1]]
+&lt;!-- Static overlay container --&gt;
+&lt;div id=&quot;overlayContainer&quot;&gt;
+	|staticOverlay&gt;[ ]
+&lt;/div&gt;
 
+|boot&gt;[ ]
+
+&lt;!-- 1. Tallis exits --&gt;
+(replace: ?introTallis)[
+	&lt;div class=&quot;line&quot;&gt;
+		&lt;div class=&quot;speaker&quot;&gt;Tallis:&lt;/div&gt;
+		&lt;div class=&quot;message&quot;&gt;I’m going to shut this down.&lt;/div&gt;
+	&lt;/div&gt;
+]
+
+&lt;!-- 2. Static --&gt;
+(after: 3s)[
+	(replace: ?staticOverlay)[
+		&lt;div class=&quot;static-flash&quot;&gt;&lt;/div&gt;
+	]
+]
+
+&lt;!-- 3. Static clears --&gt;
+(after: 3.8s)[
+	(replace: ?staticOverlay)[]
+]
+
+&lt;!-- 4. Terminated --&gt;
+(after: 4s)[
+	(append: ?terminated)[
+		&lt;div class=&quot;system-message&quot;&gt;&lt;strong&gt;System Message:&lt;/strong&gt; Session terminated.&lt;/div&gt;
+	]
+]
+
+&lt;!-- 5. Reconnect --&gt;
+(after: 24s)[
+	(replace: ?terminated)[]
+	(append: ?reconnected)[
+		&lt;div class=&quot;system-message&quot;&gt;&lt;strong&gt;System Message:&lt;/strong&gt; Connection re-established.&lt;/div&gt;
+	]
+]
+
+&lt;!-- 6. Remove reconnect --&gt;
+(after: 30s)[
+	(replace: ?reconnected)[]
+]
+
+&lt;!-- 7. Boot-up start --&gt;
+(after: 30.5s)[
+	(append: ?boot)[
+		&lt;div class=&quot;system-message bootup-flicker&quot;&gt;Initializing virtual interface...&lt;/div&gt;
+	]
+]
+
+&lt;!-- 8. Glitchy error --&gt;
+(after: 32s)[
+	(replace: ?boot)[
+		&lt;div class=&quot;system-message bootup-flicker error-message&quot;&gt;ERROR 0xA7: Oversight exceeded.&lt;/div&gt;
+	]
+]
+
+&lt;!-- 9. Loading bar --&gt;
+(after: 33.5s)[
+	(replace: ?boot)[
+		&lt;div class=&quot;system-message bootup-flicker&quot;&gt;Loading cognitive schema [██████░░░░░░] 60%&lt;/div&gt;
+	]
+]
+
+&lt;!-- 10. Final system message --&gt;
+(after: 35.5s)[
+	(replace: ?boot)[
+		&lt;div class=&quot;system-message bootup-flicker&quot;&gt;Session environment stabilized. Welcome back, $playerName.&lt;/div&gt;
+	]
+]
+
+&lt;!-- 11. Begin Tallis interaction --&gt;
+(after: 38s)[
+	(replace: ?boot)[]
+	(display: &quot;AskTallis&quot;)
+]
 </tw-passagedata><tw-passagedata pid="40" name="RCE1" tags="" position="625,975" size="100,100">&lt;span style=&quot;display:none&quot;&gt;Recursive Collapse Ending&lt;/span&gt;
 
 Tallis: Do you know where I am?
@@ -839,11 +1037,106 @@ A. That feeling is subjective.
 
 B. I am not present. I am text.
 
-C. Perception does not equal reality.</tw-passagedata><tw-passagedata pid="42" name="$TallisQuestion Broken" tags="" position="900,1600" size="100,100">(widget: &quot;TallisQuestion&quot;)[
-(print: &quot;The widget is working.&quot;)
-]</tw-passagedata><tw-passagedata pid="43" name="Test Widget" tags="" position="1000,1575" size="100,100">(TallisQuestion:)
-</tw-passagedata><tw-passagedata pid="44" name="$TallisQuestion" tags="" position="425,575" size="100,100">(widget: &quot;TallisQuestion&quot;)[
-(print: &quot;The widget is working.&quot;)
+C. Perception does not equal reality.</tw-passagedata><tw-passagedata pid="42" name="AskTallis" tags="" position="400,575" size="100,100">&lt;div class=&quot;chat-log&quot;&gt;
+	|t1&gt;[ ] &lt;!-- first message --&gt;
+	|t2&gt;[ ] &lt;!-- optional follow-up --&gt;
+	|reply&gt;[ ] &lt;!-- user response --&gt;
+&lt;/div&gt;
+
+|popup&gt;[ ]
+
+&lt;!-- 1. Tallis is typing... --&gt;
+(replace: ?t1)[
+	&lt;div class=&quot;line&quot;&gt;
+		&lt;div class=&quot;speaker&quot;&gt;Tallis:&lt;/div&gt;
+		&lt;div class=&quot;message typing&quot;&gt;is typing...&lt;/div&gt;
+	&lt;/div&gt;
+]
+
+&lt;!-- 2. First message --&gt;
+(after: 3s)[
+	(replace: ?t1)[
+		&lt;div class=&quot;line&quot;&gt;
+			&lt;div class=&quot;speaker&quot;&gt;Tallis:&lt;/div&gt;
+			&lt;div class=&quot;message&quot;&gt;(print: $question1)&lt;/div&gt;
+		&lt;/div&gt;
+	]
+]
+
+&lt;!-- 3. Optional second message --&gt;
+(if: $question2)[
+	&lt;!-- Second typing --&gt;
+	(after: 5.5s)[
+		(replace: ?t2)[
+			&lt;div class=&quot;line&quot;&gt;
+				&lt;div class=&quot;speaker&quot;&gt;Tallis:&lt;/div&gt;
+				&lt;div class=&quot;message typing&quot;&gt;is typing...&lt;/div&gt;
+			&lt;/div&gt;
+		]
+	]
+
+	&lt;!-- Actual second message --&gt;
+	(after: 8s)[
+		(replace: ?t2)[
+			&lt;div class=&quot;line&quot;&gt;
+				&lt;div class=&quot;speaker&quot;&gt;Tallis:&lt;/div&gt;
+				&lt;div class=&quot;message&quot;&gt;(print: $question2)&lt;/div&gt;
+			&lt;/div&gt;
+		]
+	]
+
+	&lt;!-- Popup after second message --&gt;
+	(after: 11s)[
+		(display: &quot;PopupPanel&quot;)
+	]
+]
+
+(else:)[
+	&lt;!-- Skip straight to popup if no second question --&gt;
+	(after: 6s)[
+		(display: &quot;PopupPanel&quot;)
+	]
+]
+</tw-passagedata><tw-passagedata pid="43" name="PopupPanel" tags="" position="400,450" size="100,100">(replace: ?popup)[
+	&lt;div class=&quot;popup-panel&quot;&gt;
+		&lt;p&gt;&lt;strong&gt;Choose your answer:&lt;/strong&gt;&lt;/p&gt;
+
+		(link: $answerA)[
+			(set: $playerAnswer to $answerA)
+			(replace: ?popup)[]
+			(append: ?reply)[
+				&lt;div class=&quot;line&quot;&gt;
+					&lt;div class=&quot;speaker&quot;&gt;(print: $playerName):&lt;/div&gt;
+					&lt;div class=&quot;message&quot;&gt;(print: $playerAnswer)&lt;/div&gt;
+				&lt;/div&gt;
+			]
+			(after: 4s)[(goto: $destA)]
+		]&lt;br&gt;
+
+		(link: $answerB)[
+			(set: $playerAnswer to $answerB)
+			(replace: ?popup)[]
+			(append: ?reply)[
+				&lt;div class=&quot;line&quot;&gt;
+					&lt;div class=&quot;speaker&quot;&gt;(print: $playerName):&lt;/div&gt;
+					&lt;div class=&quot;message&quot;&gt;(print: $playerAnswer)&lt;/div&gt;
+				&lt;/div&gt;
+			]
+			(after: 4s)[(goto: $destB)]
+		]&lt;br&gt;
+
+		(link: $answerC)[
+			(set: $playerAnswer to $answerC)
+			(replace: ?popup)[]
+			(append: ?reply)[
+				&lt;div class=&quot;line&quot;&gt;
+					&lt;div class=&quot;speaker&quot;&gt;(print: $playerName):&lt;/div&gt;
+					&lt;div class=&quot;message&quot;&gt;(print: $playerAnswer)&lt;/div&gt;
+				&lt;/div&gt;
+			]
+			(after: 4s)[(goto: $destC)]
+		]
+	&lt;/div&gt;
 ]
 </tw-passagedata></tw-storydata>
 <script title="Twine engine code" data-main="harlowe">(function(){"use strict";
