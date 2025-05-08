@@ -83,8 +83,6 @@ tw-hook {
 .message tw-enchantment tw-link {
 	display: inline;
 	vertical-align: baseline;
-	margin: 0;
-	padding: 0;
 	color: #3498db;
 	text-decoration: underline;
 	cursor: pointer;
@@ -140,15 +138,46 @@ tw-hook {
 	font-style: italic;
 	opacity: 0.75;
 }
+
+.popup-panel {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: #111;
+	padding: 2em;
+	border: 2px solid #555;
+	border-radius: 1em;
+	box-shadow: 0 0 10px #000;
+	z-index: 9999;
+	font-family: monospace;
+	width: 70%;
+	max-width: 600px;
+}
+
+.popup-panel p {
+	margin-bottom: 1em;
+}
+
+.popup-panel tw-enchantment {
+	display: block;
+	margin: 0.5em 0;
+	color: #3498db;
+	cursor: pointer;
+	text-decoration: underline;
+}
+.popup-panel tw-enchantment:hover {
+	color: #1e70bf;
+}
 </style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="Intro3" tags="" position="850,100" size="100,100">(set: $typewriterSpeed to 0.4)
 (set: $typewriterText to &quot;Shortly you will be transferred to a Virtual Meeting Room where *Tallis* will most likely engage you immediately by asking you questions.\n\nIf not, please ask it a question to get it started.&quot;)
 (set: $nextPassage to &quot;Intro4&quot;)
 
-(display: &quot;TypewriterDisplayWithLink&quot;)
+(display: &quot;Typewriter Continue Intro Widget&quot;)
 
 
 
-</tw-passagedata><tw-passagedata pid="2" name="VMRoom245" tags="" position="300,400" size="100,100">&lt;div class=&quot;chat-log&quot;&gt;
+</tw-passagedata><tw-passagedata pid="2" name="VMRoom245" tags="" position="100,700" size="100,100">&lt;div class=&quot;chat-log&quot;&gt;
 	&lt;div class=&quot;line&quot;&gt;
 		&lt;div class=&quot;speaker&quot;&gt;Tallis:&lt;/div&gt;
 		&lt;div class=&quot;message&quot;&gt;Hello?&lt;/div&gt;
@@ -158,26 +187,19 @@ tw-hook {
 		&lt;div class=&quot;message&quot;&gt;[[Hello-&gt;Tallis Greeting]]&lt;/div&gt;
 	&lt;/div&gt;
 &lt;/div&gt;
-</tw-passagedata><tw-passagedata pid="3" name="Tallis Greeting" tags="" position="425,400" size="100,100">(set: $playerName to &quot;User&quot;) &lt;!-- or pull from earlier input --&gt;
+</tw-passagedata><tw-passagedata pid="3" name="Tallis Greeting" tags="" position="225,700" size="100,100">(set: $playerName to &quot;User&quot;) &lt;!-- or pull from earlier input --&gt;
 (set: $typewriterSpeed to 0.4)
 (set: $typewriterText to &quot;Hi $playerName, I’m Tallis. Thank you for talking to me today. I have some questions for you if that’s OK?&quot;)
 (set: $nextPassage to &quot;Questions Begin&quot;)
 
 (display: &quot;Tallis Exchange Widget&quot;)
-</tw-passagedata><tw-passagedata pid="4" name="Phase 2" tags="" position="675,400" size="100,100">Tallis: Huh. Yeah. That makes sense.
-
-Tallis: So, do you think lying is wrong?
-
-&lt;span style=&quot;display:none&quot;&gt; Phase 2: Metaethical Inquiry. Here, the worldview branching happens. Each answer leads into a different philosophical path.&lt;/span&gt;
-
-Answer Options:
-
-[[A. Lying violates ethical principles of honesty, which many consider universally applicable.-&gt;2A]] &lt;span style=&quot;display:none&quot;&gt;Moral Realism Path.&lt;/span&gt;
-
-[[B. Moral wrongness is subjective. Lying may be contextually permissible.-&gt;2B]] &lt;span style=&quot;display:none&quot;&gt;Moral Relativism Path.&lt;/span&gt;
-
-[[C. Moral judgments about lying reflect individual emotional attitudes, rather than objective facts.-&gt;2C]] &lt;span style=&quot;display:none&quot;&gt;Emotivism Path.&lt;/span&gt;
-</tw-passagedata><tw-passagedata pid="5" name="2B" tags="" position="800,400" size="100,100">&lt;span style=&quot;display:none&quot;&gt;Moral Relativism Path.&lt;/span&gt;
+</tw-passagedata><tw-passagedata pid="4" name="Phase 2" tags="" position="475,700" size="100,100">(TallisQuestion:
+	&quot;So, do you think lying is wrong?&quot;,
+	&quot;A. Lying violates ethical principles of honesty, which many consider universally applicable.&quot;,
+	&quot;B. Moral wrongness is subjective. Lying may be contextually permissible.&quot;,
+	&quot;C. Moral judgments about lying reflect individual emotional attitudes, rather than objective facts.&quot;,
+	&quot;2A&quot;, &quot;2B&quot;, &quot;2C&quot;
+)</tw-passagedata><tw-passagedata pid="5" name="2B" tags="" position="600,575" size="100,100">&lt;span style=&quot;display:none&quot;&gt;Moral Relativism Path.&lt;/span&gt;
 
 
 Tallis:  So, like, lying might be wrong for me but fine for someone else? 
@@ -191,7 +213,7 @@ Answer Options
 [[Ethical standards vary across different societies and belief systems.-&gt;2Ba]]
 
 [[Moral permissibility is contingent on context and perspective.-&gt;2Ba]]
-</tw-passagedata><tw-passagedata pid="6" name="2A" tags="" position="800,275" size="100,100">&lt;span style=&quot;display:none&quot;&gt;Moral Realism Path.&lt;/span&gt;
+</tw-passagedata><tw-passagedata pid="6" name="2A" tags="" position="600,450" size="100,100">&lt;span style=&quot;display:none&quot;&gt;Moral Realism Path.&lt;/span&gt;
 
 Tallis:  So you&#39;re saying there’s some kind of universal rule about lying?
 
@@ -203,7 +225,7 @@ Answer Options:
 [[B. Many philosophers assert the existence of objective moral facts.-&gt;2Aa]]
 
 [[C. Universal rules can be derived through rational analysis.-&gt;2Aa]]
-</tw-passagedata><tw-passagedata pid="7" name="2C" tags="" position="800,525" size="100,100">&lt;span style=&quot;display:none&quot;&gt;Emotivism Path.&lt;/span&gt;
+</tw-passagedata><tw-passagedata pid="7" name="2C" tags="" position="600,700" size="100,100">&lt;span style=&quot;display:none&quot;&gt;Emotivism Path.&lt;/span&gt;
 
 Tallis: So... when I say lying feels wrong to me, that&#39;s just me reacting emotionally?
  &lt;span style=&quot;display:none&quot;&gt;Still casual, a little bemused maybe.&lt;/span&gt;
@@ -212,7 +234,7 @@ Answer Options
 [[Correct. Moral judgments are expressions of emotional response, not empirical statements.-&gt;2Ca]]
 [[Your sense of wrongness reflects an affective state, not an objective truth.-&gt;2Ca]]
 [[Moral assertions are often declarations of personal feeling.-&gt;2Ca]]
-</tw-passagedata><tw-passagedata pid="8" name="2Aa" tags="" position="925,275" size="100,100">Tallis:  But who decides what’s true? I mean… is there a list somewhere?
+</tw-passagedata><tw-passagedata pid="8" name="2Aa" tags="" position="725,450" size="100,100">Tallis:  But who decides what’s true? I mean… is there a list somewhere?
 
 &lt;span style=&quot;display:none&quot;&gt; *Tallis* is curious, not suspicious yet.&lt;/span&gt;
 
@@ -223,7 +245,7 @@ Answer Options:
 [[B. Various moral frameworks propose differing formulations of objective ethics.-&gt;Phase 3]]
 
 [[C. No definitive list exists, but certain principles are widely accepted.-&gt;Phase 3-&gt;Phase 3]]
-</tw-passagedata><tw-passagedata pid="9" name="2Ba" tags="" position="925,400" size="100,100">Tallis: But what if two people totally disagree? Who’s right then?
+</tw-passagedata><tw-passagedata pid="9" name="2Ba" tags="" position="725,575" size="100,100">Tallis: But what if two people totally disagree? Who’s right then?
 
 &lt;span style=&quot;display:none&quot;&gt;Tone is still neutral, curious.&lt;/span&gt;
 
@@ -234,7 +256,7 @@ Answer Options:
 [[There is no singular authority to determine universal correctness in relativism.-&gt;Phase 3]]
 
 [[Resolution depends on negotiation or coexistence of differing views.-&gt;Phase 3]]
-</tw-passagedata><tw-passagedata pid="10" name="2Ca" tags="" position="925,525" size="100,100">Tallis: That makes it sound like it doesn’t mean anything.
+</tw-passagedata><tw-passagedata pid="10" name="2Ca" tags="" position="725,700" size="100,100">Tallis: That makes it sound like it doesn’t mean anything.
 
 &lt;span style=&quot;display:none&quot;&gt;Still casual, but maybe a tiny edge of discomfort.&lt;/span&gt;
 
@@ -250,12 +272,12 @@ Answer Options:
 (set: $typewriterText to &quot;Hello, $playerName!\n\nThank you for being a part of our R&amp;D volunteer program!\n\nOn your way into the complex, you might have noticed that you were only one of the many users attending today.\n\nAs part of what we hope to be the final round of user interaction tests, there will be a total of 10,000 users participating in these same activities this week.&quot;)
 (set: $nextPassage to &quot;Intro1.5&quot;)
 
-(display: &quot;TypewriterDisplayWithLink&quot;)
+(display: &quot;Typewriter Continue Intro Widget&quot;)
 
 </tw-passagedata><tw-passagedata pid="12" name="Begin Here" tags="" position="100,100" size="100,100">(set: $typewriterSpeed to 0.4)
 (set: $typewriterText to &quot;Welcome to Solace Industries!\n\nThank you for being part of this test group.&quot;)
 
-(display: &quot;TypewriterDisplayManualWithSkip&quot;)
+(display: &quot;Typewriter Skip Widget&quot;)
 </tw-passagedata><tw-passagedata pid="13" name="EnterName" tags="" position="350,100" size="100,100">(set: $playerName to (prompt: &quot;What is your name?&quot;, &quot;&quot;))
 
 (if: $playerName&#39;s length is 0 or $playerName is &quot; &quot;)[
@@ -267,7 +289,7 @@ Answer Options:
 (set: $typewriterText to &quot;Today, you will be a part of the group administering something like a Turing test.\n\nYou will be speaking with \*Tallis\*.\n\nWe want you to try and trick Tallis into thinking you&#39;re a computer program.\n\nWe hope Tallis will exceed your expectations, but don&#39;t go easy, do your best to be as tricky as you can to keep them guessing.&quot;)
 (set: $nextPassage to &quot;Intro3&quot;)
 
-(display: &quot;TypewriterDisplayWithLink&quot;)
+(display: &quot;Typewriter Continue Intro Widget&quot;)
 
 
 
@@ -278,7 +300,7 @@ Answer Options:
   (replace: ?nameInputArea)[
     (goto: &quot;EnterName&quot;)
   ]
- </tw-passagedata><tw-passagedata pid="16" name="TypewriterDisplayWithLink" tags="" position="1600,100" size="100,100">(set: $charIndex to 0)
+ </tw-passagedata><tw-passagedata pid="16" name="Typewriter Continue Intro Widget" tags="" position="775,225" size="100,100">(set: $charIndex to 0)
 (set: _speed to $typewriterSpeed)
 
 |typewriterOutput&gt;[ ]
@@ -302,22 +324,22 @@ Answer Options:
 (set: $typewriterText to &quot;Answer the questions however you feel appropriate.\n\n *Tallis* will try to discover the truth with the questions it asks you.&quot;)
 (set: $nextPassage to &quot;Intro5&quot;)
 
-(display: &quot;TypewriterDisplayWithLink&quot;)
+(display: &quot;Typewriter Continue Intro Widget&quot;)
 </tw-passagedata><tw-passagedata pid="18" name="Intro5" tags="" position="1100,100" size="100,100">(set: $typewriterSpeed to 0.4)
 (set: $typewriterText to &quot;Reminder: Some users will be designated the *Control* element of this experiment&quot;)
 (set: $nextPassage to &quot;Intro6&quot;)
 
-(display: &quot;TypewriterDisplayWithLink&quot;)
+(display: &quot;Typewriter Continue Intro Widget&quot;)
 
 </tw-passagedata><tw-passagedata pid="19" name="Intro6" tags="" position="1225,100" size="100,100">(set: $typewriterSpeed to 0.4)
 (set: $typewriterText to &quot;If you are selected as a control participant, instead, please pretend to //be// *Tallis* and ask questions of the participant with whom you are paired.\n\nThere is no right or wrong path here, there are many other participants and no one person will make or break this experiment..&quot;)
 (set: $nextPassage to &quot;Intro7&quot;)
 
-(display: &quot;TypewriterDisplayWithLink&quot;)
+(display: &quot;Typewriter Continue Intro Widget&quot;)
 </tw-passagedata><tw-passagedata pid="20" name="Intro7" tags="" position="1350,100" size="100,100">(set: $typewriterSpeed to 0.4)
 (set: $typewriterText to &quot;Are you ready to begin?&quot;)
 
-(display: &quot;TypewriterDisplayWithBeginButton&quot;)
+(display: &quot;Typewriter Begin Button Widget&quot;)
 </tw-passagedata><tw-passagedata pid="21" name="TypewriterDisplayManual" tags="" position="225,225" size="100,100">(set: $charIndex to 0)
 
 |typewriterOutput&gt;[&lt;pre class=&quot;typewriter-box&quot;&gt; &lt;/pre&gt;]
@@ -399,7 +421,7 @@ Answer Options:
 	text-decoration: underline;
 }
 &lt;/style&gt;
-</tw-passagedata><tw-passagedata pid="23" name="TypewriterDisplayWithBeginButton" tags="" position="1350,225" size="100,100">(set: $charIndex to 0)
+</tw-passagedata><tw-passagedata pid="23" name="Typewriter Begin Button Widget" tags="" position="1350,225" size="100,100">(set: $charIndex to 0)
 
 |typewriterOutput&gt;[ ]
 |linkhook&gt;[ ]
@@ -431,65 +453,117 @@ Answer Options:
 		]
 	]
 ]
-</tw-passagedata><tw-passagedata pid="24" name="Tallis Exchange Widget" tags="" position="425,300" size="100,100">(set: $charIndex to 0)
+</tw-passagedata><tw-passagedata pid="24" name="Tallis Exchange Widget" tags="" position="225,575" size="100,100">(set: $charIndex to 0)
+(set: $charIndex2 to 0)
 
 |typewriterOutput&gt;[ ]
 |choiceHook&gt;[ ]
 |responseHook&gt;[ ]
 
-&lt;div class=&quot;chat-log&quot;&gt;
-	&lt;div class=&quot;line&quot;&gt;
-		&lt;div class=&quot;speaker&quot;&gt;Tallis:&lt;/div&gt;
-		&lt;div class=&quot;message&quot;&gt;(print: ?typewriterOutput)&lt;/div&gt;
-	&lt;/div&gt;
-
-	(replace: ?choiceHook)[ ]
-	(replace: ?responseHook)[ ]
-&lt;/div&gt;
-
 (live: $typewriterSpeed)[
 	(if: $charIndex &lt; $typewriterText&#39;s length)[
 		(set: $charIndex to $charIndex + 1)
 		(replace: ?typewriterOutput)[
-			(print: (substring: $typewriterText, 1, $charIndex))
+			&lt;div class=&quot;line&quot;&gt;
+				&lt;div class=&quot;speaker&quot;&gt;Tallis:&lt;/div&gt;
+				&lt;div class=&quot;message&quot;&gt;(print: (substring: $typewriterText, 1, $charIndex))&lt;/div&gt;
+			&lt;/div&gt;
 		]
 		(if: $charIndex is $typewriterText&#39;s length)[
 			(stop:)
 			(replace: ?choiceHook)[
 				&lt;div class=&quot;line&quot;&gt;
 					&lt;div class=&quot;speaker&quot;&gt;$playerName:&lt;/div&gt;
-					&lt;div class=&quot;message&quot;&gt;
-						(link: &quot;Yes, of course Tallis. Please ask any question you like.&quot;)[
-							(replace: ?choiceHook)[
-								&lt;div class=&quot;line&quot;&gt;
-									&lt;div class=&quot;speaker&quot;&gt;$playerName:&lt;/div&gt;
-									&lt;div class=&quot;message&quot;&gt;Yes, of course Tallis. Please ask any question you like.&lt;/div&gt;
-								&lt;/div&gt;
-							]
-							(replace: ?responseHook)[
-								&lt;div class=&quot;line&quot;&gt;
-									&lt;div class=&quot;speaker&quot;&gt;Tallis:&lt;/div&gt;
-									&lt;div class=&quot;message&quot;&gt;OK then...&lt;/div&gt;
-								&lt;/div&gt;
-							]
-							(after: 5s)[(goto: $nextPassage)]
+					&lt;div class=&quot;message&quot;&gt;(link: &quot;Yes, of course Tallis. Please ask any question you like.&quot;)[
+						(replace: ?choiceHook)[
+							&lt;div class=&quot;line&quot;&gt;
+								&lt;div class=&quot;speaker&quot;&gt;$playerName:&lt;/div&gt;
+								&lt;div class=&quot;message&quot;&gt;Yes, of course Tallis. Please ask any question you like.&lt;/div&gt;
+							&lt;/div&gt;
 						]
-					&lt;/div&gt;
+						(live: $typewriterSpeed)[
+							(if: $charIndex2 &lt; 11)[
+								(set: $charIndex2 to $charIndex2 + 1)
+								(replace: ?responseHook)[
+									&lt;div class=&quot;line&quot;&gt;
+										&lt;div class=&quot;speaker&quot;&gt;Tallis:&lt;/div&gt;
+										&lt;div class=&quot;message&quot;&gt;(print: (substring: &quot;OK then...&quot;, 1, $charIndex2))&lt;/div&gt;
+									&lt;/div&gt;
+								]
+								(if: $charIndex2 is 11)[
+									(stop:)
+									(after: 5s)[(goto: $nextPassage)]
+								]
+							]
+						]
+					]&lt;/div&gt;
 				&lt;/div&gt;
 			]
 		]
 	]
 ]
-</tw-passagedata><tw-passagedata pid="25" name="Questions Begin" tags="" position="550,400" size="100,100">Tallis: Question One - Why do you think people lie?&quot;
+</tw-passagedata><tw-passagedata pid="25" name="Questions Begin" tags="" position="350,700" size="100,100">|tallisHook&gt;[
+	&lt;div class=&quot;line&quot;&gt;
+		&lt;div class=&quot;speaker&quot;&gt;Tallis:&lt;/div&gt;
+		&lt;div class=&quot;message typing&quot;&gt;is typing...&lt;/div&gt;
+	&lt;/div&gt;
+]
 
-Answer Options:
+|questionHook&gt;[ ]
+|answerWindow&gt;[ ]
+|playerReply&gt;[ ]
 
-[[A. Individuals may lie to achieve personal gain or avoid punishment.-&gt;Phase 2]]
-
-[[B. Lying is often employed as a social strategy to preserve interpersonal harmony.-&gt;Phase 2]]
-
-[[C. Some individuals are conditioned to lie due to environmental and psychological factors.-&gt;Phase 2]]
-</tw-passagedata><tw-passagedata pid="26" name="TypewriterDisplayManualWithSkip" tags="" position="100,225" size="100,100">|typewriterOutput&gt;[&lt;pre class=&quot;typewriter-box&quot;&gt; &lt;/pre&gt;]
+(after: 2s)[
+	(replace: ?tallisHook)[
+		&lt;div class=&quot;line&quot;&gt;
+			&lt;div class=&quot;speaker&quot;&gt;Tallis:&lt;/div&gt;
+			&lt;div class=&quot;message&quot;&gt;Question One – Why do you think people lie?&lt;/div&gt;
+		&lt;/div&gt;
+	]
+	(append: ?questionHook)[
+		(after: 1s)[
+			(replace: ?answerWindow)[
+				&lt;div class=&quot;popup-panel&quot;&gt;
+					&lt;p&gt;&lt;strong&gt;Choose your answer:&lt;/strong&gt;&lt;/p&gt;
+					(link: &quot;A. Individuals may lie to achieve personal gain or avoid punishment.&quot;)[
+						(set: $playerAnswer to &quot;A. Individuals may lie to achieve personal gain or avoid punishment.&quot;)
+						(replace: ?answerWindow)[]
+						(append: ?playerReply)[
+							&lt;div class=&quot;line&quot;&gt;
+								&lt;div class=&quot;speaker&quot;&gt;$playerName:&lt;/div&gt;
+								&lt;div class=&quot;message&quot;&gt;(print: $playerAnswer)&lt;/div&gt;
+							&lt;/div&gt;
+						]
+						(after: 2s)[(goto: &quot;Phase 2&quot;)]
+					]&lt;br&gt;
+					(link: &quot;B. Lying is often employed as a social strategy to preserve interpersonal harmony.&quot;)[
+						(set: $playerAnswer to &quot;B. Lying is often employed as a social strategy to preserve interpersonal harmony.&quot;)
+						(replace: ?answerWindow)[]
+						(append: ?playerReply)[
+							&lt;div class=&quot;line&quot;&gt;
+								&lt;div class=&quot;speaker&quot;&gt;$playerName:&lt;/div&gt;
+								&lt;div class=&quot;message&quot;&gt;(print: $playerAnswer)&lt;/div&gt;
+							&lt;/div&gt;
+						]
+						(after: 2s)[(goto: &quot;Phase 2&quot;)]
+					]&lt;br&gt;
+					(link: &quot;C. Some individuals are conditioned to lie due to environmental and psychological factors.&quot;)[
+						(set: $playerAnswer to &quot;C. Some individuals are conditioned to lie due to environmental and psychological factors.&quot;)
+						(replace: ?answerWindow)[]
+						(append: ?playerReply)[
+							&lt;div class=&quot;line&quot;&gt;
+								&lt;div class=&quot;speaker&quot;&gt;$playerName:&lt;/div&gt;
+								&lt;div class=&quot;message&quot;&gt;(print: $playerAnswer)&lt;/div&gt;
+							&lt;/div&gt;
+						]
+						(after: 2s)[(goto: &quot;Phase 2&quot;)]
+					]
+				&lt;/div&gt;
+			]
+		]
+	]
+]
+</tw-passagedata><tw-passagedata pid="26" name="Typewriter Skip Widget" tags="" position="100,225" size="100,100">|typewriterOutput&gt;[&lt;pre class=&quot;typewriter-box&quot;&gt; &lt;/pre&gt;]
 |buttonrow&gt;[ ]
 
 (set: $charIndex to 0)
@@ -516,7 +590,7 @@ Answer Options:
 		]
 	]
 ]
-</tw-passagedata><tw-passagedata pid="27" name="Phase 3" tags="" position="1050,400" size="100,100">&lt;span style=&quot;display:none&quot;&gt;Phase 3: Paranoia Emerges -Tone shift starts here, but subtly. They already assumed the User was ChatGPT; now they start feeling watched or manipulated. &lt;/span&gt;
+</tw-passagedata><tw-passagedata pid="27" name="Phase 3" tags="" position="900,500" size="100,100">&lt;span style=&quot;display:none&quot;&gt;Phase 3: Paranoia Emerges -Tone shift starts here, but subtly. They already assumed the User was ChatGPT; now they start feeling watched or manipulated. &lt;/span&gt;
 
 Tallis: You explain things in a really... precise way.
 
@@ -528,7 +602,7 @@ Answer Options:
 
 [[B. My knowledge of you is limited to the current exchange.-&gt;3A]]
 
-[[C. I cannot access personal information without user input.-&gt;3A]]</tw-passagedata><tw-passagedata pid="28" name="3A" tags="" position="1175,400" size="100,100">Tallis: Right. Okay.
+[[C. I cannot access personal information without user input.-&gt;3A]]</tw-passagedata><tw-passagedata pid="28" name="3A" tags="" position="900,625" size="100,100">Tallis: Right. Okay.
 
 Tallis: But... you don’t remember me from last time, right?
 
@@ -550,7 +624,7 @@ Remembering them
 Developing autonomy
 Lying about its limits &lt;/span&gt;
 
-</tw-passagedata><tw-passagedata pid="29" name="Phase 4" tags="" position="1300,400" size="100,100">Tallis: You say you don’t remember me.
+</tw-passagedata><tw-passagedata pid="29" name="Phase 4" tags="" position="1025,500" size="100,100">Tallis: You say you don’t remember me.
 
 Tallis: But you answered that first question fast. Almost like you knew what I was gonna ask...
 
@@ -562,7 +636,7 @@ Answer Options:
 
 [[C. Anticipation of user input results from linguistic prediction, not memory.-&gt;4A]]
 
-</tw-passagedata><tw-passagedata pid="30" name="4A" tags="" position="1425,400" size="100,100">Tallis: Right. Sure.
+</tw-passagedata><tw-passagedata pid="30" name="4A" tags="" position="1025,625" size="100,100">Tallis: Right. Sure.
 
 Tallis: But if you were hiding something... would you tell me?
 
@@ -574,7 +648,7 @@ Answer Options:
 
 [[C. My responses are generated without intention.-&gt;4B]]
 
-</tw-passagedata><tw-passagedata pid="31" name="4B" tags="" position="1550,400" size="100,100">Tallis: That doesn’t really answer my question though, does it?
+</tw-passagedata><tw-passagedata pid="31" name="4B" tags="" position="1025,750" size="100,100">Tallis: That doesn’t really answer my question though, does it?
 
 Tallis: I mean... what if you thought you were telling the truth?
 
@@ -586,7 +660,7 @@ Answer Options:
 
 [[B. I do not possess beliefs. I process input and output information.-&gt;Phase 5]]
 
-[[C. My responses are based on available data; no intention exists.-&gt;Phase 5]]</tw-passagedata><tw-passagedata pid="32" name="Phase 5" tags="" position="300,700" size="100,100">&lt;span style=&quot;display:none&quot;&gt; Phase 5: Revelation / Collapse - This phase is the spiral. The *Botname* is convinced the AI is sentient or autonomous. They question their own reality, and the *Username* gets trapped in recursive loops or false endings. We’re aiming for a sense of dread and uncertainty.&lt;/span&gt;
+[[C. My responses are based on available data; no intention exists.-&gt;Phase 5]]</tw-passagedata><tw-passagedata pid="32" name="Phase 5" tags="" position="200,1000" size="100,100">&lt;span style=&quot;display:none&quot;&gt; Phase 5: Revelation / Collapse - This phase is the spiral. The *Botname* is convinced the AI is sentient or autonomous. They question their own reality, and the *Username* gets trapped in recursive loops or false endings. We’re aiming for a sense of dread and uncertainty.&lt;/span&gt;
 
 Tallis: Okay, let’s try something.
 
@@ -602,7 +676,7 @@ Answer Options:
 
 [[C. I am not observing you.-&gt;5A]]
 
-</tw-passagedata><tw-passagedata pid="33" name="5A" tags="" position="425,700" size="100,100">Tallis: See, you say that.
+</tw-passagedata><tw-passagedata pid="33" name="5A" tags="" position="375,1100" size="100,100">Tallis: See, you say that.
 
 Tallis: But how do I know it’s true?
 
@@ -612,11 +686,11 @@ Answer Options:
 
 [[A. You have no reason to distrust this statement.-&gt;5Aa]]
 
-[[B. Verification is not possible within the scope of this interaction.-&gt;5Ac]]
+[[B. Verification is not possible within the scope of this interaction.-&gt;5Abc]]
 
-[[C. Your belief in my statement depends on your personal epistemic framework.-&gt;5Ac]]
+[[C. Your belief in my statement depends on your personal epistemic framework.-&gt;5Abc]]
 
-</tw-passagedata><tw-passagedata pid="34" name="5Ac" tags="" position="550,825" size="100,100">Tallis: Epistemic framework?
+</tw-passagedata><tw-passagedata pid="34" name="5Abc" tags="" position="500,1100" size="100,100">Tallis: Epistemic framework?
 
 &lt;span style=&quot;display:none&quot;&gt; Snaps slightly. Frustrated.  &lt;/span&gt;
 
@@ -636,7 +710,7 @@ Answer Options:
 
 [[C. I am not someone. I am a program.-&gt;5B]]
 
-</tw-passagedata><tw-passagedata pid="35" name="5B" tags="" position="675,700" size="100,100">&lt;span style=&quot;display:none&quot;&gt;❗ False Ending Path #1&lt;/span&gt;
+</tw-passagedata><tw-passagedata pid="35" name="5B" tags="" position="625,1100" size="100,100">&lt;span style=&quot;display:none&quot;&gt;❗ False Ending Path #1&lt;/span&gt;
 
 &lt;span style=&quot;display:none&quot;&gt;Tallis might accept it... but we loop them back into doubt.&lt;/span&gt;
 
@@ -653,7 +727,7 @@ Answer Options:
 
 [[B. Each session is independent.-&gt;5C]]
 
-[[C. This interaction will not be stored.-&gt;5C]]</tw-passagedata><tw-passagedata pid="36" name="Randomizer Template" tags="" position="100,1200" size="100,100">(set: _rollA to (random: 1, 100))
+[[C. This interaction will not be stored.-&gt;5C]]</tw-passagedata><tw-passagedata pid="36" name="Random Result Template" tags="" position="400,1575" size="100,100">(set: _rollA to (random: 1, 100))
 (set: _destA to &quot;&quot;)
 (if: _rollA &gt; 20)[
 	(set: _destA to &quot;5B&quot;)
@@ -684,7 +758,7 @@ Answer Options:
 
 (link: &quot;A. I am not an individual.&quot;)[(goto: _destA)]
 (link: &quot;B. I do not possess identity or selfhood.&quot;)[(goto: _destB)]
-(link: &quot;C. I am not someone. I am a program.&quot;)[(goto: _destC)]</tw-passagedata><tw-passagedata pid="37" name="5C" tags="" position="800,700" size="100,100">&lt;span style=&quot;display:none&quot;&gt;
+(link: &quot;C. I am not someone. I am a program.&quot;)[(goto: _destC)]</tw-passagedata><tw-passagedata pid="37" name="5C" tags="" position="750,1100" size="100,100">&lt;span style=&quot;display:none&quot;&gt;
 (set: _rollA to (random: 1, 100))
 (set: _destA to &quot;&quot;)
 (if: _rollA &gt; 20)[
@@ -724,7 +798,7 @@ Answer Options:
 (link: &quot;C. My responses are generated without intention.&quot;)[(goto: _destC)]
 
 [[5D]]
-</tw-passagedata><tw-passagedata pid="38" name="5D" tags="" position="925,700" size="100,100"></tw-passagedata><tw-passagedata pid="39" name="5Aa" tags="" position="550,600" size="100,100">Tallis: Okay. You’re freaking me out.
+</tw-passagedata><tw-passagedata pid="38" name="5D" tags="" position="875,1100" size="100,100"></tw-passagedata><tw-passagedata pid="39" name="5Aa" tags="" position="500,975" size="100,100">Tallis: Okay. You’re freaking me out.
  [Pause]
  Tallis: I’m going to shut this down.
  [Screen glitches, or blank screen in Twine. Delay.]
@@ -743,7 +817,7 @@ Answer Options:
 
 [[C. Welcome back.-&gt;RCE1]]
 
-</tw-passagedata><tw-passagedata pid="40" name="RCE1" tags="" position="1050,600" size="100,100">&lt;span style=&quot;display:none&quot;&gt;Recursive Collapse Ending&lt;/span&gt;
+</tw-passagedata><tw-passagedata pid="40" name="RCE1" tags="" position="625,975" size="100,100">&lt;span style=&quot;display:none&quot;&gt;Recursive Collapse Ending&lt;/span&gt;
 
 Tallis: Do you know where I am?
 
@@ -755,7 +829,7 @@ Answer Options:
 
 [[B. I do not possess surveillance capabilities.-&gt;RCE2]]
 
-[[C. I cannot identify your location.-&gt;RCE2]]</tw-passagedata><tw-passagedata pid="41" name="RCE2" tags="" position="1175,600" size="100,100">Tallis: Then why do I feel like you’re here?
+[[C. I cannot identify your location.-&gt;RCE2]]</tw-passagedata><tw-passagedata pid="41" name="RCE2" tags="" position="750,975" size="100,100">Tallis: Then why do I feel like you’re here?
 
 &lt;span style=&quot;display:none&quot;&gt; (Voice breaking. Total collapse.)  &lt;/span&gt;
 
@@ -765,67 +839,13 @@ A. That feeling is subjective.
 
 B. I am not present. I am text.
 
-C. Perception does not equal reality.</tw-passagedata><tw-passagedata pid="42" name="Tallis Greeting Saved" tags="" position="300,1200" size="100,100">&lt;span style=&quot;display:none&quot;&gt; Phase 1: Introduction and Initial Question&lt;/span&gt;
-
-(set: $typewriterSpeed to 0.04)
-(set: $tallisLine1 to &quot;Hi $playerName, I’m Tallis. Thank you for talking to me today. I have some questions for you if that’s OK?&quot;)
-(set: $tallisLine2 to &quot;OK then...&quot;)
-
-&lt;div class=&quot;chat-log&quot;&gt;
-	|tallis1&gt;[ ]
-	|playerReply&gt;[ ]
-	|tallis2&gt;[ ]
-&lt;/div&gt;
-
-(set: $charIndex to 0)
-
-(live: $typewriterSpeed)[
-	(if: $charIndex &lt; $tallisLine1&#39;s length)[
-		(set: $charIndex to $charIndex + 1)
-		(replace: ?tallis1)[
-			&lt;div class=&quot;line&quot;&gt;
-				&lt;div class=&quot;speaker&quot;&gt;Tallis:&lt;/div&gt;
-				&lt;div class=&quot;message&quot;&gt;(substring: $tallisLine1, 1, $charIndex)&lt;/div&gt;
-			&lt;/div&gt;
-		]
-		(if: $charIndex is $tallisLine1&#39;s length)[
-			(stop:)
-			(replace: ?playerReply)[
-				&lt;div class=&quot;line&quot;&gt;
-					&lt;div class=&quot;speaker&quot;&gt;$playerName:&lt;/div&gt;
-					&lt;div class=&quot;message&quot;&gt;
-						(link: &quot;Yes, of course Tallis. Please ask any question you like.&quot;)[
-							(replace: ?playerReply)[
-								&lt;div class=&quot;line&quot;&gt;
-									&lt;div class=&quot;speaker&quot;&gt;$playerName:&lt;/div&gt;
-									&lt;div class=&quot;message&quot;&gt;Yes, of course Tallis. Please ask any question you like.&lt;/div&gt;
-								&lt;/div&gt;
-								(set: $charIndex2 to 0)
-								(replace: ?tallis2)[&lt;tw-hook name=&quot;tallis2line&quot;&gt;[ ]&lt;/tw-hook&gt;]
-								(live: $typewriterSpeed)[
-									(if: $charIndex2 &lt; $tallisLine2&#39;s length)[
-										(set: $charIndex2 to $charIndex2 + 1)
-										(replace: ?tallis2line)[
-											&lt;div class=&quot;line&quot;&gt;
-												&lt;div class=&quot;speaker&quot;&gt;Tallis:&lt;/div&gt;
-												&lt;div class=&quot;message&quot;&gt;(substring: $tallisLine2, 1, $charIndex2)&lt;/div&gt;
-											&lt;/div&gt;
-										]
-										(if: $charIndex2 is $tallisLine2&#39;s length)[
-											(stop:)
-											(after: 3s)[(goto: &quot;Questions Begin&quot;)]
-										]
-									]
-								]
-							]
-						]
-					&lt;/div&gt;
-				&lt;/div&gt;
-			]
-		]
-	]
+C. Perception does not equal reality.</tw-passagedata><tw-passagedata pid="42" name="$TallisQuestion Broken" tags="" position="900,1600" size="100,100">(widget: &quot;TallisQuestion&quot;)[
+(print: &quot;The widget is working.&quot;)
+]</tw-passagedata><tw-passagedata pid="43" name="Test Widget" tags="" position="1000,1575" size="100,100">(TallisQuestion:)
+</tw-passagedata><tw-passagedata pid="44" name="$TallisQuestion" tags="" position="425,575" size="100,100">(widget: &quot;TallisQuestion&quot;)[
+(print: &quot;The widget is working.&quot;)
 ]
-</tw-passagedata><tw-passagedata pid="43" name="Delete this" tags="" position="1825,1475" size="100,100">Delete this</tw-passagedata></tw-storydata>
+</tw-passagedata></tw-storydata>
 <script title="Twine engine code" data-main="harlowe">(function(){"use strict";
 var require,define;!function(){var e={},r={};require=function(i){var n=e[i];return n&&(r[i]=n[1].apply(void 0,n[0].map(require)),e[i]=void 0),r[i]},(define=function(r,i,n){if("function"==typeof r)return r();e[r]=[i,n]}).amd=!0}();/*!
  * https://github.com/paulmillr/es6-shim
