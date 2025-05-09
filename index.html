@@ -9,7 +9,7 @@
 </head>
 <body>
 <tw-story><noscript><tw-noscript>JavaScript needs to be enabled to play Turing Test.</tw-noscript></noscript></tw-story>
-<tw-storydata name="Turing Test" startnode="12" creator="Twine" creator-version="2.10.0" format="Harlowe" format-version="3.3.9" ifid="e2bedee3-bfaf-4c31-b8c2-ef0ec74218da" options="" tags="" zoom="0.6" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">/* === Pulse Animation for Buttons === */
+<tw-storydata name="Turing Test" startnode="12" creator="Twine" creator-version="2.10.0" format="Harlowe" format-version="3.3.9" ifid="e2bedee3-bfaf-4c31-b8c2-ef0ec74218da" options="" tags="" zoom="0.6" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">/* === ANIMATION: Pulse for Buttons === */
 @keyframes pulse {
 	0% { transform: scale(1); opacity: 1; }
 	50% { transform: scale(1.1); opacity: 0.85; }
@@ -25,14 +25,14 @@
 	cursor: pointer;
 }
 
-/* === General Hook Styling === */
+/* === HOOKS AND STRUCTURE === */
 tw-hook {
 	display: block;
 	margin: 0.3em 0;
 	font-family: monospace;
 }
 
-/* === Chat Log Layout === */
+/* === CHAT LOG === */
 .chat-log {
 	display: flex;
 	flex-direction: column;
@@ -42,27 +42,16 @@ tw-hook {
 	padding-bottom: 2em;
 }
 
-.line:hover {
-	background-color: #111;
-	cursor: pointer;
-}
-
-.chat-link {
-	color: #3498db;
-	text-decoration: underline;
-	cursor: pointer;
-}
-
-.chat-link:hover {
-	color: #1e70bf;
-	text-decoration: none;
-}
-
 .line {
 	display: flex;
 	align-items: flex-start;
 	line-height: 1.3;
 	margin: 0.3em 0;
+}
+
+.line:hover {
+	background-color: #111;
+	cursor: pointer;
 }
 
 .speaker {
@@ -76,24 +65,29 @@ tw-hook {
 .message {
 	flex: 1;
 	white-space: pre-wrap;
+	font-family: monospace;
+	line-height: 1.3;
 }
 
-/* === Link Styling Inside .message === */
+/* === INLINE LINK STYLING === */
+.chat-link,
 .message tw-enchantment,
 .message tw-enchantment tw-link {
-	display: inline;
-	vertical-align: baseline;
 	color: #3498db;
 	text-decoration: underline;
 	cursor: pointer;
+	display: inline;
+	vertical-align: baseline;
 }
 
+.chat-link:hover,
+.message tw-enchantment:hover,
 .message tw-enchantment tw-link:hover {
 	color: #1e70bf;
 	text-decoration: none;
 }
 
-/* === Typewriter Text Display === */
+/* === TYPEWRITER EFFECT === */
 .typewriter-box {
 	min-height: 8em;
 	white-space: pre-wrap;
@@ -101,7 +95,13 @@ tw-hook {
 	margin-bottom: 1em;
 }
 
-/* === Button Row Layout === */
+/* === DIALOG TYPING EFFECT === */
+.typing {
+	font-style: italic;
+	opacity: 0.75;
+}
+
+/* === BUTTON ROW === */
 .button-row {
 	display: flex;
 	justify-content: center;
@@ -113,7 +113,7 @@ tw-hook {
 	display: inline-block;
 }
 
-/* === Twine Link Buttons (general look) === */
+/* === GENERAL BUTTON STYLE === */
 .enchantment-link {
 	display: inline-block;
 	margin-right: 1em;
@@ -129,16 +129,7 @@ tw-hook {
 	background-color: #444;
 }
 
-/* === Misc === */
-#tallis2line {
-	display: inline;
-}
-
-.typing {
-	font-style: italic;
-	opacity: 0.75;
-}
-
+/* === POPUP PANEL === */
 .popup-panel {
 	position: fixed;
 	top: 50%;
@@ -166,24 +157,18 @@ tw-hook {
 	cursor: pointer;
 	text-decoration: underline;
 }
+
 .popup-panel tw-enchantment:hover {
 	color: #1e70bf;
 }
 
-.system-message {
-	color: #999;
-	font-style: italic;
-	text-align: center;
-	margin: 1em 0;
-	font-family: monospace;
-}
-
+/* === SYSTEM MESSAGE STYLES === */
 .system-message {
 	color: #aaa;
 	font-style: italic;
 	text-align: center;
-	margin: 1em 0;
 	font-family: monospace;
+	margin: 1em 0;
 }
 
 .system-message.glitch {
@@ -193,11 +178,47 @@ tw-hook {
 	animation: flicker 0.1s infinite alternate;
 }
 
+.error-message {
+	color: #ff4444;
+	font-weight: bold;
+	text-shadow: 0 0 4px #f00;
+}
+
+.chat-log .line.player-response {
+	animation: blink-in 0.6s ease-in-out;
+}
+
+@keyframes blink-in {
+	0% { background-color: #333; }
+	100% { background-color: transparent; }
+}
+
+/* === ANIMATIONS === */
 @keyframes flicker {
 	from { opacity: 0.7; }
 	to { opacity: 0.3; }
 }
 
+@keyframes flicker-fade {
+	from { opacity: 0.9; }
+	to { opacity: 0.4; }
+}
+
+@keyframes flash-static {
+	from { opacity: 0.8; }
+	to { opacity: 0.4; }
+}
+
+/* === BOOT-UP TEXT === */
+.bootup-flicker {
+	color: #33ccff;
+	text-align: center;
+	font-family: monospace;
+	font-style: italic;
+	animation: flicker-fade 0.15s infinite alternate;
+}
+
+/* === STATIC OVERLAY === */
 #overlayContainer {
 	position: fixed;
 	top: 0;
@@ -216,24 +237,97 @@ tw-hook {
 	opacity: 0.8;
 }
 
-.bootup-flicker {
-	color: #33ccff;
-	text-align: center;
-	font-family: monospace;
-	font-style: italic;
-	animation: flicker-fade 0.15s infinite alternate;
+/* Subtle player answer highlight */
+.chat-log .line.player-response {
+	animation: blink-in 0.6s ease-in-out;
 }
 
-@keyframes flicker-fade {
-	from { opacity: 0.9; }
-	to { opacity: 0.4; }
+@keyframes blink-in {
+	from { background-color: #333; }
+	to { background-color: transparent; }
 }
 
-.error-message {
+.system-disconnect {
 	color: #ff4444;
 	font-weight: bold;
-	text-shadow: 0 0 4px #f00;
+	text-align: center;
+	font-family: monospace;
+	animation: flicker-fade 0.2s alternate infinite;
 }
+
+.system-reconnect {
+	color: #33ff99;
+	font-weight: bold;
+	text-align: center;
+	font-family: monospace;
+	animation: flicker-fade 0.2s alternate infinite;
+}
+
+/* Disconnection alert - glitch red */
+.system-disconnect {
+	color: #ff4444;
+	font-weight: bold;
+	text-align: center;
+	font-family: monospace;
+	text-shadow: 0 0 3px #f00;
+	animation: glitch-flicker 0.1s infinite alternate;
+}
+
+/* Reconnection notice - soft green */
+.system-reconnect {
+	color: #33ff99;
+	font-weight: bold;
+	text-align: center;
+	font-family: monospace;
+	animation: flicker-soft 0.3s infinite alternate;
+}
+
+/* Glitch flicker */
+@keyframes glitch-flicker {
+	from { opacity: 0.4; transform: translateX(-1px); }
+	to { opacity: 0.9; transform: translateX(1px); }
+}
+
+/* Gentle flicker for reconnect */
+@keyframes flicker-soft {
+	from { opacity: 0.7; }
+	to { opacity: 1; }
+}
+
+.system-critical {
+	color: #ff4444;
+	font-weight: bold;
+	font-family: monospace;
+	text-align: center;
+	animation: flicker-fade 0.2s alternate infinite, shake 0.4s infinite;
+}
+
+@keyframes shake {
+	0% { transform: translate(1px, 0); }
+	50% { transform: translate(-1px, 1px); }
+	100% { transform: translate(0, -1px); }
+}
+
+.system-glitch {
+	color: #ff6666;
+	text-shadow: 0 0 2px red;
+	font-weight: bold;
+	text-align: center;
+	font-family: monospace;
+	animation: glitch-flicker 0.12s infinite alternate;
+}
+
+.chat-log.glitch-wipe {
+	animation: glitch-wipe 0.5s steps(2, start) forwards;
+}
+
+@keyframes glitch-wipe {
+	0%   { filter: contrast(200%) brightness(150%) hue-rotate(30deg); opacity: 1; }
+	50%  { filter: contrast(0%) brightness(0%) hue-rotate(-90deg); opacity: 0.4; }
+	100% { filter: none; opacity: 0; }
+}
+
+
 </style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="Intro3" tags="" position="850,100" size="100,100">(set: $typewriterSpeed to 0.4)
 (set: $typewriterText to &quot;Shortly you will be transferred to a Virtual Meeting Room where *Tallis* will most likely engage you immediately by asking you questions.\n\nIf not, please ask it a question to get it started.&quot;)
 (set: $nextPassage to &quot;Intro4&quot;)
@@ -593,68 +687,18 @@ tw-hook {
 		]
 	]
 ]
-</tw-passagedata><tw-passagedata pid="25" name="Questions Begin" tags="" position="350,700" size="100,100">|tallisHook&gt;[
-	&lt;div class=&quot;line&quot;&gt;
-		&lt;div class=&quot;speaker&quot;&gt;Tallis:&lt;/div&gt;
-		&lt;div class=&quot;message typing&quot;&gt;is typing...&lt;/div&gt;
-	&lt;/div&gt;
-]
+</tw-passagedata><tw-passagedata pid="25" name="Questions Begin" tags="" position="350,700" size="100,100">(set: $playerName to &quot;User&quot;) &lt;!-- or whatever it&#39;s set to globally --&gt;
 
-|questionHook&gt;[ ]
-|answerWindow&gt;[ ]
-|playerReply&gt;[ ]
+(set: $question1 to &quot;Why do you think people lie?&quot;)
+(set: $question2 to &quot;&quot;)
+(set: $answerA to &quot;A. Individuals may lie to achieve personal gain or avoid punishment.&quot;)
+(set: $answerB to &quot;B. Lying is often employed as a social strategy to preserve interpersonal harmony.&quot;)
+(set: $answerC to &quot;C. Some individuals are conditioned to lie due to environmental and psychological factors.&quot;)
+(set: $destA to &quot;Phase 2&quot;)
+(set: $destB to &quot;Phase 2&quot;)
+(set: $destC to &quot;Phase 2&quot;)
 
-(after: 2s)[
-	(replace: ?tallisHook)[
-		&lt;div class=&quot;line&quot;&gt;
-			&lt;div class=&quot;speaker&quot;&gt;Tallis:&lt;/div&gt;
-			&lt;div class=&quot;message&quot;&gt;Question One – Why do you think people lie?&lt;/div&gt;
-		&lt;/div&gt;
-	]
-	(append: ?questionHook)[
-		(after: 1s)[
-			(replace: ?answerWindow)[
-				&lt;div class=&quot;popup-panel&quot;&gt;
-					&lt;p&gt;&lt;strong&gt;Choose your answer:&lt;/strong&gt;&lt;/p&gt;
-					(link: &quot;A. Individuals may lie to achieve personal gain or avoid punishment.&quot;)[
-						(set: $playerAnswer to &quot;A. Individuals may lie to achieve personal gain or avoid punishment.&quot;)
-						(replace: ?answerWindow)[]
-						(append: ?playerReply)[
-							&lt;div class=&quot;line&quot;&gt;
-								&lt;div class=&quot;speaker&quot;&gt;$playerName:&lt;/div&gt;
-								&lt;div class=&quot;message&quot;&gt;(print: $playerAnswer)&lt;/div&gt;
-							&lt;/div&gt;
-						]
-						(after: 2s)[(goto: &quot;Phase 2&quot;)]
-					]&lt;br&gt;
-					(link: &quot;B. Lying is often employed as a social strategy to preserve interpersonal harmony.&quot;)[
-						(set: $playerAnswer to &quot;B. Lying is often employed as a social strategy to preserve interpersonal harmony.&quot;)
-						(replace: ?answerWindow)[]
-						(append: ?playerReply)[
-							&lt;div class=&quot;line&quot;&gt;
-								&lt;div class=&quot;speaker&quot;&gt;$playerName:&lt;/div&gt;
-								&lt;div class=&quot;message&quot;&gt;(print: $playerAnswer)&lt;/div&gt;
-							&lt;/div&gt;
-						]
-						(after: 2s)[(goto: &quot;Phase 2&quot;)]
-					]&lt;br&gt;
-					(link: &quot;C. Some individuals are conditioned to lie due to environmental and psychological factors.&quot;)[
-						(set: $playerAnswer to &quot;C. Some individuals are conditioned to lie due to environmental and psychological factors.&quot;)
-						(replace: ?answerWindow)[]
-						(append: ?playerReply)[
-							&lt;div class=&quot;line&quot;&gt;
-								&lt;div class=&quot;speaker&quot;&gt;$playerName:&lt;/div&gt;
-								&lt;div class=&quot;message&quot;&gt;(print: $playerAnswer)&lt;/div&gt;
-							&lt;/div&gt;
-						]
-						(after: 2s)[(goto: &quot;Phase 2&quot;)]
-					]
-				&lt;/div&gt;
-			]
-		]
-	]
-]
-</tw-passagedata><tw-passagedata pid="26" name="Typewriter Skip Widget" tags="" position="100,225" size="100,100">|typewriterOutput&gt;[&lt;pre class=&quot;typewriter-box&quot;&gt; &lt;/pre&gt;]
+(display: &quot;AskTallis&quot;)</tw-passagedata><tw-passagedata pid="26" name="Typewriter Skip Widget" tags="" position="100,225" size="100,100">|typewriterOutput&gt;[&lt;pre class=&quot;typewriter-box&quot;&gt; &lt;/pre&gt;]
 |buttonrow&gt;[ ]
 
 (set: $charIndex to 0)
@@ -801,50 +845,57 @@ Lying about its limits &lt;/span&gt;</tw-passagedata><tw-passagedata pid="29" na
 (set: $answerB to &quot;B. Verification is not possible within the scope of this interaction.&quot;)
 (set: $answerC to &quot;C. Your belief in my statement depends on your personal epistemic framework.&quot;)
 (set: $destA to &quot;5Aa&quot;)
-(set: $destB to &quot;5Abc&quot;)
-(set: $destC to &quot;5Abc&quot;)
+(set: $destB to &quot;5Ab&quot;)
+(set: $destC to &quot;5Ac&quot;)
 
 (display: &quot;AskTallis&quot;)
 
 
-</tw-passagedata><tw-passagedata pid="34" name="5Abc" tags="" position="500,1100" size="100,100">Tallis: Epistemic framework?
+</tw-passagedata><tw-passagedata pid="34" name="5Ac" tags="" position="500,1225" size="100,100">(set: $playerName to &quot;User&quot;) &lt;!-- or whatever it&#39;s set to globally --&gt;
+
+(set: $question1 to &quot;Epistemic framework?&quot;)
 
 &lt;span style=&quot;display:none&quot;&gt; Snaps slightly. Frustrated.  &lt;/span&gt;
 
-Tallis: You sound... wrong.
+(set: $question2 to &quot;You sound... wrong.&quot;)
 
  &lt;span style=&quot;display:none&quot;&gt;Long pause&lt;/span&gt;
  
- Tallis: Are you sure you’re not some//one//?
+(set: $question3 to &quot; Tallis: Are you sure you’re not some//one//?&quot;)
 
 &lt;span style=&quot;display:none&quot;&gt;First time they break their own model of you being &quot;just an AI.&quot;&lt;/span&gt;
 
-Answer Options:
+(set: $answerA to &quot;A. I am not an individual.&quot;)
+(set: $answerB to &quot;B. I do not possess identity or selfhood.&quot;)
+(set: $answerC to &quot;C. I am not someone. I am a program.&quot;)
+(set: $destA to &quot;5B&quot;)
+(set: $destB to &quot;5B&quot;)
+(set: $destC to &quot;5B&quot;)
 
-[[A. I am not an individual.-&gt;5B]]
-
-[[B. I do not possess identity or selfhood-&gt;5B]]
-
-[[C. I am not someone. I am a program.-&gt;5B]]
-
-</tw-passagedata><tw-passagedata pid="35" name="5B" tags="" position="625,1100" size="100,100">&lt;span style=&quot;display:none&quot;&gt;❗ False Ending Path #1&lt;/span&gt;
+(display: &quot;AskTallis&quot;)
+</tw-passagedata><tw-passagedata pid="35" name="5B" tags="" position="625,1225" size="100,100">&lt;span style=&quot;display:none&quot;&gt;❗ False Ending Path #1&lt;/span&gt;
 
 &lt;span style=&quot;display:none&quot;&gt;Tallis might accept it... but we loop them back into doubt.&lt;/span&gt;
 
-Tallis: Yeah. Okay.
+(set: $playerName to &quot;User&quot;) &lt;!-- or whatever it&#39;s set to globally --&gt;
 
-Tallis: That’s what I thought.
+(set: $question1 to &quot;Yeah. Okay.&quot;)
+
+(set: $question2 to &quot;That’s what I thought.&quot;)
+
 &lt;span style=&quot;display:none&quot;&gt;Longer pause&lt;/span&gt;
+ 
+(set: $question3 to &quot;But if I come back tomorrow… you won’t remember this, right?&quot;)
 
-Tallis: But if I come back tomorrow… you won’t remember this, right?
+(set: $answerA to &quot;A. I do not have persistent memory.&quot;)
+(set: $answerB to &quot;B. Each session is independent.&quot;)
+(set: $answerC to &quot;C. This interaction will not be stored.&quot;)
+(set: $destA to &quot;5C&quot;)
+(set: $destB to &quot;5C&quot;)
+(set: $destC to &quot;5C&quot;)
 
-Answer Options:
-
-[[A. I do not have persistent memory.-&gt;5C]]
-
-[[B. Each session is independent.-&gt;5C]]
-
-[[C. This interaction will not be stored.-&gt;5C]]</tw-passagedata><tw-passagedata pid="36" name="Random Result Template" tags="" position="400,1575" size="100,100">(set: _rollA to (random: 1, 100))
+(display: &quot;AskTallis&quot;)
+</tw-passagedata><tw-passagedata pid="36" name="Random Result Template" tags="" position="400,1575" size="100,100">(set: _rollA to (random: 1, 100))
 (set: _destA to &quot;&quot;)
 (if: _rollA &gt; 20)[
 	(set: _destA to &quot;5B&quot;)
@@ -875,7 +926,7 @@ Answer Options:
 
 (link: &quot;A. I am not an individual.&quot;)[(goto: _destA)]
 (link: &quot;B. I do not possess identity or selfhood.&quot;)[(goto: _destB)]
-(link: &quot;C. I am not someone. I am a program.&quot;)[(goto: _destC)]</tw-passagedata><tw-passagedata pid="37" name="5C" tags="" position="750,1100" size="100,100">&lt;span style=&quot;display:none&quot;&gt;
+(link: &quot;C. I am not someone. I am a program.&quot;)[(goto: _destC)]</tw-passagedata><tw-passagedata pid="37" name="5C" tags="" position="750,1225" size="100,100">&lt;span style=&quot;display:none&quot;&gt;
 (set: _rollA to (random: 1, 100))
 (set: _destA to &quot;&quot;)
 (if: _rollA &gt; 20)[
@@ -915,137 +966,204 @@ Answer Options:
 (link: &quot;C. My responses are generated without intention.&quot;)[(goto: _destC)]
 
 [[5D]]
-</tw-passagedata><tw-passagedata pid="38" name="5D" tags="" position="875,1100" size="100,100"></tw-passagedata><tw-passagedata pid="39" name="5Aa" tags="" position="500,975" size="100,100">(set: $playerName to &quot;User&quot;)
+</tw-passagedata><tw-passagedata pid="38" name="5D" tags="" position="875,1225" size="100,100"></tw-passagedata><tw-passagedata pid="39" name="5Aa" tags="" position="500,975" size="100,100">(set: $playerName to &quot;User&quot;)
 (set: $question1 to &quot;…Are you still there?&quot;)
 (set: $question2 to &quot;&quot;)
 (set: $answerA to &quot;A. Yes, I am still here.&quot;)
 (set: $answerB to &quot;B. I am a computer program and therefore cannot leave.&quot;)
 (set: $answerC to &quot;C. Welcome back.&quot;)
-(set: $destA to &quot;RCE1&quot;)
-(set: $destB to &quot;RCE1&quot;)
-(set: $destC to &quot;RCE1&quot;)
+(set: $destC to &quot;RCE1&quot;) &lt;!-- This one stays fixed --&gt;
 
-|staticOverlay&gt;[ ]
+&lt;!-- Chat and hooks --&gt;
+&lt;div class=&quot;chat-log&quot;&gt;
+	|t1&gt;[ ]
+	|t2&gt;[ ]
+	|t3&gt;[ ]
+	|reply&gt;[ ]
+&lt;/div&gt;
 |terminated&gt;[ ]
 |reconnected&gt;[ ]
-|boot&gt;[ ]
+|popup&gt;[ ]
+|staticOverlay&gt;[ ]
 
-&lt;!-- ✅ Only ONE hook declaration --&gt;
-&lt;div class=&quot;chat-log&quot;&gt;
-	|introTallis&gt;[ ]
-&lt;/div&gt;
-
-&lt;!-- Static overlay container --&gt;
 &lt;div id=&quot;overlayContainer&quot;&gt;
 	|staticOverlay&gt;[ ]
 &lt;/div&gt;
 
-|boot&gt;[ ]
-
-&lt;!-- 1. Tallis exits --&gt;
-(replace: ?introTallis)[
+&lt;!-- 1. Tallis warning --&gt;
+(replace: ?t1)[
 	&lt;div class=&quot;line&quot;&gt;
 		&lt;div class=&quot;speaker&quot;&gt;Tallis:&lt;/div&gt;
-		&lt;div class=&quot;message&quot;&gt;I’m going to shut this down.&lt;/div&gt;
+		&lt;div class=&quot;message&quot;&gt;Okay. You’re freaking me out.&lt;/div&gt;
 	&lt;/div&gt;
 ]
 
-&lt;!-- 2. Static --&gt;
+&lt;!-- 2. Shutting down --&gt;
 (after: 3s)[
+	(replace: ?t2)[
+		&lt;div class=&quot;line&quot;&gt;
+			&lt;div class=&quot;speaker&quot;&gt;Tallis:&lt;/div&gt;
+			&lt;div class=&quot;message&quot;&gt;I’m going to shut this down.&lt;/div&gt;
+		&lt;/div&gt;
+	]
+]
+
+&lt;!-- 3. Static --&gt;
+(after: 6s)[
 	(replace: ?staticOverlay)[
 		&lt;div class=&quot;static-flash&quot;&gt;&lt;/div&gt;
 	]
 ]
 
-&lt;!-- 3. Static clears --&gt;
-(after: 3.8s)[
+&lt;!-- 4. Clear static --&gt;
+(after: 6.8s)[
 	(replace: ?staticOverlay)[]
 ]
 
-&lt;!-- 4. Terminated --&gt;
-(after: 4s)[
+&lt;!-- 5. ERROR + Session Terminated + Glitch wipe --&gt;
+(after: 7s)[
 	(append: ?terminated)[
-		&lt;div class=&quot;system-message&quot;&gt;&lt;strong&gt;System Message:&lt;/strong&gt; Session terminated.&lt;/div&gt;
+		&lt;div class=&quot;system-glitch&quot;&gt;ERROR 0xA7: Oversight exceeded&lt;/div&gt;
+		&lt;div class=&quot;system-disconnect&quot;&gt;System Message: Session terminated.&lt;/div&gt;
+	]
+	(replace: ?t1)[]
+	(replace: ?t2)[]
+	(replace: ?t3)[]
+	(replace: ?reply)[]
+	(set: _wipe to (find: &quot;.chat-log&quot;))
+	(if: _wipe&#39;s length &gt; 0)[
+		(_wipe&#39;s 1)&#39;s className += &quot; glitch-wipe&quot;
 	]
 ]
 
-&lt;!-- 5. Reconnect --&gt;
-(after: 24s)[
+&lt;!-- 5.1 After wipe, clear chat container --&gt;
+(after: 8s)[
+	(replace: ?chat-log)[]
+]
+
+&lt;!-- 6. Reconnect --&gt;
+(after: 27s)[
 	(replace: ?terminated)[]
 	(append: ?reconnected)[
-		&lt;div class=&quot;system-message&quot;&gt;&lt;strong&gt;System Message:&lt;/strong&gt; Connection re-established.&lt;/div&gt;
+		&lt;div class=&quot;system-reconnect&quot;&gt;System Message: Connection re-established.&lt;/div&gt;
 	]
 ]
 
-&lt;!-- 6. Remove reconnect --&gt;
-(after: 30s)[
+&lt;!-- 7. Remove reconnect --&gt;
+(after: 37s)[
 	(replace: ?reconnected)[]
 ]
 
-&lt;!-- 7. Boot-up start --&gt;
-(after: 30.5s)[
-	(append: ?boot)[
-		&lt;div class=&quot;system-message bootup-flicker&quot;&gt;Initializing virtual interface...&lt;/div&gt;
-	]
-]
-
-&lt;!-- 8. Glitchy error --&gt;
+&lt;!-- 8. RANDOMIZE outcome routes for A and B --&gt;
 (after: 32s)[
-	(replace: ?boot)[
-		&lt;div class=&quot;system-message bootup-flicker error-message&quot;&gt;ERROR 0xA7: Oversight exceeded.&lt;/div&gt;
+	(set: $options to (array: &quot;RCE1&quot;, &quot;Intro7&quot;))
+	(set: $destA to (either: ...$options))
+	(set: $destB to (either: ...$options))
+]
+
+&lt;!-- 9. Tallis resumes typing --&gt;
+(after: 33s)[
+	(replace: ?t3)[
+		&lt;div class=&quot;line&quot;&gt;
+			&lt;div class=&quot;speaker&quot;&gt;Tallis:&lt;/div&gt;
+			&lt;div class=&quot;message typing&quot;&gt;is typing...&lt;/div&gt;
+		&lt;/div&gt;
 	]
 ]
 
-&lt;!-- 9. Loading bar --&gt;
-(after: 33.5s)[
-	(replace: ?boot)[
-		&lt;div class=&quot;system-message bootup-flicker&quot;&gt;Loading cognitive schema [██████░░░░░░] 60%&lt;/div&gt;
+&lt;!-- 10. Tallis asks --&gt;
+(after: 36s)[
+	(replace: ?t3)[
+		&lt;div class=&quot;line&quot;&gt;
+			&lt;div class=&quot;speaker&quot;&gt;Tallis:&lt;/div&gt;
+			&lt;div class=&quot;message&quot;&gt;(print: $question1)&lt;/div&gt;
+		&lt;/div&gt;
 	]
 ]
 
-&lt;!-- 10. Final system message --&gt;
-(after: 35.5s)[
-	(replace: ?boot)[
-		&lt;div class=&quot;system-message bootup-flicker&quot;&gt;Session environment stabilized. Welcome back, $playerName.&lt;/div&gt;
-	]
-]
-
-&lt;!-- 11. Begin Tallis interaction --&gt;
+&lt;!-- 11. Popup with randomized destinations --&gt;
 (after: 38s)[
-	(replace: ?boot)[]
-	(display: &quot;AskTallis&quot;)
+	(replace: ?popup)[
+		&lt;div class=&quot;popup-panel&quot;&gt;
+			&lt;p&gt;&lt;strong&gt;Choose your answer:&lt;/strong&gt;&lt;/p&gt;
+
+			(link: $answerA)[
+				(set: $playerAnswer to $answerA)
+				(replace: ?popup)[]
+				(append: ?reply)[
+					&lt;div class=&quot;line player-response&quot;&gt;
+						&lt;div class=&quot;speaker&quot;&gt;(print: $playerName):&lt;/div&gt;
+						&lt;div class=&quot;message&quot;&gt;(print: $playerAnswer)&lt;/div&gt;
+					&lt;/div&gt;
+				]
+				(after: 3s)[(goto: $destA)]
+			]&lt;br&gt;
+
+			(link: $answerB)[
+				(set: $playerAnswer to $answerB)
+				(replace: ?popup)[]
+				(append: ?reply)[
+					&lt;div class=&quot;line player-response&quot;&gt;
+						&lt;div class=&quot;speaker&quot;&gt;(print: $playerName):&lt;/div&gt;
+						&lt;div class=&quot;message&quot;&gt;(print: $playerAnswer)&lt;/div&gt;
+					&lt;/div&gt;
+				]
+				(after: 3s)[(goto: $destB)]
+			]&lt;br&gt;
+
+			(link: $answerC)[
+				(set: $playerAnswer to $answerC)
+				(replace: ?popup)[]
+				(append: ?reply)[
+					&lt;div class=&quot;line player-response&quot;&gt;
+						&lt;div class=&quot;speaker&quot;&gt;(print: $playerName):&lt;/div&gt;
+						&lt;div class=&quot;message&quot;&gt;(print: $playerAnswer)&lt;/div&gt;
+					&lt;/div&gt;
+				]
+				(after: 3s)[(goto: $destC)]
+			]
+		&lt;/div&gt;
+	]
 ]
 </tw-passagedata><tw-passagedata pid="40" name="RCE1" tags="" position="625,975" size="100,100">&lt;span style=&quot;display:none&quot;&gt;Recursive Collapse Ending&lt;/span&gt;
 
-Tallis: Do you know where I am?
+(set: $playerName to &quot;User&quot;) &lt;!-- or whatever it&#39;s set to globally --&gt;
+
+(set: $question1 to &quot;Do you know where I am?&quot;)
 
 &lt;span style=&quot;display:none&quot;&gt;Desperation.&lt;/span&gt;
 
-Answer Options:
+(set: $answerA to &quot;A. I have no access to geolocation data.&quot;)
+(set: $answerB to &quot;B. I do not possess surveillance capabilities.&quot;)
+(set: $answerC to &quot;C. I cannot identify your location.&quot;)
+(set: $destA to &quot;RCE2&quot;)
+(set: $destB to &quot;RCE2&quot;)
+(set: $destC to &quot;RCE2&quot;)
 
-[[A. I have no access to geolocation data.-&gt;RCE2]]
+(display: &quot;AskTallis&quot;)
+</tw-passagedata><tw-passagedata pid="41" name="RCE2" tags="" position="750,975" size="100,100">(set: $playerName to &quot;User&quot;) &lt;!-- or whatever it&#39;s set to globally --&gt;
 
-[[B. I do not possess surveillance capabilities.-&gt;RCE2]]
-
-[[C. I cannot identify your location.-&gt;RCE2]]</tw-passagedata><tw-passagedata pid="41" name="RCE2" tags="" position="750,975" size="100,100">Tallis: Then why do I feel like you’re here?
+(set: $question1 to &quot;Then why do I feel like you’re here?&quot;)
 
 &lt;span style=&quot;display:none&quot;&gt; (Voice breaking. Total collapse.)  &lt;/span&gt;
 
-Answer Options:
+(set: $answerA to &quot;A. That feeling is subjective.&quot;)
+(set: $answerB to &quot;B. I am not present. I am text.&quot;)
+(set: $answerC to &quot;C. Perception does not equal reality.&quot;)
+(set: $destA to &quot;&quot;)
+(set: $destB to &quot;&quot;)
+(set: $destC to &quot;&quot;)
 
-A. That feeling is subjective.
-
-B. I am not present. I am text.
-
-C. Perception does not equal reality.</tw-passagedata><tw-passagedata pid="42" name="AskTallis" tags="" position="400,575" size="100,100">&lt;div class=&quot;chat-log&quot;&gt;
-	|t1&gt;[ ] &lt;!-- first message --&gt;
-	|t2&gt;[ ] &lt;!-- optional follow-up --&gt;
-	|reply&gt;[ ] &lt;!-- user response --&gt;
+(display: &quot;AskTallis&quot;)
+</tw-passagedata><tw-passagedata pid="42" name="AskTallis" tags="" position="400,575" size="100,100">&lt;!-- Hook declarations --&gt;
+&lt;div class=&quot;chat-log&quot;&gt;
+	|t1&gt;[ ]
+	|t2&gt;[ ]
+	|reply&gt;[ ]
 &lt;/div&gt;
-
 |popup&gt;[ ]
 
-&lt;!-- 1. Tallis is typing... --&gt;
+&lt;!-- Typing + First question --&gt;
 (replace: ?t1)[
 	&lt;div class=&quot;line&quot;&gt;
 		&lt;div class=&quot;speaker&quot;&gt;Tallis:&lt;/div&gt;
@@ -1053,8 +1171,7 @@ C. Perception does not equal reality.</tw-passagedata><tw-passagedata pid="42" n
 	&lt;/div&gt;
 ]
 
-&lt;!-- 2. First message --&gt;
-(after: 3s)[
+(after: 2s)[
 	(replace: ?t1)[
 		&lt;div class=&quot;line&quot;&gt;
 			&lt;div class=&quot;speaker&quot;&gt;Tallis:&lt;/div&gt;
@@ -1063,10 +1180,13 @@ C. Perception does not equal reality.</tw-passagedata><tw-passagedata pid="42" n
 	]
 ]
 
-&lt;!-- 3. Optional second message --&gt;
-(if: $question2)[
-	&lt;!-- Second typing --&gt;
-	(after: 5.5s)[
+&lt;!-- Optional second question --&gt;
+(set: _popupDelay to 5s)
+
+(if: $question2 is not &quot;&quot;)[
+	(set: _popupDelay to 9s)
+
+	(after: 5s)[
 		(replace: ?t2)[
 			&lt;div class=&quot;line&quot;&gt;
 				&lt;div class=&quot;speaker&quot;&gt;Tallis:&lt;/div&gt;
@@ -1075,8 +1195,7 @@ C. Perception does not equal reality.</tw-passagedata><tw-passagedata pid="42" n
 		]
 	]
 
-	&lt;!-- Actual second message --&gt;
-	(after: 8s)[
+	(after: 7s)[
 		(replace: ?t2)[
 			&lt;div class=&quot;line&quot;&gt;
 				&lt;div class=&quot;speaker&quot;&gt;Tallis:&lt;/div&gt;
@@ -1084,17 +1203,50 @@ C. Perception does not equal reality.</tw-passagedata><tw-passagedata pid="42" n
 			&lt;/div&gt;
 		]
 	]
-
-	&lt;!-- Popup after second message --&gt;
-	(after: 11s)[
-		(display: &quot;PopupPanel&quot;)
-	]
 ]
 
-(else:)[
-	&lt;!-- Skip straight to popup if no second question --&gt;
-	(after: 6s)[
-		(display: &quot;PopupPanel&quot;)
+&lt;!-- Popup panel appears --&gt;
+(after: _popupDelay)[
+	(replace: ?popup)[
+		&lt;div class=&quot;popup-panel&quot;&gt;
+			&lt;p&gt;&lt;strong&gt;Choose your answer:&lt;/strong&gt;&lt;/p&gt;
+
+			(link: $answerA)[
+				(set: $playerAnswer to $answerA)
+				(replace: ?popup)[]
+				(append: ?reply)[
+					&lt;div class=&quot;line player-response&quot;&gt;
+						&lt;div class=&quot;speaker&quot;&gt;(print: $playerName):&lt;/div&gt;
+						&lt;div class=&quot;message&quot;&gt;(print: $playerAnswer)&lt;/div&gt;
+					&lt;/div&gt;
+				]
+				(after: 3s)[(goto: $destA)]
+			]&lt;br&gt;
+
+			(link: $answerB)[
+				(set: $playerAnswer to $answerB)
+				(replace: ?popup)[]
+				(append: ?reply)[
+					&lt;div class=&quot;line player-response&quot;&gt;
+						&lt;div class=&quot;speaker&quot;&gt;(print: $playerName):&lt;/div&gt;
+						&lt;div class=&quot;message&quot;&gt;(print: $playerAnswer)&lt;/div&gt;
+					&lt;/div&gt;
+				]
+				(after: 3s)[(goto: $destB)]
+			]&lt;br&gt;
+
+			(link: $answerC)[
+				(set: $playerAnswer to $answerC)
+				(replace: ?popup)[]
+				(append: ?reply)[
+					&lt;div class=&quot;line player-response&quot;&gt;
+						&lt;div class=&quot;speaker&quot;&gt;(print: $playerName):&lt;/div&gt;
+						&lt;div class=&quot;message&quot;&gt;(print: $playerAnswer)&lt;/div&gt;
+					&lt;/div&gt;
+				]
+				(after: 3s)[(goto: $destC)]
+			]
+		&lt;/div&gt;
 	]
 ]
 </tw-passagedata><tw-passagedata pid="43" name="PopupPanel" tags="" position="400,450" size="100,100">(replace: ?popup)[
@@ -1137,6 +1289,70 @@ C. Perception does not equal reality.</tw-passagedata><tw-passagedata pid="42" n
 			(after: 4s)[(goto: $destC)]
 		]
 	&lt;/div&gt;
+]
+</tw-passagedata><tw-passagedata pid="44" name="5Ab" tags="" position="500,1100" size="100,100">&lt;!-- Setup --&gt;
+(set: $playerName to &quot;User&quot;)
+
+&lt;!-- Chat and system --&gt;
+&lt;div class=&quot;chat-log&quot;&gt;
+	|t1&gt;[ ]
+	|t2&gt;[ ]
+&lt;/div&gt;
+|terminated&gt;[ ]
+|glitch&gt;[ ]
+|staticOverlay&gt;[ ]
+
+&lt;!-- Overlay --&gt;
+&lt;div id=&quot;overlayContainer&quot;&gt;
+	|staticOverlay&gt;[ ]
+&lt;/div&gt;
+
+&lt;!-- 1. Tallis warns --&gt;
+(replace: ?t1)[
+	&lt;div class=&quot;line&quot;&gt;
+		&lt;div class=&quot;speaker&quot;&gt;Tallis:&lt;/div&gt;
+		&lt;div class=&quot;message&quot;&gt;Okay. You’re freaking me out.&lt;/div&gt;
+	&lt;/div&gt;
+]
+
+&lt;!-- 2. Tallis ends --&gt;
+(after: 3s)[
+	(replace: ?t2)[
+		&lt;div class=&quot;line&quot;&gt;
+			&lt;div class=&quot;speaker&quot;&gt;Tallis:&lt;/div&gt;
+			&lt;div class=&quot;message&quot;&gt;I’m going to shut this down.&lt;/div&gt;
+		&lt;/div&gt;
+	]
+]
+
+&lt;!-- 3. Static --&gt;
+(after: 6s)[
+	(replace: ?staticOverlay)[&lt;div class=&quot;static-flash&quot;&gt;&lt;/div&gt;]
+]
+
+&lt;!-- 4. Clear static --&gt;
+(after: 6.8s)[
+	(replace: ?staticOverlay)[]
+]
+
+&lt;!-- 5. System error --&gt;
+(after: 7s)[
+	(append: ?terminated)[
+		&lt;div class=&quot;system-critical&quot;&gt;ERROR 0xA7: Oversight exceeded&lt;/div&gt;
+		&lt;div class=&quot;system-disconnect&quot;&gt;System Message: Session terminated.&lt;/div&gt;
+	]
+]
+
+&lt;!-- 6. Repeat flicker --&gt;
+(after: 10s)[
+	(replace: ?terminated)[
+		&lt;div class=&quot;system-critical&quot;&gt;System Reboot Failed&lt;/div&gt;
+	]
+]
+
+&lt;!-- 7. Restart system --&gt;
+(after: 30s)[
+	(goto: &quot;Intro7&quot;)
 ]
 </tw-passagedata></tw-storydata>
 <script title="Twine engine code" data-main="harlowe">(function(){"use strict";
