@@ -11,17 +11,16 @@
 <tw-story><noscript><tw-noscript>JavaScript needs to be enabled to play Turing Test.</tw-noscript></noscript></tw-story>
 <tw-storydata name="Turing Test" startnode="12" creator="Twine" creator-version="2.10.0" format="Harlowe" format-version="3.3.9" ifid="e2bedee3-bfaf-4c31-b8c2-ef0ec74218da" options="" tags="" zoom="0.6" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">/* === BASE RESET === */
 html, body {
-	font-size: 14px;
-    margin: 0;
+	margin: 0;
 	padding: 0;
 	height: 100vh;
 	background-color: #000;
 	color: #33ff99;
 	font-family: 'Courier New', monospace;
+	font-size: 14px;
 	overflow: hidden;
 }
 
-/* === TWINE STORY STRUCTURE === */
 tw-story {
 	display: flex;
 	flex-direction: column;
@@ -35,12 +34,12 @@ tw-story {
 	width: 80vw;
 	max-width: 750px;
 	margin: 2vh auto;
+	min-height: 90vh;
 	border: 2px solid #33ff99;
 	box-shadow: 0 0 8px #33ff99;
 	background-color: #000;
 	display: flex;
 	flex-direction: column;
-	min-height: 90vh;
 	overflow: hidden;
 }
 
@@ -53,26 +52,23 @@ tw-story {
 	justify-content: space-between;
 	align-items: center;
 	padding: 0.4em 0.8em;
-    font-size: 0.9em;
+	font-size: 0.9em;
 	border-bottom: 2px solid #33ff99;
 	box-shadow: 0 0 8px #33ff99;
-	z-index: 10;
 	box-sizing: border-box;
+	z-index: 10;
 }
 
-/* === WINDOW CONTROLS === */
 .window-controls {
 	display: flex;
 	gap: 0.5em;
 }
-
 .control-button {
 	width: 12px;
 	height: 12px;
 	border-radius: 50%;
 	display: inline-block;
 }
-
 .control-button.minimize { background-color: #fdbc40; box-shadow: 0 0 4px #fdbc40; }
 .control-button.maximize { background-color: #33c948; box-shadow: 0 0 4px #33c948; }
 .control-button.close    { background-color: #ff5f56; box-shadow: 0 0 4px #ff5f56; }
@@ -83,14 +79,13 @@ tw-story {
 	background-color: #080808;
 	border-bottom: 2px solid #33ff99;
 	display: flex;
-	gap: 1.5em;
+	gap: 1em;
 	padding: 0.4em 0.8em;
 	font-size: 0.9em;
-	gap: 1em;
 	font-family: monospace;
 	box-shadow: 0 2px 6px #0f0;
-	z-index: 9;
 	box-sizing: border-box;
+	z-index: 9;
 }
 
 .tab {
@@ -100,40 +95,50 @@ tw-story {
 	border-bottom: 2px solid transparent;
 	transition: border-bottom 0.2s;
 }
-
 .tab:hover {
 	color: #66ffaa;
 	border-bottom: 2px solid #66ffaa;
 }
-
 .tab.active {
 	font-weight: bold;
 	color: #99ffcc;
 	border-bottom: 2px solid #99ffcc;
 }
-
 .tab.disabled {
 	opacity: 0.4;
 	cursor: not-allowed;
 	pointer-events: none;
 }
 
-/* === MAIN TERMINAL DISPLAY === */
+/* === MAIN TERMINAL CONTENT === */
 #app-container {
 	flex-grow: 1;
-	padding: 1.5em;
+	padding: 1em 1.5em;
+	overflow-y: auto;
 	font-size: 0.9em;
 	line-height: 1.4;
-	overflow-y: auto;
 	box-sizing: border-box;
 }
 
-/* === TYPEWRITER TEXT BOX === */
+/* === TYPEWRITER === */
 .typewriter-box {
-	min-height: 6em;
-	font-family: monospace;
+	min-height: 4em;
+	margin-bottom: 0.5em;
 	white-space: pre-wrap;
 	line-height: 1.5;
+}
+
+/* === CHAT LOG === */
+.line {
+	margin: 0.15em 0;
+	line-height: 1.2;
+}
+.message {
+	white-space: pre-wrap;
+	line-height: 1.2;
+}
+.system-message {
+	margin: 0.5em 0;
 }
 
 /* === BUTTON ROW === */
@@ -143,7 +148,6 @@ tw-story {
 	gap: 2em;
 	margin-top: 2em;
 }
-
 .button-row tw-link,
 .button-row tw-enchantment {
 	display: inline-block;
@@ -152,18 +156,17 @@ tw-story {
 	border: 1px solid #33ff99;
 	padding: 0.6em 1.2em;
 	border-radius: 0.4em;
-	text-decoration: none;
 	cursor: pointer;
 	transition: background-color 0.3s ease, color 0.3s ease;
+	text-decoration: none;
 }
-
 .button-row tw-link:hover,
 .button-row tw-enchantment:hover {
 	background-color: #33ff99;
 	color: #000;
 }
 
-/* === CURSOR ANIMATION === */
+/* === CURSOR === */
 .cursor {
 	display: inline-block;
 	width: 0.6em;
@@ -171,112 +174,38 @@ tw-story {
 	animation: blink 1s step-start infinite;
 	margin-left: 0.2em;
 }
-
 @keyframes blink {
 	50% { opacity: 0; }
 }
 
-
 /* === TALLIS MODE === */
-/* === BACKGROUND LAYERS === */
-body {
-	background-color: #ddd;
-	background-image: url('./images/cubicle-panel.jpg'); /* soft texture */
-	background-size: cover;
-	background-position: center;
-}
-
-/* Degraded office after VMRoom245 */
 body.tallis-mode {
-	background-color: #bbb;
-	filter: grayscale(20%) brightness(95%);
-	animation: flicker-light 1.5s infinite alternate;
-}
-
-/* === TERMINAL MODES === */
-#console-wrapper.default {
-	border: 2px solid #33ff99;
-	background-color: #000;
-	color: #33ff99;
-	box-shadow: 0 0 12px #33ff99;
-}
-
-#console-wrapper.tallis-mode {
-	background-color: #f4f4f4;
-	color: #222;
-	border: none;
-	box-shadow: inset 0 0 30px rgba(0,0,0,0.1);
-}
-
-/* Flattened UI in Tallis mode */
-#console-wrapper.tallis-mode .title-bar,
-#console-wrapper.tallis-mode .nav-bar {
-	background-color: #e0e0e0;
-	border-bottom: 1px solid #aaa;
-	box-shadow: none;
-	color: #222;
-}
-
-/* Flicker animation for degraded lighting */
-@keyframes flicker-light {
-	from { filter: brightness(95%); }
-	to   { filter: brightness(100%) contrast(102%); }
-}
-
-body.tallis-mode {
-	background-image: url("https://sdmntprwestus.oaiusercontent.com/files/00000000-2c68-6230-98a5-0c4e037aab9f/raw?se=2025-05-10T15%3A04%3A23Z&sp=r&sv=2024-08-04&sr=b&scid=00000000-0000-0000-0000-000000000000&skoid=71e8fa5c-90a9-4c17-827b-14c3005164d6&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-05-10T02%3A27%3A59Z&ske=2025-05-11T02%3A27%3A59Z&sks=b&skv=2024-08-04&sig=YopRacZpI0SSAYxTB4kuJ7PF9gJD9QzTM59gaRyiaOc%3D");
-	background-size: cover;
-	background-position: center;
-	background-repeat: no-repeat;
-	background-color: #000;
-}
-
-/* === TALLIS-MODE: Clinical Interface Overhaul === */
-
-body.tallis-mode {
-	background-image: url("img/tallis-crt-terminal.png"); /* Replace with your actual file path */
+	background-image: url("img/tallis-crt-terminal.png"); /* Replace with your local path */
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
 	background-color: #000;
 	color: #e0e0e0;
+	animation: flicker-light 1.5s infinite alternate;
 }
 
-/* Terminal Wrapper in Tallis-mode becomes more sterile */
 body.tallis-mode #console-wrapper {
 	background-color: #1a1a1a;
 	border: 2px solid #888;
 	box-shadow: 0 0 6px #555;
 }
 
-/* Muted title bar */
-body.tallis-mode .title-bar {
+body.tallis-mode .title-bar,
+body.tallis-mode .nav-bar {
 	background-color: #1f1f1f;
 	color: #ccc;
 	border-bottom: 2px solid #666;
 	box-shadow: none;
 }
 
-/* Window controls: dimmer + sterile */
-body.tallis-mode .control-button.minimize {
-	background-color: #777;
-	box-shadow: none;
-}
-body.tallis-mode .control-button.maximize {
-	background-color: #666;
-	box-shadow: none;
-}
-body.tallis-mode .control-button.close {
-	background-color: #444;
-	box-shadow: none;
-}
-
-/* Nav bar becomes hollow and less inviting */
-body.tallis-mode .nav-bar {
-	background-color: #151515;
-	border-bottom: 2px solid #444;
-	box-shadow: none;
-}
+body.tallis-mode .control-button.minimize { background-color: #777; box-shadow: none; }
+body.tallis-mode .control-button.maximize { background-color: #666; box-shadow: none; }
+body.tallis-mode .control-button.close    { background-color: #444; box-shadow: none; }
 
 body.tallis-mode .tab {
 	color: #999;
@@ -290,7 +219,6 @@ body.tallis-mode .tab:hover {
 	border-bottom: 2px solid #aaa;
 }
 
-/* Popup styling for Tallis-mode */
 body.tallis-mode .popup-panel {
 	background-color: #222;
 	border-color: #444;
@@ -298,43 +226,20 @@ body.tallis-mode .popup-panel {
 	box-shadow: 0 0 8px #333;
 }
 
-/* Chat message tones */
 body.tallis-mode .chat-log .line {
 	background-color: rgba(255, 255, 255, 0.02);
 	border-left: 2px solid #444;
 	padding-left: 1em;
 }
 
-/* Cursor and input aesthetics */
 body.tallis-mode .cursor {
 	background-color: #999;
 }
 
-[data-interface-mode="tallis-mode"] #console-wrapper {
-	background: #000;
-	border: 2px solid #33ff99;
-	box-shadow: 0 0 20px #33ff99;
-	animation: crt-flicker 0.25s infinite alternate;
-}
-
-[data-interface-mode="tallis-mode"] #app-container {
-	background-color: rgba(0, 0, 0, 0.95);
-	border: 2px solid #33ff99;
-	color: #33ff99;
-	font-family: 'Courier New', monospace;
-}
-
-[data-interface-mode="tallis-mode"] .title-bar,
-[data-interface-mode="tallis-mode"] .nav-bar {
-	background-color: #020202;
-	border-bottom: 1px solid #33ff99;
-	box-shadow: 0 0 5px #33ff99;
-}
-
-/* Optional: CRT flicker effect */
-@keyframes crt-flicker {
-	from { opacity: 0.95; }
-	to   { opacity: 1; }
+/* === OPTIONAL EFFECT === */
+@keyframes flicker-light {
+	from { filter: brightness(95%); }
+	to   { filter: brightness(100%) contrast(102%); }
 }
 </style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="Intro3Content" tags="" position="975,675" size="100,100">(display: &quot;TitleBar&quot;)
 (display: &quot;NavBar&quot;)
