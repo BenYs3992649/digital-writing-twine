@@ -309,6 +309,33 @@ body.tallis-mode .chat-log .line {
 body.tallis-mode .cursor {
 	background-color: #999;
 }
+
+[data-interface-mode="tallis-mode"] #console-wrapper {
+	background: #000;
+	border: 2px solid #33ff99;
+	box-shadow: 0 0 20px #33ff99;
+	animation: crt-flicker 0.25s infinite alternate;
+}
+
+[data-interface-mode="tallis-mode"] #app-container {
+	background-color: rgba(0, 0, 0, 0.95);
+	border: 2px solid #33ff99;
+	color: #33ff99;
+	font-family: 'Courier New', monospace;
+}
+
+[data-interface-mode="tallis-mode"] .title-bar,
+[data-interface-mode="tallis-mode"] .nav-bar {
+	background-color: #020202;
+	border-bottom: 1px solid #33ff99;
+	box-shadow: 0 0 5px #33ff99;
+}
+
+/* Optional: CRT flicker effect */
+@keyframes crt-flicker {
+	from { opacity: 0.95; }
+	to   { opacity: 1; }
+}
 </style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="Intro3Content" tags="" position="975,675" size="100,100">(display: &quot;TitleBar&quot;)
 (display: &quot;NavBar&quot;)
 
@@ -334,8 +361,8 @@ body.tallis-mode .cursor {
 		(display: &quot;Typewriter Continue Intro Widget&quot;)
 	&lt;/div&gt;
 ]
-</tw-passagedata><tw-passagedata pid="2" name="VMRoom245Content" tags="" position="1600,675" size="100,100">(unless: $playerName&#39;s length &gt; 0)[
-    (set: $playerName to &quot;User&quot;)
+</tw-passagedata><tw-passagedata pid="2" name="VMRoom245Content" tags="" position="1600,675" size="100,100">(unless: $playerName is a string)[
+	(set: $playerName to &quot;User&quot;)
 ]
 
 &lt;div class=&quot;chat-log&quot;&gt;
@@ -345,7 +372,7 @@ body.tallis-mode .cursor {
 	&lt;/div&gt;
 	&lt;div class=&quot;line&quot;&gt;
 		&lt;div class=&quot;speaker&quot;&gt;(print: $playerName + &quot;:&quot;)&lt;/div&gt;
-		&lt;div class=&quot;message&quot;&gt;[[Hello-&gt;Tallis Greeting]]&lt;/div&gt;
+		&lt;div class=&quot;message&quot;&gt;[[Hello-&gt;TallisGreetingContent]]&lt;/div&gt;
 	&lt;/div&gt;
 &lt;/div&gt;
 </tw-passagedata><tw-passagedata pid="3" name="TallisGreetingContent" tags="" position="1725,675" size="100,100">(set: $playerName to &quot;User&quot;) &lt;!-- or pull from earlier input --&gt;
@@ -472,7 +499,7 @@ body.tallis-mode .cursor {
 ]
 </tw-passagedata><tw-passagedata pid="12" name="Begin Here" tags="" position="100,550" size="100,100">(display: &quot;Header&quot;)
 
-(set: $contentPassage to &quot;BeginHere_Content&quot;)
+(set: $contentPassage to &quot;BeginHereContent&quot;)
 (display: &quot;MainLayout&quot;)
 
 </tw-passagedata><tw-passagedata pid="13" name="EnterName" tags="" position="475,550" size="100,100">(set: $playerName to (prompt: &quot;What is your name?&quot;, &quot;&quot;))
@@ -1394,7 +1421,7 @@ Answer Options:
 		&lt;span class=&quot;control-button close&quot; title=&quot;Close&quot;&gt;&lt;/span&gt;
 	&lt;/div&gt;
 &lt;/div&gt;
-</tw-passagedata><tw-passagedata pid="49" name="MainLayout" tags="" position="100,50" size="100,100">&lt;div id=&quot;console-wrapper&quot; class=&quot;(print: $interfaceMode)&quot;&gt;
+</tw-passagedata><tw-passagedata pid="49" name="MainLayout" tags="" position="100,50" size="100,100">&lt;div id=&quot;console-wrapper&quot;&gt;
 	(display: &quot;TitleBar&quot;)
 	(display: &quot;NavBar&quot;)
 
@@ -1512,16 +1539,15 @@ Answer Options:
 (if: $systemLogs is not a Array)[
 	(set: $systemLogs to (a:))
 ]
-&lt;script&gt;
-document.body.className = &quot;&quot;;
-if (State.variables.interfaceMode === &quot;tallis-mode&quot;) {
-	document.body.classList.add(&quot;tallis-mode&quot;);
-}
-&lt;/script&gt;
-	(unless: $interfaceMode is a string)[
+(unless: $interfaceMode is a string)[
 		(set: $interfaceMode to &quot;default&quot;)
 	]
-&lt;/span&gt;</tw-passagedata><tw-passagedata pid="60" name="logEvent" tags="widget" position="350,50" size="100,100">|logEventHook&gt;[ ]
+
+	(set: _mode to $interfaceMode)
+&lt;/span&gt;
+
+&lt;!-- This tag allows CSS attribute-based style control --&gt;
+&lt;tw-expression data-interface-mode=&quot;(print: _mode)&quot;&gt;&lt;/tw-expression&gt;</tw-passagedata><tw-passagedata pid="60" name="logEvent" tags="widget" position="350,50" size="100,100">|logEventHook&gt;[ ]
 
 (set: _logText to _args&#39;s 1)
 
@@ -1540,7 +1566,7 @@ if (State.variables.interfaceMode === &quot;tallis-mode&quot;) {
 (if: not _alreadyLogged)[
 	(set: $systemLogs to $systemLogs + (a: _logText))
 ]
-</tw-passagedata><tw-passagedata pid="61" name="BeginHere_Content" tags="" position="100,425" size="100,100">&lt;span style=&quot;display:none&quot;&gt;
+</tw-passagedata><tw-passagedata pid="61" name="BeginHereContent" tags="" position="100,425" size="100,100">&lt;span style=&quot;display:none&quot;&gt;
 	(unless: $playerName is a string)[
 		(set: $playerName to &quot;&quot;)
 	]
@@ -1574,7 +1600,7 @@ if (State.variables.interfaceMode === &quot;tallis-mode&quot;) {
 (display: &quot;MainLayout&quot;)
 </tw-passagedata><tw-passagedata pid="67" name="VMRoom245" tags="" position="1600,550" size="100,100">(display: &quot;Header&quot;)
 
-(set: $interfaceMode to &quot;tallis-mode&quot;)
+(set: $interfaceMode to &quot;tallis-mode&quot;) &lt;!-- CRT visual mode begins here --&gt;
 (set: $contentPassage to &quot;VMRoom245Content&quot;)
 (display: &quot;MainLayout&quot;)
 </tw-passagedata><tw-passagedata pid="68" name="Tallis Greeting" tags="" position="1725,550" size="100,100">(display: &quot;Header&quot;)
