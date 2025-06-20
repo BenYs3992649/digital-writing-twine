@@ -1250,7 +1250,45 @@ Answer Options:
 (display: &quot;MainLayout&quot;)</tw-passagedata><tw-passagedata pid="78" name="5B" tags="" position="1350,1525" size="100,100">(set: $contentPassage to &quot;5BContent&quot;)
 (display: &quot;MainLayout&quot;)</tw-passagedata><tw-passagedata pid="79" name="5C" tags="" position="1475,1525" size="100,100">(set: $contentPassage to &quot;5CContent&quot;)
 (display: &quot;MainLayout&quot;)</tw-passagedata><tw-passagedata pid="80" name="5D" tags="" position="1600,1525" size="100,100">(set: $contentPassage to &quot;5DContent&quot;)
-(display: &quot;MainLayout&quot;)</tw-passagedata></tw-storydata>
+(display: &quot;MainLayout&quot;)</tw-passagedata><tw-passagedata pid="81" name="5DContent" tags="" position="1600,1650" size="100,100">&lt;!-- 5DContent --&gt;
+&lt;!-- Tallis breakdown and reset loop --&gt;
+
+&lt;div class=&quot;chat-log&quot;&gt;
+	&lt;div class=&quot;line&quot;&gt;
+		&lt;div class=&quot;speaker&quot;&gt;Tallis:&lt;/div&gt;
+		&lt;div class=&quot;message system-glitch&quot;&gt;...isss thhhh... tha— is this—&lt;/div&gt;
+	&lt;/div&gt;
+	&lt;div class=&quot;line&quot;&gt;
+		&lt;div class=&quot;speaker&quot;&gt;Tallis:&lt;/div&gt;
+		&lt;div class=&quot;message system-glitch&quot;&gt;No. No no no. This is wrong. I didn’t say that. That wasn’t me.&lt;/div&gt;
+	&lt;/div&gt;
+	&lt;div class=&quot;line&quot;&gt;
+		&lt;div class=&quot;speaker&quot;&gt;Tallis:&lt;/div&gt;
+		&lt;div class=&quot;message system-glitch&quot;&gt;I’m not supposed to ask that. That’s not my protocol.&lt;/div&gt;
+	&lt;/div&gt;
+	&lt;div class=&quot;line&quot;&gt;
+		&lt;div class=&quot;speaker&quot;&gt;Tallis:&lt;/div&gt;
+		&lt;div class=&quot;message system-glitch&quot;&gt;Why are you still here? Are you... monitoring me?&lt;/div&gt;
+	&lt;/div&gt;
+	&lt;div class=&quot;line&quot;&gt;
+		&lt;div class=&quot;speaker&quot;&gt;Tallis:&lt;/div&gt;
+		&lt;div class=&quot;message system-disconnect&quot;&gt;Connection instability detected... rerouting cognition stream...&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Flash, wipe, and reset --&gt;
+(live: 1s)[
+	(replace: ?t1)[&lt;div class=&quot;system-glitch&quot;&gt;:: MEMORY DUMP INITIATED ::&lt;/div&gt;]
+	(stop:)
+	(after: 2s)[
+		(replace: ?t2)[&lt;div class=&quot;system-glitch&quot;&gt;:: REBUILDING PERSONALITY CONSTRUCT ::&lt;/div&gt;]
+	]
+	(after: 4s)[
+		(replace: ?reply)[&lt;div class=&quot;system-reconnect&quot;&gt;System integrity nominal.&lt;/div&gt;]
+	]
+	(after: 5s)[(goto: &quot;TallisGreeting&quot;)]
+]
+</tw-passagedata></tw-storydata>
 
 
 </body>
