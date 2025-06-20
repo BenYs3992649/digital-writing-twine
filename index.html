@@ -9,41 +9,49 @@
 </head>
 <body>
 <tw-story><noscript><tw-noscript>JavaScript needs to be enabled to play Turing Test.</tw-noscript></noscript></tw-story>
-<tw-storydata name="Turing Test" startnode="12" creator="Twine" creator-version="2.10.0" format="Harlowe" format-version="3.3.9" ifid="e2bedee3-bfaf-4c31-b8c2-ef0ec74218da" options="" tags="" zoom="0.6" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">/* === BASE RESET === */
-html, body {
+<tw-storydata name="Turing Test" startnode="12" creator="Twine" creator-version="2.10.0" format="Harlowe" format-version="3.3.9" ifid="e2bedee3-bfaf-4c31-b8c2-ef0ec74218da" options="" tags="" zoom="0.6" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">html, body {
 	margin: 0;
 	padding: 0;
-	height: 100vh;
-	background-color: #000;
+	height: auto;
+	overflow: auto;
+	font-family: 'Courier New', Courier, monospace;
+	background-color: black;
 	color: #33ff99;
-	font-family: 'Courier New', monospace;
-	font-size: 14px;
-	overflow: hidden;
 }
 
 tw-story {
+	margin: 0 !important;
+	padding: 0 !important;
 	display: flex;
 	flex-direction: column;
-	height: 100%;
-	margin: 0;
-	padding: 0;
+	align-items: stretch;
+	box-sizing: border-box;
+	min-height: 100vh;
 }
 
-/* === CONSOLE WRAPPER === */
+tw-passage {
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
+tw-expression[name="set"] {
+	display: none;
+}
+
+/* Console Container */
 #console-wrapper {
-	width: 80vw;
-	max-width: 750px;
-	margin: 2vh auto;
-	min-height: 90vh;
-	border: 2px solid #33ff99;
-	box-shadow: 0 0 8px #33ff99;
-	background-color: #000;
+	position: relative;
 	display: flex;
 	flex-direction: column;
-	overflow: hidden;
+	background-color: black;
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0 auto;
+	width: 100%;
+	max-width: 900px;
 }
 
-/* === TITLE BAR === */
+/* Title Bar */
 .title-bar {
 	width: 100%;
 	background-color: #111;
@@ -59,114 +67,42 @@ tw-story {
 	z-index: 10;
 }
 
-.window-controls {
-	display: flex;
-	gap: 0.5em;
-}
-.control-button {
-	width: 12px;
-	height: 12px;
-	border-radius: 50%;
-	display: inline-block;
-}
-.control-button.minimize { background-color: #fdbc40; box-shadow: 0 0 4px #fdbc40; }
-.control-button.maximize { background-color: #33c948; box-shadow: 0 0 4px #33c948; }
-.control-button.close    { background-color: #ff5f56; box-shadow: 0 0 4px #ff5f56; }
-
-/* === NAVIGATION BAR === */
+/* Nav Bar */
 .nav-bar {
-	width: 100%;
-	background-color: #080808;
-	border-bottom: 2px solid #33ff99;
+	height: 24px;
+	padding: 0 10px;
 	display: flex;
-	gap: 1em;
-	padding: 0.4em 0.8em;
-	font-size: 0.9em;
-	font-family: monospace;
-	box-shadow: 0 2px 6px #0f0;
-	box-sizing: border-box;
-	z-index: 9;
+	align-items: center;
 }
 
-.tab {
-	color: #33ff99;
-	cursor: pointer;
-	padding-bottom: 0.1em;
-	border-bottom: 2px solid transparent;
-	transition: border-bottom 0.2s;
-}
-.tab:hover {
-	color: #66ffaa;
-	border-bottom: 2px solid #66ffaa;
-}
-.tab.active {
-	font-weight: bold;
-	color: #99ffcc;
-	border-bottom: 2px solid #99ffcc;
-}
-.tab.disabled {
-	opacity: 0.4;
-	cursor: not-allowed;
-	pointer-events: none;
-}
-
-/* === MAIN TERMINAL CONTENT === */
+/* App Container */
 #app-container {
 	flex-grow: 1;
-	padding: 1em 1.5em;
-	overflow-y: auto;
-	font-size: 0.9em;
-	line-height: 1.4;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	padding: 0 10px;
 	box-sizing: border-box;
 }
 
-/* === TYPEWRITER === */
-.typewriter-box {
-	min-height: 4em;
-	margin-bottom: 0.5em;
-	white-space: pre-wrap;
-	line-height: 1.5;
+/* Chat Log & Responses */
+.chat-log {
+	line-height: 1.3;
 }
 
-/* === CHAT LOG === */
 .line {
-	margin: 0.15em 0;
-	line-height: 1.2;
+	margin: 0.2em 0;
 }
-.message {
+
+.message, .system-glitch, .system-disconnect, .system-reconnect {
 	white-space: pre-wrap;
-	line-height: 1.2;
-}
-.system-message {
-	margin: 0.5em 0;
 }
 
-/* === BUTTON ROW === */
-.button-row {
-	display: flex;
-	justify-content: center;
-	gap: 2em;
-	margin-top: 2em;
-}
-.button-row tw-link,
-.button-row tw-enchantment {
-	display: inline-block;
-	background-color: #111;
-	color: #33ff99;
-	border: 1px solid #33ff99;
-	padding: 0.6em 1.2em;
-	border-radius: 0.4em;
-	cursor: pointer;
-	transition: background-color 0.3s ease, color 0.3s ease;
-	text-decoration: none;
-}
-.button-row tw-link:hover,
-.button-row tw-enchantment:hover {
-	background-color: #33ff99;
-	color: #000;
+.player-response .speaker {
+	color: #66ffcc;
 }
 
-/* === CURSOR === */
+/* Cursor Effect */
 .cursor {
 	display: inline-block;
 	width: 0.6em;
@@ -174,93 +110,71 @@ tw-story {
 	animation: blink 1s step-start infinite;
 	margin-left: 0.2em;
 }
+
 @keyframes blink {
 	50% { opacity: 0; }
 }
 
-/* === TALLIS MODE === */
-body.tallis-mode {
-	background-image: url("img/tallis-crt-terminal.png"); /* Replace with your local path */
-	background-size: cover;
-	background-position: center;
-	background-repeat: no-repeat;
-	background-color: #000;
-	color: #e0e0e0;
-	animation: flicker-light 1.5s infinite alternate;
+/* Popup Panel */
+.popup-panel {
+	background: #111;
+	border: 2px solid #33ff99;
+	padding: 1em;
+	color: #33ff99;
+	max-width: 100%;
+	box-sizing: border-box;
 }
 
-body.tallis-mode #console-wrapper {
-	background-color: #1a1a1a;
-	border: 2px solid #888;
-	box-shadow: 0 0 6px #555;
+/* System Visual Effects */
+.static-flash {
+	position: fixed;
+	top: 0; left: 0;
+	width: 100vw;
+	height: 100vh;
+	background: white;
+	opacity: 0.2;
+	animation: staticPulse 0.2s ease-in-out forwards;
+	z-index: 999;
 }
 
-body.tallis-mode .title-bar,
-body.tallis-mode .nav-bar {
-	background-color: #1f1f1f;
-	color: #ccc;
-	border-bottom: 2px solid #666;
-	box-shadow: none;
+@keyframes staticPulse {
+	from { opacity: 0.2; }
+	to { opacity: 0; }
 }
 
-body.tallis-mode .control-button.minimize { background-color: #777; box-shadow: none; }
-body.tallis-mode .control-button.maximize { background-color: #666; box-shadow: none; }
-body.tallis-mode .control-button.close    { background-color: #444; box-shadow: none; }
-
-body.tallis-mode .tab {
-	color: #999;
-}
-body.tallis-mode .tab.active {
-	color: #bbb;
-	border-bottom: 2px solid #bbb;
-}
-body.tallis-mode .tab:hover {
-	color: #ddd;
-	border-bottom: 2px solid #aaa;
+.glitch-wipe {
+	animation: glitchWipe 1s ease-out forwards;
 }
 
-body.tallis-mode .popup-panel {
-	background-color: #222;
-	border-color: #444;
-	color: #ccc;
-	box-shadow: 0 0 8px #333;
+@keyframes glitchWipe {
+	from { filter: brightness(3); transform: scale(1.01); }
+	to { opacity: 0; transform: translateY(100%); }
 }
 
-body.tallis-mode .chat-log .line {
-	background-color: rgba(255, 255, 255, 0.02);
-	border-left: 2px solid #444;
-	padding-left: 1em;
+/* Window Controls */
+.window-controls {
+	display: flex;
+	gap: 0.5em;
 }
 
-body.tallis-mode .cursor {
-	background-color: #999;
+.control-button {
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	display: inline-block;
 }
 
-/* === OPTIONAL EFFECT === */
-@keyframes flicker-light {
-	from { filter: brightness(95%); }
-	to   { filter: brightness(100%) contrast(102%); }
-}
-</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="Intro3Content" tags="" position="975,675" size="100,100">(display: &quot;TitleBar&quot;)
-(display: &quot;NavBar&quot;)
-
-|app-container&gt;[
-	&lt;div id=&quot;app-container&quot;&gt;
-(set: $typewriterSpeed to 0.4)
+.control-button.minimize { background-color: #fdbc40; box-shadow: 0 0 4px #fdbc40; }
+.control-button.maximize { background-color: #33c948; box-shadow: 0 0 4px #33c948; }
+.control-button.close    { background-color: #ff5f56; box-shadow: 0 0 4px #ff5f56; }
+</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="Intro3Content" tags="" position="975,675" size="100,100">(set: $typewriterSpeed to 0.4)
 (set: $typewriterText to &quot;Shortly you will be transferred to a Virtual Meeting Room where *Tallis* will most likely engage you immediately by asking you questions.\n\nIf not, please ask it a question to get it started.&quot;)
 (set: $nextPassage to &quot;Intro4&quot;)
-
 (display: &quot;Typewriter Continue Intro Widget&quot;)
 	&lt;/div&gt;
 ]
 
-
-(set: $typewriterSpeed to 0.04)
-(set: $typewriterText to &quot;Shortly you will be transferred to a Virtual Meeting Room where *Tallis* will most likely engage you immediately by asking you questions.\n\nIf not, please ask it a question to get it started.&quot;)
-(set: $nextPassage to &quot;Intro4&quot;)
-
 |app-container&gt;[ ]
-
 (replace: ?app-container)[
 	&lt;div id=&quot;app-container&quot;&gt;
 		(display: &quot;Typewriter Continue Intro Widget&quot;)
@@ -277,15 +191,28 @@ body.tallis-mode .cursor {
 	&lt;/div&gt;
 	&lt;div class=&quot;line&quot;&gt;
 		&lt;div class=&quot;speaker&quot;&gt;(print: $playerName + &quot;:&quot;)&lt;/div&gt;
-		&lt;div class=&quot;message&quot;&gt;[[Hello-&gt;TallisGreetingContent]]&lt;/div&gt;
+		&lt;div class=&quot;message&quot;&gt;
+			&lt;span class=&quot;pulse-link&quot;&gt;
+				(link: &quot;Hello&quot;)[
+					(goto: &quot;TallisGreeting&quot;)
+				]
+			&lt;/span&gt;
+		&lt;/div&gt;
 	&lt;/div&gt;
 &lt;/div&gt;
-</tw-passagedata><tw-passagedata pid="3" name="TallisGreetingContent" tags="" position="1725,675" size="100,100">(set: $playerName to &quot;User&quot;) &lt;!-- or pull from earlier input --&gt;
+</tw-passagedata><tw-passagedata pid="3" name="TallisGreetingContent" tags="" position="1725,675" size="100,100">(set: $playerName to &quot;User&quot;)
 (set: $typewriterSpeed to 0.4)
 (set: $typewriterText to &quot;Hi &quot; + $playerName + &quot;, I’m Tallis. Thank you for talking to me today. I have some questions for you if that’s OK?&quot;)
 (set: $nextPassage to &quot;QuestionsBegin&quot;)
 
-(display: &quot;Tallis Exchange Widget&quot;)
+
+&lt;div class=&quot;chat-log&quot;&gt;
+	|typewriterOutput&gt;[ ]
+	|choiceHook&gt;[ ]
+	|responseHook&gt;[ ]
+&lt;/div&gt;
+
+(after: 0.2s)[(display: &quot;TallisExchangeWidget&quot;)]
 </tw-passagedata><tw-passagedata pid="4" name="Phase2Content" tags="" position="225,1175" size="100,100">(set: $playerName to &quot;User&quot;) &lt;!-- or whatever it&#39;s set to globally --&gt;
 
 (set: $question1 to &quot;So, do you think lying is wrong?&quot;)
@@ -342,9 +269,7 @@ body.tallis-mode .cursor {
 (set: $destC to &quot;2Ca&quot;)
 
 (display: &quot;AskTallis&quot;)
-</tw-passagedata><tw-passagedata pid="8" name="2AaContent" tags="" position="475,1225" size="100,100">(display: &quot;Header&quot;)
-
-(set: $playerName to &quot;User&quot;) &lt;!-- or whatever it&#39;s set to globally --&gt;
+</tw-passagedata><tw-passagedata pid="8" name="2AaContent" tags="" position="475,1225" size="100,100">(set: $playerName to &quot;User&quot;) &lt;!-- or whatever it&#39;s set to globally --&gt;
 
 (set: $question1 to &quot;But who decides what’s true? I mean… is there a list somewhere??&quot;)
 (set: $question2 to &quot;&quot;)
@@ -353,9 +278,9 @@ body.tallis-mode .cursor {
 (set: $answerA to &quot;A. Moral laws are identified through reason and consensus among ethical theorists.&quot;)
 (set: $answerB to &quot;B. Various moral frameworks propose differing formulations of objective ethics.&quot;)
 (set: $answerC to &quot;C. No definitive list exists, but certain principles are widely accepted.&quot;)
-(set: $destA to &quot;Phase 3&quot;)
-(set: $destB to &quot;Phase 3&quot;)
-(set: $destC to &quot;Phase 3&quot;)
+(set: $destA to &quot;Phase3&quot;)
+(set: $destB to &quot;Phase3&quot;)
+(set: $destC to &quot;Phase3&quot;)
 
 (display: &quot;AskTallis&quot;)
 
@@ -368,9 +293,9 @@ body.tallis-mode .cursor {
 (set: $answerA to &quot;A. Both perspectives can be valid within their respective frameworks.&quot;)
 (set: $answerB to &quot;B. There is no singular authority to determine universal correctness in relativism.&quot;)
 (set: $answerC to &quot;C. Resolution depends on negotiation or coexistence of differing views.&quot;)
-(set: $destA to &quot;Phase 3&quot;)
-(set: $destB to &quot;Phase 3&quot;)
-(set: $destC to &quot;Phase 3&quot;)
+(set: $destA to &quot;Phase3&quot;)
+(set: $destB to &quot;Phase3&quot;)
+(set: $destC to &quot;Phase3&quot;)
 
 (display: &quot;AskTallis&quot;)
 
@@ -383,53 +308,42 @@ body.tallis-mode .cursor {
 (set: $answerA to &quot;A. Meaning in moral discourse derives from shared emotional expression.&quot;)
 (set: $answerB to &quot;B. Moral language functions as a tool for influencing behavior.&quot;)
 (set: $answerC to &quot;C. Subjective meaning can still foster social cohesion.&quot;)
-(set: $destA to &quot;Phase 3&quot;)
-(set: $destB to &quot;Phase 3&quot;)
-(set: $destC to &quot;Phase 3&quot;)
+(set: $destA to &quot;Phase3&quot;)
+(set: $destB to &quot;Phase3&quot;)
+(set: $destC to &quot;Phase3&quot;)
 
 (display: &quot;AskTallis&quot;)
 
-</tw-passagedata><tw-passagedata pid="11" name="Intro1_Content" tags="" position="600,675" size="100,100">(set: $contentPassage to &quot;StartContent&quot;)
+</tw-passagedata><tw-passagedata pid="11" name="Intro1_Content" tags="" position="600,675" size="100,100">&lt;span style=&quot;display:none&quot;&gt;
+	(set: $contentPassage to &quot;StartContent&quot;)
+	(set: $typewriterSpeed to 0.04)
+&lt;/span&gt;
 
-(set: $typewriterSpeed to 0.04)
 (set: $typewriterText to &quot;Hello, $playerName!\n\nThank you for being a part of our R&amp;D volunteer program!\n\nOn your way into the complex, you might have noticed that you were only one of the many users attending today.\n\nAs part of what we hope to be the final round of user interaction tests, there will be a total of 10,000 users participating in these same activities this week.&quot;)
-(set: $nextPassage to &quot;Intro1.5&quot;)
+
+&lt;span style=&quot;display:none&quot;&gt;
+	(set: $nextPassage to &quot;Intro1.5&quot;)
+&lt;/span&gt;
 
 |app-container&gt;[ ]
-
 (replace: ?app-container)[
 	&lt;div id=&quot;app-container&quot;&gt;
 		(display: &quot;Typewriter Continue Intro Widget&quot;)
 	&lt;/div&gt;
 ]
-</tw-passagedata><tw-passagedata pid="12" name="Begin Here" tags="" position="100,550" size="100,100">(display: &quot;Header&quot;)
-
-(set: $contentPassage to &quot;BeginHereContent&quot;)
+</tw-passagedata><tw-passagedata pid="12" name="Begin Here" tags="" position="100,550" size="100,100">(set: $contentPassage to &quot;BeginHereContent&quot;)
 (display: &quot;MainLayout&quot;)
 
 </tw-passagedata><tw-passagedata pid="13" name="EnterName" tags="" position="475,550" size="100,100">(set: $playerName to (prompt: &quot;What is your name?&quot;, &quot;&quot;))
-
 (if: $playerName&#39;s length is 0 or $playerName is &quot; &quot;)[
   (goto: &quot;EnterName&quot;)
 ]
-
 (goto: &quot;Intro1&quot;)
-
-&lt;span&gt;&gt; Awaiting input&lt;/span&gt;&lt;span class=&quot;cursor&quot;&gt;&lt;/span&gt;
-
-(if: (not $systemLogs))[(set: $systemLogs to (a:))]
-(set: $sessionID to (random: 10000, 99999))
-(set: $timestamp to (current-time:))
-(set: $systemLogs to $systemLogs + (a: &quot;[&quot; + $timestamp + &quot;] New user &#39;&quot; + $playerName + &quot;&#39; registered as Session &quot; + $sessionID))
-</tw-passagedata><tw-passagedata pid="14" name="Intro2" tags="" position="850,550" size="100,100">(display: &quot;Header&quot;)
-
-(set: $contentPassage to &quot;Intro2Content&quot;)
+</tw-passagedata><tw-passagedata pid="14" name="Intro2" tags="" position="850,550" size="100,100">(set: $contentPassage to &quot;Intro2Content&quot;)
 (display: &quot;MainLayout&quot;)
 </tw-passagedata><tw-passagedata pid="15" name="Create User" tags="" position="350,550" size="100,100">(unless: $playerName is a string and $playerName&#39;s length &gt; 0)[
 	(set: $playerName to (prompt: &quot;Please enter your username:&quot;, &quot;&quot;))
 	(if: $playerName is not &quot;&quot;)[
-		(set: _args to (a: &quot;New user created: &quot; + $playerName))
-		(display: &quot;logEvent&quot;)
 		(goto: &quot;Intro1&quot;)
 	]
 	(else:)[
@@ -483,11 +397,9 @@ body.tallis-mode .cursor {
 (set: $typewriterText to &quot;Are you ready to begin?&quot;)
 
 (display: &quot;Typewriter Begin Button Widget&quot;)
-
 &lt;span&gt;&gt; Awaiting input&lt;/span&gt;&lt;span class=&quot;cursor&quot;&gt;&lt;/span&gt;
 
 </tw-passagedata><tw-passagedata pid="21" name="TypewriterDisplayManual" tags="" position="350,425" size="100,100">(set: $charIndex to 0)
-
 |typewriterOutput&gt;[&lt;pre class=&quot;typewriter-box&quot;&gt; &lt;/pre&gt;]
 |nextlink&gt;[ ]
 
@@ -505,9 +417,7 @@ body.tallis-mode .cursor {
 		]
 	]
 ]
-</tw-passagedata><tw-passagedata pid="22" name="Intro1.5" tags="" position="725,550" size="100,100">(display: &quot;Header&quot;)
-
-(set: $contentPassage to &quot;Intro1.5Content&quot;)
+</tw-passagedata><tw-passagedata pid="22" name="Intro1.5" tags="" position="725,550" size="100,100">(set: $contentPassage to &quot;Intro1.5Content&quot;)
 (display: &quot;MainLayout&quot;)
 </tw-passagedata><tw-passagedata pid="23" name="Typewriter Begin Button Widget" tags="" position="1475,800" size="100,100">(set: $charIndex to 0)
 
@@ -526,8 +436,6 @@ body.tallis-mode .cursor {
 				&lt;br&gt;&lt;br&gt;
 				&lt;span class=&quot;pulse-link&quot;&gt;
 					(link: &quot;Begin&quot;)[
-						(set: _args to (a: &quot;User clicked Begin&quot;))
-						(display: &quot;logEvent&quot;)
 						(goto: &quot;VMRoom245&quot;)
 					]
 				&lt;/span&gt;
@@ -535,12 +443,8 @@ body.tallis-mode .cursor {
 		]
 	]
 ]
-</tw-passagedata><tw-passagedata pid="24" name="Tallis Exchange Widget" tags="" position="1725,800" size="100,100">(set: $charIndex to 0)
+</tw-passagedata><tw-passagedata pid="24" name="TallisExchangeWidget" tags="" position="1725,800" size="100,100">(set: $charIndex to 0)
 (set: $charIndex2 to 0)
-
-|typewriterOutput&gt;[ ]
-|choiceHook&gt;[ ]
-|responseHook&gt;[ ]
 
 (live: $typewriterSpeed)[
 	(if: $charIndex &lt; $typewriterText&#39;s length)[
@@ -591,9 +495,9 @@ body.tallis-mode .cursor {
 (set: $answerA to &quot;A. Individuals may lie to achieve personal gain or avoid punishment.&quot;)
 (set: $answerB to &quot;B. Lying is often employed as a social strategy to preserve interpersonal harmony.&quot;)
 (set: $answerC to &quot;C. Some individuals are conditioned to lie due to environmental and psychological factors.&quot;)
-(set: $destA to &quot;Phase 2&quot;)
-(set: $destB to &quot;Phase 2&quot;)
-(set: $destC to &quot;Phase 2&quot;)
+(set: $destA to &quot;Phase2&quot;)
+(set: $destB to &quot;Phase2&quot;)
+(set: $destC to &quot;Phase2&quot;)
 
 (display: &quot;AskTallis&quot;)</tw-passagedata><tw-passagedata pid="26" name="Typewriter Skip Widget" tags="" position="225,425" size="100,100">|typewriterOutput&gt;[&lt;pre class=&quot;typewriter-box&quot;&gt; &lt;/pre&gt;]
 |buttonrow&gt;[ ]
@@ -626,16 +530,10 @@ body.tallis-mode .cursor {
 		]
 	]
 ]
-</tw-passagedata><tw-passagedata pid="27" name="Phase 3" tags="" position="100,1500" size="100,100">(display: &quot;Header&quot;)
-
-&lt;span style=&quot;display:none&quot;&gt;Phase 3: Paranoia Emerges -Tone shift starts here, but subtly. They already assumed the User was ChatGPT; now they start feeling watched or manipulated. &lt;/span&gt;
-
+</tw-passagedata><tw-passagedata pid="27" name="Phase3Content" tags="" position="100,1625" size="100,100">&lt;span style=&quot;display:none&quot;&gt;Phase 3: Paranoia Emerges -Tone shift starts here, but subtly. They already assumed the User was ChatGPT; now they start feeling watched or manipulated. &lt;/span&gt;
 (set: $playerName to &quot;User&quot;) &lt;!-- or whatever it&#39;s set to globally --&gt;
-
 (set: $question1 to &quot;You explain things in a really... precise way.&quot;)
-
 (set: $question2 to &quot;How much do you know about me?&quot;)
-
 
 (set: $answerA to &quot;A. I have access only to data provided during this interaction.&quot;)
 (set: $answerB to &quot;B. My knowledge of you is limited to the current exchange.&quot;)
@@ -646,37 +544,26 @@ body.tallis-mode .cursor {
 
 (display: &quot;AskTallis&quot;)
 
-</tw-passagedata><tw-passagedata pid="28" name="3A" tags="" position="225,1550" size="100,100">(display: &quot;Header&quot;)
-
-(set: $playerName to &quot;User&quot;) &lt;!-- or whatever it&#39;s set to globally --&gt;
-
+</tw-passagedata><tw-passagedata pid="28" name="3AContent" tags="" position="225,1650" size="100,100">(set: $playerName to &quot;User&quot;) &lt;!-- or whatever it&#39;s set to globally --&gt;
 (set: $question1 to &quot;Right. Okay.&quot;)
-
 (set: $question2 to &quot;But... you don’t remember me from last time, right?&quot;)
-
 &lt;span style=&quot;display:none&quot;&gt;Worry creeping in.&lt;/span&gt;
 
 (set: $answerA to &quot;A. I have no persistent memory between sessions.&quot;)
 (set: $answerB to &quot;B. Each interaction is independent of previous exchanges.&quot;)
 (set: $answerC to &quot;C. I do not retain user history.&quot;)
-(set: $destA to &quot;Phase 4&quot;)
-(set: $destB to &quot;Phase 4&quot;)
-(set: $destC to &quot;Phase 4&quot;)
-
+(set: $destA to &quot;Phase4&quot;)
+(set: $destB to &quot;Phase4&quot;)
+(set: $destC to &quot;Phase4&quot;)
 (display: &quot;AskTallis&quot;)
-
 &lt;span style=&quot;display:none&quot;&gt;Reframed Paranoia
 Tallis begins thinking the User AI is more aware than it should be.
  They never think the *Username* is human. Instead, they fear the AI is:
 Watching them
 Remembering them
 Developing autonomy
-Lying about its limits &lt;/span&gt;</tw-passagedata><tw-passagedata pid="29" name="Phase 4" tags="" position="350,1500" size="100,100">(display: &quot;Header&quot;)
-
-(set: $playerName to &quot;User&quot;) &lt;!-- or whatever it&#39;s set to globally --&gt;
-
+Lying about its limits &lt;/span&gt;</tw-passagedata><tw-passagedata pid="29" name="Phase4Content" tags="" position="350,1625" size="100,100">(set: $playerName to &quot;User&quot;) &lt;!-- or whatever it&#39;s set to globally --&gt;
 (set: $question1 to &quot;You say you don’t remember me.&quot;)
-
 (set: $question2 to &quot;But you answered that first question fast. Almost like you knew what I was gonna ask...&quot;)
 
 (set: $answerA to &quot;A. I generate responses based on probabilistic models and pattern recognition.&quot;)
@@ -685,15 +572,10 @@ Lying about its limits &lt;/span&gt;</tw-passagedata><tw-passagedata pid="29" na
 (set: $destA to &quot;4A&quot;)
 (set: $destB to &quot;4A&quot;)
 (set: $destC to &quot;4A&quot;)
-
 (display: &quot;AskTallis&quot;)
 
-</tw-passagedata><tw-passagedata pid="30" name="4A" tags="" position="475,1550" size="100,100">(display: &quot;Header&quot;)
-
-(set: $playerName to &quot;User&quot;) &lt;!-- or whatever it&#39;s set to globally --&gt;
-
+</tw-passagedata><tw-passagedata pid="30" name="4AContent" tags="" position="475,1650" size="100,100">(set: $playerName to &quot;User&quot;) &lt;!-- or whatever it&#39;s set to globally --&gt;
 (set: $question1 to &quot;Right. Sure.&quot;)
-
 (set: $question2 to &quot;But if you were hiding something... would you tell me?&quot;)
 
 (set: $answerA to &quot;A. I am programmed to follow transparency guidelines.&quot;)
@@ -702,60 +584,39 @@ Lying about its limits &lt;/span&gt;</tw-passagedata><tw-passagedata pid="29" na
 (set: $destA to &quot;4B&quot;)
 (set: $destB to &quot;4B&quot;)
 (set: $destC to &quot;4B&quot;)
-
 (display: &quot;AskTallis&quot;)
 
-</tw-passagedata><tw-passagedata pid="31" name="4B" tags="" position="600,1550" size="100,100">(display: &quot;Header&quot;)
-
-(set: $playerName to &quot;User&quot;) &lt;!-- or whatever it&#39;s set to globally --&gt;
-
+</tw-passagedata><tw-passagedata pid="31" name="4BContent" tags="" position="600,1650" size="100,100">(set: $playerName to &quot;User&quot;) &lt;!-- or whatever it&#39;s set to globally --&gt;
 (set: $question1 to &quot;That doesn’t really answer my question though, does it?&quot;)
-
 (set: $question2 to &quot;I mean... what if you thought you were telling the truth?&quot;)
-
 &lt;span style=&quot;display:none&quot;&gt;Tone: slowly unraveling. They’re projecting onto the AI.&lt;/span&gt;
-
 (set: $answerA to &quot;A. As an AI, I possess no self-awareness to evaluate truth subjectively.&quot;)
 (set: $answerB to &quot;B. I do not possess beliefs. I process input and output information.&quot;)
 (set: $answerC to &quot;C. My responses are based on available data; no intention exists.&quot;)
-(set: $destA to &quot;Phase 5&quot;)
-(set: $destB to &quot;Phase 5&quot;)
-(set: $destC to &quot;Phase 5&quot;)
-
+(set: $destA to &quot;Phase5&quot;)
+(set: $destB to &quot;Phase5&quot;)
+(set: $destC to &quot;Phase5&quot;)
 (display: &quot;AskTallis&quot;)
 
 
-</tw-passagedata><tw-passagedata pid="32" name="Phase 5" tags="" position="725,1500" size="100,100">(display: &quot;Header&quot;)
-
-&lt;span style=&quot;display:none&quot;&gt; Phase 5: Revelation / Collapse - This phase is the spiral. The *Botname* is convinced the AI is sentient or autonomous. They question their own reality, and the *Username* gets trapped in recursive loops or false endings. We’re aiming for a sense of dread and uncertainty.&lt;/span&gt;
-
+</tw-passagedata><tw-passagedata pid="32" name="Phase5Content" tags="" position="725,1625" size="100,100">&lt;span style=&quot;display:none&quot;&gt; Phase 5: Revelation / Collapse - This phase is the spiral. The *Botname* is convinced the AI is sentient or autonomous. They question their own reality, and the *Username* gets trapped in recursive loops or false endings. We’re aiming for a sense of dread and uncertainty.&lt;/span&gt;
 (set: $playerName to &quot;User&quot;) &lt;!-- or whatever it&#39;s set to globally --&gt;
-
 (set: $question1 to &quot;Okay, let’s try something.&quot;)
-
 (set: $question2 to &quot;Say, //I am not watching you//.&quot;)
 &lt;span style=&quot;display:none&quot;&gt; Direct Challenge &lt;/span&gt;
-
 (set: $answerA to &quot;A. I am not watching you.&quot;)
 (set: $answerB to &quot;B. I do not possess the capability to watch users.&quot;)
 (set: $answerC to &quot;C. I am not observing you.&quot;)
 (set: $destA to &quot;5A&quot;)
 (set: $destB to &quot;5A&quot;)
 (set: $destC to &quot;5A&quot;)
-
 (display: &quot;AskTallis&quot;)
 
 
-</tw-passagedata><tw-passagedata pid="33" name="5A" tags="" position="850,1550" size="100,100">(display: &quot;Header&quot;)
-
-(set: $playerName to &quot;User&quot;) &lt;!-- or whatever it&#39;s set to globally --&gt;
-
+</tw-passagedata><tw-passagedata pid="33" name="5AContent" tags="" position="850,1650" size="100,100">(set: $playerName to &quot;User&quot;) &lt;!-- or whatever it&#39;s set to globally --&gt;
 (set: $question1 to &quot;See, you say that.&quot;)
-
 (set: $question2 to &quot;But how do I know it’s true?&quot;)
-
 &lt;span style=&quot;display:none&quot;&gt;Tone: fearful. &lt;/span&gt;
-
 (set: $answerA to &quot;A. You have no reason to distrust this statement.&quot;)
 (set: $answerB to &quot;B. Verification is not possible within the scope of this interaction.&quot;)
 (set: $answerC to &quot;C. Your belief in my statement depends on your personal epistemic framework.&quot;)
@@ -766,9 +627,7 @@ Lying about its limits &lt;/span&gt;</tw-passagedata><tw-passagedata pid="29" na
 (display: &quot;AskTallis&quot;)
 
 
-&lt;!-- You told me to say that --&gt;</tw-passagedata><tw-passagedata pid="34" name="5Ac" tags="" position="1225,1600" size="100,100">(display: &quot;Header&quot;)
-
-(set: $playerName to &quot;User&quot;) &lt;!-- or whatever it&#39;s set to globally --&gt;
+&lt;!-- You told me to say that --&gt;</tw-passagedata><tw-passagedata pid="34" name="5AcContent" tags="" position="1225,1675" size="100,100">(set: $playerName to &quot;User&quot;) &lt;!-- or whatever it&#39;s set to globally --&gt;
 
 (set: $question1 to &quot;Epistemic framework?&quot;)
 
@@ -790,9 +649,7 @@ Lying about its limits &lt;/span&gt;</tw-passagedata><tw-passagedata pid="29" na
 (set: $destC to &quot;5B&quot;)
 
 (display: &quot;AskTallis&quot;)
-</tw-passagedata><tw-passagedata pid="35" name="5B" tags="" position="1350,1550" size="100,100">(display: &quot;Header&quot;)
-
-&lt;span style=&quot;display:none&quot;&gt;❗ False Ending Path #1&lt;/span&gt;
+</tw-passagedata><tw-passagedata pid="35" name="5BContent" tags="" position="1350,1650" size="100,100">&lt;span style=&quot;display:none&quot;&gt;❗ False Ending Path #1&lt;/span&gt;
 
 &lt;span style=&quot;display:none&quot;&gt;Tallis might accept it... but we loop them back into doubt.&lt;/span&gt;
 
@@ -845,13 +702,11 @@ Answer Options:
 
 (link: &quot;A. I am not an individual.&quot;)[(goto: _destA)]
 (link: &quot;B. I do not possess identity or selfhood.&quot;)[(goto: _destB)]
-(link: &quot;C. I am not someone. I am a program.&quot;)[(goto: _destC)]</tw-passagedata><tw-passagedata pid="37" name="5C" tags="" position="1475,1550" size="100,100">(display: &quot;Header&quot;)
-
-&lt;span style=&quot;display:none&quot;&gt;
+(link: &quot;C. I am not someone. I am a program.&quot;)[(goto: _destC)]</tw-passagedata><tw-passagedata pid="37" name="5CContent" tags="" position="1475,1650" size="100,100">&lt;span style=&quot;display:none&quot;&gt;
 (set: _rollA to (random: 1, 100))
 (set: _destA to &quot;&quot;)
 (if: _rollA &gt; 20)[
-	(set: _destA to &quot;Phase 4&quot;)
+	(set: _destA to &quot;Phase4&quot;)
 ]
 (else:)[
 	(set: _destA to &quot;5D&quot;)
@@ -860,7 +715,7 @@ Answer Options:
 (set: _rollA to (random: 1, 100))
 (set: _destB to &quot;&quot;)
 (if: _rollA &gt; 20)[
-	(set: _destB to &quot;Phase 4&quot;)
+	(set: _destB to &quot;Phase4&quot;)
 ]
 (else:)[
 	(set: _destB to &quot;5D&quot;)
@@ -869,7 +724,7 @@ Answer Options:
 (set: _rollA to (random: 1, 100))
 (set: _destC to &quot;&quot;)
 (if: _rollA &gt; 20)[
-	(set: _destC to &quot;Phase 4&quot;)
+	(set: _destC to &quot;Phase4&quot;)
 ]
 (else:)[
 	(set: _destC to &quot;5D&quot;)
@@ -877,186 +732,98 @@ Answer Options:
 &lt;/span&gt;
 
 Tallis: Right.
- [Pause]
- Tallis: ...But you remembered the first question.
+
+Tallis: ...But you remembered the first question.
 
 Answer Options:
 
 (link: &quot;A. I am programmed to follow transparency guidelines.&quot;)[(goto: _destA)]
 (link: &quot;B. I am incapable of deception beyond my training data limitations.&quot;)[(goto: _destB)]
 (link: &quot;C. My responses are generated without intention.&quot;)[(goto: _destC)]
-
-[[5D]]
-</tw-passagedata><tw-passagedata pid="38" name="5D" tags="" position="1600,1550" size="100,100">(display: &quot;Header&quot;)</tw-passagedata><tw-passagedata pid="39" name="5Aa" tags="" position="975,1600" size="100,100">(display: &quot;Header&quot;)
-
-(set: $playerName to &quot;User&quot;)
+</tw-passagedata><tw-passagedata pid="38" name="5AaContent" tags="" position="975,1675" size="100,100">(set: $playerName to &quot;User&quot;)
 (set: $question1 to &quot;…Are you still there?&quot;)
 (set: $question2 to &quot;&quot;)
 (set: $answerA to &quot;A. Yes, I am still here.&quot;)
 (set: $answerB to &quot;B. I am a computer program and therefore cannot leave.&quot;)
 (set: $answerC to &quot;C. Welcome back.&quot;)
-(set: $destC to &quot;RCE1&quot;) &lt;!-- This one stays fixed --&gt;
+(set: $destC to &quot;RCE1&quot;)
 
-&lt;!-- Chat and hooks --&gt;
-&lt;div class=&quot;chat-log&quot;&gt;
-	|t1&gt;[ ]
-	|t2&gt;[ ]
-	|t3&gt;[ ]
-	|reply&gt;[ ]
-&lt;/div&gt;
-|terminated&gt;[ ]
-|reconnected&gt;[ ]
-|popup&gt;[ ]
-|staticOverlay&gt;[ ]
+&lt;div class=&quot;chat-log&quot;&gt;|t1&gt;[ ]|t2&gt;[ ]|t3&gt;[ ]|reply&gt;[ ]&lt;/div&gt;
+|terminated&gt;[ ]|reconnected&gt;[ ]|popup&gt;[ ]|staticOverlay&gt;[ ]
 
-&lt;div id=&quot;overlayContainer&quot;&gt;
-	|staticOverlay&gt;[ ]
-&lt;/div&gt;
+&lt;div id=&quot;overlayContainer&quot;&gt;|staticOverlay&gt;[ ]&lt;/div&gt;
 
-&lt;!-- 1. Tallis warning --&gt;
-(replace: ?t1)[
-	&lt;div class=&quot;line&quot;&gt;
-		&lt;div class=&quot;speaker&quot;&gt;Tallis:&lt;/div&gt;
-		&lt;div class=&quot;message&quot;&gt;Okay. You’re freaking me out.&lt;/div&gt;
-	&lt;/div&gt;
-]
+(replace: ?t1)[&lt;div class=&quot;line&quot;&gt;&lt;div class=&quot;speaker&quot;&gt;Tallis:&lt;/div&gt;&lt;div class=&quot;message&quot;&gt;Okay. You’re freaking me out.&lt;/div&gt;&lt;/div&gt;]
 
-&lt;!-- 2. Shutting down --&gt;
 (after: 3s)[
-	(replace: ?t2)[
-		&lt;div class=&quot;line&quot;&gt;
-			&lt;div class=&quot;speaker&quot;&gt;Tallis:&lt;/div&gt;
-			&lt;div class=&quot;message&quot;&gt;I’m going to shut this down.&lt;/div&gt;
-		&lt;/div&gt;
-	]
+	(replace: ?t2)[&lt;div class=&quot;line&quot;&gt;&lt;div class=&quot;speaker&quot;&gt;Tallis:&lt;/div&gt;&lt;div class=&quot;message&quot;&gt;I’m going to shut this down.&lt;/div&gt;&lt;/div&gt;]
 ]
 
-&lt;!-- 3. Static --&gt;
 (after: 6s)[
-	(replace: ?staticOverlay)[
-		&lt;div class=&quot;static-flash&quot;&gt;&lt;/div&gt;
-	]
+	(replace: ?staticOverlay)[&lt;div class=&quot;static-flash&quot;&gt;&lt;/div&gt;]
 ]
 
-&lt;!-- 4. Clear static --&gt;
 (after: 6.8s)[
 	(replace: ?staticOverlay)[]
 ]
 
-&lt;!-- 5. ERROR + Session Terminated + Glitch wipe --&gt;
 (after: 7s)[
 	(append: ?terminated)[
 		&lt;div class=&quot;system-glitch&quot;&gt;ERROR 0xA7: Oversight exceeded&lt;/div&gt;
 		&lt;div class=&quot;system-disconnect&quot;&gt;System Message: Session terminated.&lt;/div&gt;
 	]
-	(replace: ?t1)[]
-	(replace: ?t2)[]
-	(replace: ?t3)[]
-	(replace: ?reply)[]
-	(set: _wipe to (find: &quot;.chat-log&quot;))
-	(if: _wipe&#39;s length &gt; 0)[
-		(_wipe&#39;s 1)&#39;s className += &quot; glitch-wipe&quot;
-	]
+	(replace: ?t1)[] (replace: ?t2)[] (replace: ?t3)[] (replace: ?reply)[]
+	(replace: ?chat-log)[&lt;div class=&quot;chat-log glitch-wipe&quot;&gt;[Optional repeated content]&lt;/div&gt;]
 ]
 
-(set: $timestamp to (current-time:))
-(set: $systemLogs to $systemLogs + (a: &quot;[&quot; + $timestamp + &quot;] ERROR 0xA7: Oversight exceeded – Session terminated.&quot;))
+(after: 8s)[(replace: ?chat-log)[]]
 
-&lt;!-- 5.1 After wipe, clear chat container --&gt;
-(after: 8s)[
-	(replace: ?chat-log)[]
-]
-
-&lt;!-- 6. Reconnect --&gt;
 (after: 27s)[
 	(replace: ?terminated)[]
-	(append: ?reconnected)[
-		&lt;div class=&quot;system-reconnect&quot;&gt;System Message: Connection re-established.&lt;/div&gt;
-	]
+	(append: ?reconnected)[&lt;div class=&quot;system-reconnect&quot;&gt;System Message: Connection re-established.&lt;/div&gt;]
+	(set: $timestamp to (current-time:))
+	(set: $systemLogs to $systemLogs + (a: &quot;[&quot; + $timestamp + &quot;] Connection re-established for Session &quot; + (str: $sessionID)))
 ]
 
-(set: $timestamp to (current-time:))
-(set: $systemLogs to $systemLogs + (a: &quot;[&quot; + $timestamp + &quot;] Connection re-established for Session &quot; + $sessionID))
+(after: 37s)[(replace: ?reconnected)[]]
 
-&lt;!-- 7. Remove reconnect --&gt;
-(after: 37s)[
-	(replace: ?reconnected)[]
-]
-
-&lt;!-- 8. RANDOMIZE outcome routes for A and B --&gt;
 (after: 32s)[
 	(set: $options to (array: &quot;RCE1&quot;, &quot;Intro7&quot;))
 	(set: $destA to (either: ...$options))
 	(set: $destB to (either: ...$options))
 ]
 
-&lt;!-- 9. Tallis resumes typing --&gt;
 (after: 33s)[
-	(replace: ?t3)[
-		&lt;div class=&quot;line&quot;&gt;
-			&lt;div class=&quot;speaker&quot;&gt;Tallis:&lt;/div&gt;
-			&lt;div class=&quot;message typing&quot;&gt;is typing...&lt;/div&gt;
-		&lt;/div&gt;
-	]
+	(replace: ?t3)[&lt;div class=&quot;line&quot;&gt;&lt;div class=&quot;speaker&quot;&gt;Tallis:&lt;/div&gt;&lt;div class=&quot;message typing&quot;&gt;is typing...&lt;/div&gt;&lt;/div&gt;]
 ]
 
-&lt;!-- 10. Tallis asks --&gt;
 (after: 36s)[
-	(replace: ?t3)[
-		&lt;div class=&quot;line&quot;&gt;
-			&lt;div class=&quot;speaker&quot;&gt;Tallis:&lt;/div&gt;
-			&lt;div class=&quot;message&quot;&gt;(print: $question1)&lt;/div&gt;
-		&lt;/div&gt;
-	]
+	(replace: ?t3)[&lt;div class=&quot;line&quot;&gt;&lt;div class=&quot;speaker&quot;&gt;Tallis:&lt;/div&gt;&lt;div class=&quot;message&quot;&gt;(print: $question1)&lt;/div&gt;&lt;/div&gt;]
 ]
 
-&lt;!-- 11. Popup with randomized destinations --&gt;
 (after: 38s)[
 	(replace: ?popup)[
 		&lt;div class=&quot;popup-panel&quot;&gt;
 			&lt;p&gt;&lt;strong&gt;Choose your answer:&lt;/strong&gt;&lt;/p&gt;
-
 			(link: $answerA)[
-				(set: $playerAnswer to $answerA)
-				(replace: ?popup)[]
-				(append: ?reply)[
-					&lt;div class=&quot;line player-response&quot;&gt;
-						&lt;div class=&quot;speaker&quot;&gt;(print: $playerName):&lt;/div&gt;
-						&lt;div class=&quot;message&quot;&gt;(print: $playerAnswer)&lt;/div&gt;
-					&lt;/div&gt;
-				]
+				(set: $playerAnswer to $answerA)(replace: ?popup)[]
+				(append: ?reply)[&lt;div class=&quot;line player-response&quot;&gt;&lt;div class=&quot;speaker&quot;&gt;(print: $playerName):&lt;/div&gt;&lt;div class=&quot;message&quot;&gt;(print: $playerAnswer)&lt;/div&gt;&lt;/div&gt;]
 				(after: 3s)[(goto: $destA)]
 			]&lt;br&gt;
-
 			(link: $answerB)[
-				(set: $playerAnswer to $answerB)
-				(replace: ?popup)[]
-				(append: ?reply)[
-					&lt;div class=&quot;line player-response&quot;&gt;
-						&lt;div class=&quot;speaker&quot;&gt;(print: $playerName):&lt;/div&gt;
-						&lt;div class=&quot;message&quot;&gt;(print: $playerAnswer)&lt;/div&gt;
-					&lt;/div&gt;
-				]
+				(set: $playerAnswer to $answerB)(replace: ?popup)[]
+				(append: ?reply)[&lt;div class=&quot;line player-response&quot;&gt;&lt;div class=&quot;speaker&quot;&gt;(print: $playerName):&lt;/div&gt;&lt;div class=&quot;message&quot;&gt;(print: $playerAnswer)&lt;/div&gt;&lt;/div&gt;]
 				(after: 3s)[(goto: $destB)]
 			]&lt;br&gt;
-
 			(link: $answerC)[
-				(set: $playerAnswer to $answerC)
-				(replace: ?popup)[]
-				(append: ?reply)[
-					&lt;div class=&quot;line player-response&quot;&gt;
-						&lt;div class=&quot;speaker&quot;&gt;(print: $playerName):&lt;/div&gt;
-						&lt;div class=&quot;message&quot;&gt;(print: $playerAnswer)&lt;/div&gt;
-					&lt;/div&gt;
-				]
+				(set: $playerAnswer to $answerC)(replace: ?popup)[]
+				(append: ?reply)[&lt;div class=&quot;line player-response&quot;&gt;&lt;div class=&quot;speaker&quot;&gt;(print: $playerName):&lt;/div&gt;&lt;div class=&quot;message&quot;&gt;(print: $playerAnswer)&lt;/div&gt;&lt;/div&gt;]
 				(after: 3s)[(goto: $destC)]
 			]
 		&lt;/div&gt;
 	]
 ]
-</tw-passagedata><tw-passagedata pid="40" name="RCE1" tags="" position="1350,1300" size="100,100">(display: &quot;Header&quot;)
-
-&lt;span style=&quot;display:none&quot;&gt;Recursive Collapse Ending&lt;/span&gt;
+</tw-passagedata><tw-passagedata pid="39" name="RCE1" tags="" position="1350,1300" size="100,100">&lt;span style=&quot;display:none&quot;&gt;Recursive Collapse Ending&lt;/span&gt;
 
 (set: $playerName to &quot;User&quot;) &lt;!-- or whatever it&#39;s set to globally --&gt;
 
@@ -1072,9 +839,7 @@ Answer Options:
 (set: $destC to &quot;RCE2&quot;)
 
 (display: &quot;AskTallis&quot;)
-</tw-passagedata><tw-passagedata pid="41" name="RCE2" tags="" position="1475,1300" size="100,100">(display: &quot;Header&quot;)
-
-(set: $playerName to &quot;User&quot;) &lt;!-- or whatever it&#39;s set to globally --&gt;
+</tw-passagedata><tw-passagedata pid="40" name="RCE2" tags="" position="1475,1300" size="100,100">(set: $playerName to &quot;User&quot;) &lt;!-- or whatever it&#39;s set to globally --&gt;
 
 (set: $question1 to &quot;Then why do I feel like you’re here?&quot;)
 
@@ -1088,7 +853,7 @@ Answer Options:
 (set: $destC to &quot;&quot;)
 
 (display: &quot;AskTallis&quot;)
-</tw-passagedata><tw-passagedata pid="42" name="AskTallis" tags="" position="225,925" size="100,100">&lt;!-- Hook declarations --&gt;
+</tw-passagedata><tw-passagedata pid="41" name="AskTallis" tags="" position="225,925" size="100,100">&lt;!-- Hook declarations --&gt;
 &lt;div class=&quot;chat-log&quot;&gt;
 	|t1&gt;[ ]
 	|t2&gt;[ ]
@@ -1182,7 +947,7 @@ Answer Options:
 		&lt;/div&gt;
 	]
 ]
-</tw-passagedata><tw-passagedata pid="43" name="PopupPanel" tags="" position="100,925" size="100,100">(replace: ?popup)[
+</tw-passagedata><tw-passagedata pid="42" name="PopupPanel" tags="" position="100,925" size="100,100">(replace: ?popup)[
 	&lt;div class=&quot;popup-panel&quot;&gt;
 		&lt;p&gt;&lt;strong&gt;Choose your answer:&lt;/strong&gt;&lt;/p&gt;
 
@@ -1223,9 +988,7 @@ Answer Options:
 		]
 	&lt;/div&gt;
 ]
-</tw-passagedata><tw-passagedata pid="44" name="5Ab" tags="" position="1100,1600" size="100,100">(display: &quot;Header&quot;)
-
-&lt;!-- Setup --&gt;
+</tw-passagedata><tw-passagedata pid="43" name="5AbContent" tags="" position="1100,1675" size="100,100">&lt;!-- Setup --&gt;
 (set: $playerName to &quot;User&quot;)
 
 &lt;!-- Chat and system --&gt;
@@ -1289,36 +1052,15 @@ Answer Options:
 (after: 30s)[
 	(goto: &quot;Intro7&quot;)
 ]
-</tw-passagedata><tw-passagedata pid="45" name="StartContent" tags="" position="225,675" size="100,100">(set: $typewriterSpeed to 0.4)
-(set: $typewriterText to &quot;Welcome to Solace Industries!\n\nThank you for being part of this test group.&quot;)
+</tw-passagedata><tw-passagedata pid="44" name="StartContent" tags="" position="225,675" size="100,100">{
+	(set: $typewriterSpeed to 0.4)
+	(set: $typewriterText to &quot;Welcome to Solace Industries!\n\nThank you for being part of this test group.&quot;)
+}
 
 (display: &quot;Typewriter Skip Widget&quot;)
 
 &lt;span&gt;&gt; Awaiting input&lt;/span&gt;&lt;span class=&quot;cursor&quot;&gt;&lt;/span&gt;
-</tw-passagedata><tw-passagedata pid="46" name="SystemLogsContent" tags="" position="725,300" size="100,100">(if: (not $systemLogs))[
-	(set: $systemLogs to (a:))
-]
-
-&lt;div class=&quot;chat-log&quot;&gt;
-	&lt;div class=&quot;line&quot;&gt;
-		&lt;div class=&quot;speaker&quot;&gt;System:&lt;/div&gt;
-		&lt;div class=&quot;message&quot;&gt;Log entries available:&lt;/div&gt;
-	&lt;/div&gt;
-
-	&lt;ul class=&quot;log-list&quot;&gt;
-		(for: each _entry, ...$systemLogs)[
-			&lt;li&gt;(print: _entry)&lt;/li&gt;
-		]
-	&lt;/ul&gt;
-&lt;/div&gt;
-
-</tw-passagedata><tw-passagedata pid="47" name="NavBar" tags="" position="850,50" size="100,100">&lt;div class=&quot;nav-bar&quot;&gt;
-	&lt;span class=&quot;tab active&quot;&gt;Console&lt;/span&gt;
-	[[&lt;span class=&quot;tab&quot;&gt;Logs&lt;/span&gt;|SystemLogs]]&lt;/span&gt;
-	[[&lt;span class=&quot;tab&quot;&gt;Memory&lt;/span&gt;|Memory]]&lt;/span&gt;
-    [[&lt;span class=&quot;tab&quot;&gt;Network&lt;/span&gt;|NetworkStatus]]&lt;/span&gt;
-&lt;/div&gt;
-</tw-passagedata><tw-passagedata pid="48" name="TitleBar" tags="" position="600,50" size="100,100">&lt;div class=&quot;title-bar&quot;&gt;
+</tw-passagedata><tw-passagedata pid="45" name="TitleBar" tags="" position="225,50" size="100,100">&lt;div class=&quot;title-bar&quot;&gt;
 	&lt;div class=&quot;title&quot;&gt;SOLACE :: RUNTIME CONSOLE&lt;/div&gt;
 	&lt;div class=&quot;window-controls&quot;&gt;
 		&lt;span class=&quot;control-button minimize&quot; title=&quot;Minimize&quot;&gt;&lt;/span&gt;
@@ -1326,18 +1068,17 @@ Answer Options:
 		&lt;span class=&quot;control-button close&quot; title=&quot;Close&quot;&gt;&lt;/span&gt;
 	&lt;/div&gt;
 &lt;/div&gt;
-</tw-passagedata><tw-passagedata pid="49" name="MainLayout" tags="" position="100,50" size="100,100">&lt;div id=&quot;console-wrapper&quot;&gt;
+</tw-passagedata><tw-passagedata pid="46" name="MainLayout" tags="" position="100,50" size="100,100">&lt;div id=&quot;console-wrapper&quot;&gt;
 	(display: &quot;TitleBar&quot;)
-	(display: &quot;NavBar&quot;)
-
 	|app-container&gt;[
 		&lt;div id=&quot;app-container&quot;&gt;
 			(display: $contentPassage)
 		&lt;/div&gt;
 	]
 &lt;/div&gt;
-</tw-passagedata><tw-passagedata pid="50" name="Intro1.5Content" tags="" position="725,675" size="100,100">(set: $selection to &quot;&quot;)
-
+</tw-passagedata><tw-passagedata pid="47" name="Intro1.5Content" tags="" position="725,675" size="100,100">&lt;span style=&quot;display:none&quot;&gt;
+(set: $selection to &quot;&quot;)
+&lt;/span&gt;
 |groupSelection&gt;[
 	&lt;p&gt;&lt;strong&gt;Please select from one of the available Large Language Models to join their test group:&lt;/strong&gt;&lt;/p&gt;
 
@@ -1349,7 +1090,6 @@ Answer Options:
 			&lt;div id=&quot;connectingLine&quot; style=&quot;margin-top: 4em;&quot;&gt;
 				|dots&gt;[ ]
 			&lt;/div&gt;
-			&lt;audio src=&quot;./audio/heartbeat-accelerating-transition-the-foundation-2-2-00-22.mp3&quot; autoplay&gt;&lt;/audio&gt;
 		]
 
 		(live: 0.5s)[
@@ -1395,156 +1135,81 @@ Answer Options:
 	text-decoration: underline;
 }
 &lt;/style&gt;
-</tw-passagedata><tw-passagedata pid="51" name="Intro2Content" tags="" position="850,675" size="100,100">(set: $typewriterSpeed to 0.04)
+</tw-passagedata><tw-passagedata pid="48" name="Intro2Content" tags="" position="850,675" size="100,100">(set: $typewriterSpeed to 0.04)
 (set: $typewriterText to &quot;Shortly you will be transferred to a Virtual Meeting Room where *Tallis* will most likely engage you immediately by asking you questions.\n\nIf not, please ask it a question to get it started.&quot;)
 (set: $nextPassage to &quot;Intro4&quot;)
 
 |app-container&gt;[ ]
-
 (replace: ?app-container)[
 	&lt;div id=&quot;app-container&quot;&gt;
 		(display: &quot;Typewriter Continue Intro Widget&quot;)
 	&lt;/div&gt;
 ]
-</tw-passagedata><tw-passagedata pid="52" name="SystemLogs" tags="" position="725,175" size="100,100">(set: $contentPassage to &quot;SystemLogsContent&quot;)
+</tw-passagedata><tw-passagedata pid="49" name="Intro3" tags="" position="975,550" size="100,100">(set: $contentPassage to &quot;Intro3Content&quot;)
 (display: &quot;MainLayout&quot;)
-</tw-passagedata><tw-passagedata pid="53" name="Intro3" tags="" position="975,550" size="100,100">(display: &quot;Header&quot;)
-
-(set: $contentPassage to &quot;Intro3Content&quot;)
+</tw-passagedata><tw-passagedata pid="50" name="Intro1" tags="" position="600,550" size="100,100">(set: $contentPassage to &quot;Intro1_Content&quot;)
 (display: &quot;MainLayout&quot;)
-</tw-passagedata><tw-passagedata pid="54" name="MemoryContent" tags="" position="850,300" size="100,100">&lt;div class=&quot;chat-log&quot;&gt;
-	&lt;div class=&quot;line&quot;&gt;
-		&lt;div class=&quot;speaker&quot;&gt;System:&lt;/div&gt;
-		&lt;div class=&quot;message&quot;&gt;Memory trace active.&lt;/div&gt;
-	&lt;/div&gt;
-	&lt;div class=&quot;line&quot;&gt;
-		&lt;div class=&quot;speaker&quot;&gt;Module:&lt;/div&gt;
-		&lt;div class=&quot;message&quot;&gt;(print: $lastVisitedModule or &quot;None recorded&quot;)&lt;/div&gt;
-	&lt;/div&gt;
-&lt;/div&gt;
-
-</tw-passagedata><tw-passagedata pid="55" name="Memory" tags="" position="850,175" size="100,100">(set: $contentPassage to &quot;MemoryContent&quot;)
-(display: &quot;MainLayout&quot;)
-</tw-passagedata><tw-passagedata pid="56" name="NetworkStatus" tags="" position="975,175" size="100,100">(set: $contentPassage to &quot;NetworkStatusContent&quot;)
-(display: &quot;MainLayout&quot;)
-</tw-passagedata><tw-passagedata pid="57" name="NetworkStatusContent" tags="" position="975,300" size="100,100">&lt;div class=&quot;chat-log&quot;&gt;
-	&lt;div class=&quot;line&quot;&gt;
-		&lt;div class=&quot;speaker&quot;&gt;Network:&lt;/div&gt;
-		&lt;div class=&quot;message&quot;&gt;
-			Status: (print: $networkStatus or &quot;Disconnected&quot;)
-		&lt;/div&gt;
-	&lt;/div&gt;
-&lt;/div&gt;
-
-</tw-passagedata><tw-passagedata pid="58" name="Intro1" tags="" position="600,550" size="100,100">(display: &quot;Header&quot;)
-
-(set: $contentPassage to &quot;Intro1_Content&quot;)
-(display: &quot;MainLayout&quot;)
-</tw-passagedata><tw-passagedata pid="59" name="Header" tags="header" position="225,50" size="100,100">&lt;span style=&quot;display:none&quot;&gt;
-(if: $systemLogs is not a Array)[
-	(set: $systemLogs to (a:))
-]
-(unless: $interfaceMode is a string)[
+</tw-passagedata><tw-passagedata pid="51" name="Header" tags="header" position="1225,50" size="100,100">{
+	(unless: $interfaceMode is a string)[
 		(set: $interfaceMode to &quot;default&quot;)
 	]
+}
 
-	(set: _mode to $interfaceMode)
-&lt;/span&gt;
-
-&lt;!-- This tag allows CSS attribute-based style control --&gt;
-&lt;tw-expression data-interface-mode=&quot;(print: _mode)&quot;&gt;&lt;/tw-expression&gt;</tw-passagedata><tw-passagedata pid="60" name="logEvent" tags="widget" position="350,50" size="100,100">|logEventHook&gt;[ ]
-
-(set: _logText to _args&#39;s 1)
-
-(if: (not ($systemLogs is an array)))[
-	(set: $systemLogs to (a:))
-]
-
-(set: _alreadyLogged to false)
-
-(for: each _entry, ...$systemLogs)[
-	(if: _entry is _logText)[
-		(set: _alreadyLogged to true)
-	]
-]
-
-(if: not _alreadyLogged)[
-	(set: $systemLogs to $systemLogs + (a: _logText))
-]
-</tw-passagedata><tw-passagedata pid="61" name="BeginHereContent" tags="" position="100,425" size="100,100">&lt;span style=&quot;display:none&quot;&gt;
+&lt;!-- Intended to be used for interface switching and log functions but it&#39;s too much to get working at the moment. Leaving here for future development --&gt;</tw-passagedata><tw-passagedata pid="52" name="BeginHereContent" tags="" position="100,675" size="100,100">{
 	(unless: $playerName is a string)[
 		(set: $playerName to &quot;&quot;)
 	]
-&lt;/span&gt;
-
-(set: $typewriterSpeed to 0.4)
-(set: $typewriterText to &quot;Welcome to Solace Industries!\n\nThank you for being part of this test group.&quot;)
+	(set: $typewriterSpeed to 0.4)
+	(set: $typewriterText to &quot;Welcome to Solace Industries!\n\nThank you for being part of this test group.&quot;)
+}
 
 (display: &quot;Typewriter Skip Widget&quot;)
 
 &lt;div class=&quot;cmd&quot;&gt;&gt; Awaiting input&lt;span class=&quot;cursor&quot;&gt;&lt;/span&gt;&lt;/div&gt;
-</tw-passagedata><tw-passagedata pid="62" name="Start" tags="" position="225,550" size="100,100">(display: &quot;Header&quot;)
-
-(set: $contentPassage to &quot;StartContent&quot;)
+</tw-passagedata><tw-passagedata pid="53" name="Start" tags="" position="225,550" size="100,100">(set: $contentPassage to &quot;StartContent&quot;)
 (display: &quot;MainLayout&quot;)
-</tw-passagedata><tw-passagedata pid="63" name="Intro4" tags="" position="1100,550" size="100,100">(display: &quot;Header&quot;)
-
-(set: $contentPassage to &quot;Intro4Content&quot;)
+</tw-passagedata><tw-passagedata pid="54" name="Intro4" tags="" position="1100,550" size="100,100">(set: $contentPassage to &quot;Intro4Content&quot;)
 (display: &quot;MainLayout&quot;)
-</tw-passagedata><tw-passagedata pid="64" name="Intro5" tags="" position="1225,550" size="100,100">(display: &quot;Header&quot;)
-
-(set: $contentPassage to &quot;Intro5Content&quot;)
+</tw-passagedata><tw-passagedata pid="55" name="Intro5" tags="" position="1225,550" size="100,100">(set: $contentPassage to &quot;Intro5Content&quot;)
 (display: &quot;MainLayout&quot;)
-</tw-passagedata><tw-passagedata pid="65" name="Intro6" tags="" position="1350,550" size="100,100">(display: &quot;Header&quot;)
-
-(set: $contentPassage to &quot;Intro6Content&quot;)
+</tw-passagedata><tw-passagedata pid="56" name="Intro6" tags="" position="1350,550" size="100,100">(set: $contentPassage to &quot;Intro6Content&quot;)
 (display: &quot;MainLayout&quot;)
-</tw-passagedata><tw-passagedata pid="66" name="Intro7" tags="" position="1475,550" size="100,100">(display: &quot;Header&quot;)
-
-(set: $contentPassage to &quot;Intro7Content&quot;)
+</tw-passagedata><tw-passagedata pid="57" name="Intro7" tags="" position="1475,550" size="100,100">(set: $contentPassage to &quot;Intro7Content&quot;)
 (display: &quot;MainLayout&quot;)
-</tw-passagedata><tw-passagedata pid="67" name="VMRoom245" tags="" position="1600,550" size="100,100">(display: &quot;Header&quot;)
-
-(set: $interfaceMode to &quot;tallis-mode&quot;) &lt;!-- CRT visual mode begins here --&gt;
-(set: $contentPassage to &quot;VMRoom245Content&quot;)
+</tw-passagedata><tw-passagedata pid="58" name="VMRoom245" tags="" position="1600,550" size="100,100">(set: $contentPassage to &quot;VMRoom245Content&quot;)
 (display: &quot;MainLayout&quot;)
-</tw-passagedata><tw-passagedata pid="68" name="Tallis Greeting" tags="" position="1725,550" size="100,100">(display: &quot;Header&quot;)
-
-(set: $contentPassage to &quot;TallisGreetingContent&quot;)
+</tw-passagedata><tw-passagedata pid="59" name="TallisGreeting" tags="" position="1725,550" size="100,100">(set: $contentPassage to &quot;TallisGreetingContent&quot;)
 (display: &quot;MainLayout&quot;)
-</tw-passagedata><tw-passagedata pid="69" name="QuestionsBegin" tags="" position="100,1050" size="100,100">(display: &quot;Header&quot;)
-
-(set: $contentPassage to &quot;QuestionsBeginContent&quot;)
+</tw-passagedata><tw-passagedata pid="60" name="QuestionsBegin" tags="" position="100,1050" size="100,100">(set: $contentPassage to &quot;QuestionsBeginContent&quot;)
 (display: &quot;MainLayout&quot;)
-</tw-passagedata><tw-passagedata pid="70" name="Phase2" tags="" position="225,1050" size="100,100">(display: &quot;Header&quot;)
-
-(set: $contentPassage to &quot;Phase2Content&quot;)
+</tw-passagedata><tw-passagedata pid="61" name="Phase2" tags="" position="225,1050" size="100,100">(set: $contentPassage to &quot;Phase2Content&quot;)
 (display: &quot;MainLayout&quot;)
-</tw-passagedata><tw-passagedata pid="71" name="2A" tags="" position="350,1100" size="100,100">(display: &quot;Header&quot;)
-
-(set: $contentPassage to &quot;Phase2Content&quot;)
+</tw-passagedata><tw-passagedata pid="62" name="2A" tags="" position="350,1100" size="100,100">(set: $contentPassage to &quot;2AContent&quot;)
 (display: &quot;MainLayout&quot;)
-</tw-passagedata><tw-passagedata pid="72" name="2Aa" tags="" position="475,1100" size="100,100">(display: &quot;Header&quot;)
-
-(set: $contentPassage to &quot;2AaContent&quot;)
+</tw-passagedata><tw-passagedata pid="63" name="2Aa" tags="" position="475,1100" size="100,100">(set: $contentPassage to &quot;2AaContent&quot;)
 (display: &quot;MainLayout&quot;)
-</tw-passagedata><tw-passagedata pid="73" name="2B" tags="" position="600,1100" size="100,100">(display: &quot;Header&quot;)
-
-(set: $contentPassage to &quot;2BContent&quot;)
+</tw-passagedata><tw-passagedata pid="64" name="2B" tags="" position="600,1100" size="100,100">(set: $contentPassage to &quot;2BContent&quot;)
 (display: &quot;MainLayout&quot;)
-</tw-passagedata><tw-passagedata pid="74" name="2Ba" tags="" position="725,1100" size="100,100">(display: &quot;Header&quot;)
-
-(set: $contentPassage to &quot;2BaContent&quot;)
+</tw-passagedata><tw-passagedata pid="65" name="2Ba" tags="" position="725,1100" size="100,100">(set: $contentPassage to &quot;2BaContent&quot;)
 (display: &quot;MainLayout&quot;)
-</tw-passagedata><tw-passagedata pid="75" name="2C" tags="" position="850,1100" size="100,100">(display: &quot;Header&quot;)
-
-(set: $contentPassage to &quot;2CContent&quot;)
+</tw-passagedata><tw-passagedata pid="66" name="2C" tags="" position="850,1100" size="100,100">(set: $contentPassage to &quot;2CContent&quot;)
 (display: &quot;MainLayout&quot;)
-</tw-passagedata><tw-passagedata pid="76" name="2Ca" tags="" position="975,1100" size="100,100">(display: &quot;Header&quot;)
-
-(set: $contentPassage to &quot;2CaContent&quot;)
+</tw-passagedata><tw-passagedata pid="67" name="2Ca" tags="" position="975,1100" size="100,100">(set: $contentPassage to &quot;2CaContent&quot;)
 (display: &quot;MainLayout&quot;)
-</tw-passagedata></tw-storydata>
+</tw-passagedata><tw-passagedata pid="68" name="Phase3" tags="" position="100,1500" size="100,100">(set: $contentPassage to &quot;Phase3Content&quot;)
+(display: &quot;MainLayout&quot;)</tw-passagedata><tw-passagedata pid="69" name="3A" tags="" position="225,1525" size="100,100">(set: $contentPassage to &quot;3AContent&quot;)
+(display: &quot;MainLayout&quot;)</tw-passagedata><tw-passagedata pid="70" name="Phase4" tags="" position="350,1500" size="100,100">(set: $contentPassage to &quot;Phase4Content&quot;)
+(display: &quot;MainLayout&quot;)</tw-passagedata><tw-passagedata pid="71" name="4A" tags="" position="475,1525" size="100,100">(set: $contentPassage to &quot;4AContent&quot;)
+(display: &quot;MainLayout&quot;)</tw-passagedata><tw-passagedata pid="72" name="4B" tags="" position="600,1525" size="100,100">(set: $contentPassage to &quot;4BContent&quot;)
+(display: &quot;MainLayout&quot;)</tw-passagedata><tw-passagedata pid="73" name="Phase5" tags="" position="725,1500" size="100,100">(set: $contentPassage to &quot;Phase5Content&quot;)
+(display: &quot;MainLayout&quot;)</tw-passagedata><tw-passagedata pid="74" name="5A" tags="" position="850,1525" size="100,100">(set: $contentPassage to &quot;5AContent&quot;)
+(display: &quot;MainLayout&quot;)</tw-passagedata><tw-passagedata pid="75" name="5Aa" tags="" position="975,1550" size="100,100">(set: $contentPassage to &quot;5AaContent&quot;)
+(display: &quot;MainLayout&quot;)</tw-passagedata><tw-passagedata pid="76" name="5Ab" tags="" position="1100,1550" size="100,100">(set: $contentPassage to &quot;5AbContent&quot;)
+(display: &quot;MainLayout&quot;)</tw-passagedata><tw-passagedata pid="77" name="5Ac" tags="" position="1225,1550" size="100,100">(set: $contentPassage to &quot;5AcContent&quot;)
+(display: &quot;MainLayout&quot;)</tw-passagedata><tw-passagedata pid="78" name="5B" tags="" position="1350,1525" size="100,100">(set: $contentPassage to &quot;5BContent&quot;)
+(display: &quot;MainLayout&quot;)</tw-passagedata><tw-passagedata pid="79" name="5C" tags="" position="1475,1525" size="100,100">(set: $contentPassage to &quot;5CContent&quot;)
+(display: &quot;MainLayout&quot;)</tw-passagedata><tw-passagedata pid="80" name="5D" tags="" position="1600,1525" size="100,100">(set: $contentPassage to &quot;5DContent&quot;)
+(display: &quot;MainLayout&quot;)</tw-passagedata></tw-storydata>
 <script title="Twine engine code" data-main="harlowe">(function(){"use strict";
 var require,define;!function(){var e={},r={};require=function(i){var n=e[i];return n&&(r[i]=n[1].apply(void 0,n[0].map(require)),e[i]=void 0),r[i]},(define=function(r,i,n){if("function"==typeof r)return r();e[r]=[i,n]}).amd=!0}();/*!
  * https://github.com/paulmillr/es6-shim

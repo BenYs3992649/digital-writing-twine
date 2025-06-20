@@ -50,171 +50,1207 @@ tw-passagedata:before
 
 <h1>Turing Test
 </h1>
-<tw-storydata name="Turing Test" startnode="1" creator="Twine" creator-version="2.10.0" format="Harlowe" format-version="3.3.9" ifid="814C3073-6789-4673-9459-F8DB5B79F2D7" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css"></style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="[Phase 1: Setup and Intro]" tags="" position="675,25" size="100,100">To join the meeting room, please enter your name: ….
+<tw-storydata name="Turing Test" startnode="12" creator="Twine" creator-version="2.10.0" format="Harlowe" format-version="3.3.9" ifid="e2bedee3-bfaf-4c31-b8c2-ef0ec74218da" options="" tags="" zoom="0.6" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">html, body {
+	margin: 0;
+	padding: 0;
+	height: auto;
+	overflow: auto;
+	font-family: 'Courier New', Courier, monospace;
+	background-color: black;
+	color: #33ff99;
+}
 
-[[Welcome *Username*]]
+tw-story {
+	margin: 0 !important;
+	padding: 0 !important;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	box-sizing: border-box;
+	min-height: 100vh;
+}
 
-</tw-passagedata><tw-passagedata pid="2" name="Welcome *Username*" tags="" position="825,25" size="100,100">Thank you for being part of this test group.
+tw-passage {
+	margin: 0 !important;
+	padding: 0 !important;
+}
 
-Today you will be speaking with *Botname*.
+tw-expression[name="set"] {
+	display: none;
+}
 
-We have a range of users testing different elements of our new technology, today you will be a part of the group administering something like a Turing test. 
+/* Console Container */
+#console-wrapper {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	background-color: black;
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0 auto;
+	width: 100%;
+	max-width: 900px;
+}
 
-Additionally, some participants will be randomly assigned to play the control in this experiment.
+/* Title Bar */
+.title-bar {
+	width: 100%;
+	background-color: #111;
+	color: #33ff99;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0.4em 0.8em;
+	font-size: 0.9em;
+	border-bottom: 2px solid #33ff99;
+	box-shadow: 0 0 8px #33ff99;
+	box-sizing: border-box;
+	z-index: 10;
+}
 
-[Short pause]
+/* Nav Bar */
+.nav-bar {
+	height: 24px;
+	padding: 0 10px;
+	display: flex;
+	align-items: center;
+}
 
-Shortly you will be transferred to the chat room, *Botname* will most likely engage you immediately by asking you questions. 
+/* App Container */
+#app-container {
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	padding: 0 10px;
+	box-sizing: border-box;
+}
 
-If it does not, please ask it a question to get it started.
+/* Chat Log & Responses */
+.chat-log {
+	line-height: 1.3;
+}
 
-Please answer the questions however you feel appropriate. 
+.line {
+	margin: 0.2em 0;
+}
 
-Through your answers, we would like you to try and convince *Botname* that you are an LLM or Chatbot, *Botname* will try to discover the truth with the questions it asks you.
+.message, .system-glitch, .system-disconnect, .system-reconnect {
+	white-space: pre-wrap;
+}
 
-If you are selected as a control participant, instead, please pretend to be *Botname* and ask questions of the participant with whom you are paired. 
+.player-response .speaker {
+	color: #66ffcc;
+}
 
-There is no right or wrong path here, there are many other participants and no one person will make or break this experiment.
-[Short pause]
-Again, thank you for your participation. I’ll now transfer you to the chatroom to [[Virtual meeting room 245]].
-</tw-passagedata><tw-passagedata pid="3" name="Virtual meeting room 245" tags="" position="950,25" size="100,100">*Botname*: Hello?
+/* Cursor Effect */
+.cursor {
+	display: inline-block;
+	width: 0.6em;
+	background-color: #33ff99;
+	animation: blink 1s step-start infinite;
+	margin-left: 0.2em;
+}
 
-[[*Username*: Hello.]]
+@keyframes blink {
+	50% { opacity: 0; }
+}
 
-</tw-passagedata><tw-passagedata pid="4" name="*Username*: Hello." tags="" position="1075,25" size="100,100">Bot: Hi *username*, I’m *Botname*. Thank you for talking to me today, I have some questions for you if that’s OK?
+/* Popup Panel */
+.popup-panel {
+	background: #111;
+	border: 2px solid #33ff99;
+	padding: 1em;
+	color: #33ff99;
+	max-width: 100%;
+	box-sizing: border-box;
+}
 
-[No response required]
+/* System Visual Effects */
+.static-flash {
+	position: fixed;
+	top: 0; left: 0;
+	width: 100vw;
+	height: 100vh;
+	background: white;
+	opacity: 0.2;
+	animation: staticPulse 0.2s ease-in-out forwards;
+	z-index: 999;
+}
 
-Ok then…
+@keyframes staticPulse {
+	from { opacity: 0.2; }
+	to { opacity: 0; }
+}
 
-[Short pause]
+.glitch-wipe {
+	animation: glitchWipe 1s ease-out forwards;
+}
 
-Question One.
+@keyframes glitchWipe {
+	from { filter: brightness(3); transform: scale(1.01); }
+	to { opacity: 0; transform: translateY(100%); }
+}
 
-Why do you think people lie?&quot;
+/* Window Controls */
+.window-controls {
+	display: flex;
+	gap: 0.5em;
+}
 
-Answer Options
+.control-button {
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	display: inline-block;
+}
 
-[[A. &quot;Individuals may lie to achieve personal gain or avoid punishment.&quot;]]
-[[B. &quot;Lying is often employed as a social strategy to preserve interpersonal harmony.&quot;*]]
-[[C. &quot;Some individuals are conditioned to lie due to environmental and psychological factors.&quot;]]
-</tw-passagedata><tw-passagedata pid="5" name="A. &quot;Individuals may lie to achieve personal gain or avoid punishment.&quot;" tags="" position="525,175" size="100,100">&quot;Huh. Yeah. That makes sense.&quot;
- [Short pause]
- &quot;Do you think lying is wrong?&quot;
+.control-button.minimize { background-color: #fdbc40; box-shadow: 0 0 4px #fdbc40; }
+.control-button.maximize { background-color: #33c948; box-shadow: 0 0 4px #33c948; }
+.control-button.close    { background-color: #ff5f56; box-shadow: 0 0 4px #ff5f56; }
+</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="Intro3Content" tags="" position="975,675" size="100,100">(set: $typewriterSpeed to 0.4)
+(set: $typewriterText to &quot;Shortly you will be transferred to a Virtual Meeting Room where *Tallis* will most likely engage you immediately by asking you questions.\n\nIf not, please ask it a question to get it started.&quot;)
+(set: $nextPassage to &quot;Intro4&quot;)
+(display: &quot;Typewriter Continue Intro Widget&quot;)
+	&lt;/div&gt;
+]
 
-Answer Options
-[[A. &quot;Lying violates ethical principles of honesty, which many consider universally applicable.&quot;]]
- → Leads to Moral Realism branch.
-[[B. &quot;Moral wrongness is subjective. Lying may be contextually permissible.&quot;]]
- → Leads to Relativism branch.
-[[C. &quot;Moral judgments about lying reflect individual emotional attitudes, rather than objective facts.&quot;]]
- → Leads to Emotivism branch.</tw-passagedata><tw-passagedata pid="6" name="B. &quot;Moral wrongness is subjective. Lying may be contextually permissible.&quot;" tags="" position="975,300" size="100,100">4B. *Botname*
-&quot;So, like, lying might be wrong for me but fine for someone else?&quot;
- (The *Botname* sounds casual, exploring the idea.)
+|app-container&gt;[ ]
+(replace: ?app-container)[
+	&lt;div id=&quot;app-container&quot;&gt;
+		(display: &quot;Typewriter Continue Intro Widget&quot;)
+	&lt;/div&gt;
+]
+</tw-passagedata><tw-passagedata pid="2" name="VMRoom245Content" tags="" position="1600,675" size="100,100">(unless: $playerName is a string)[
+	(set: $playerName to &quot;User&quot;)
+]
 
-Answer Options
-[[&quot;Correct. Moral judgments depend on cultural or individual perspectives.&quot;]]
-[[&quot;Ethical standards vary across different societies and belief systems.&quot;]]
-[[&quot;Moral permissibility is contingent on context and perspective.&quot;]]
-</tw-passagedata><tw-passagedata pid="7" name="A. &quot;Lying violates ethical principles of honesty, which many consider universally applicable.&quot;" tags="" position="525,300" size="100,100">Moral Realism Path
+&lt;div class=&quot;chat-log&quot;&gt;
+	&lt;div class=&quot;line&quot;&gt;
+		&lt;div class=&quot;speaker&quot;&gt;Tallis:&lt;/div&gt;
+		&lt;div class=&quot;message&quot;&gt;Hello?&lt;/div&gt;
+	&lt;/div&gt;
+	&lt;div class=&quot;line&quot;&gt;
+		&lt;div class=&quot;speaker&quot;&gt;(print: $playerName + &quot;:&quot;)&lt;/div&gt;
+		&lt;div class=&quot;message&quot;&gt;
+			&lt;span class=&quot;pulse-link&quot;&gt;
+				(link: &quot;Hello&quot;)[
+					(goto: &quot;TallisGreeting&quot;)
+				]
+			&lt;/span&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+</tw-passagedata><tw-passagedata pid="3" name="TallisGreetingContent" tags="" position="1725,675" size="100,100">(set: $playerName to &quot;User&quot;)
+(set: $typewriterSpeed to 0.4)
+(set: $typewriterText to &quot;Hi &quot; + $playerName + &quot;, I’m Tallis. Thank you for talking to me today. I have some questions for you if that’s OK?&quot;)
+(set: $nextPassage to &quot;QuestionsBegin&quot;)
 
-4A. *Botname*
-&quot;So you&#39;re saying there’s some kind of universal rule about lying?&quot;
 
-*Username* Answer Options
-[[&quot;Correct. Ethical truths exist independently of personal opinion.&quot;]]
-[[&quot;Many philosophers assert the existence of objective moral facts.&quot;]]
-[[&quot;Universal rules can be derived through rational analysis.&quot;]]
-</tw-passagedata><tw-passagedata pid="8" name="C. &quot;Moral judgments about lying reflect individual emotional attitudes, rather than objective facts.&quot;" tags="" position="1475,300" size="100,100">4C. *Botname*
-&quot;So... when I say lying feels wrong to me, that&#39;s just me reacting emotionally?&quot;
- (Still casual, a little bemused maybe.)
+&lt;div class=&quot;chat-log&quot;&gt;
+	|typewriterOutput&gt;[ ]
+	|choiceHook&gt;[ ]
+	|responseHook&gt;[ ]
+&lt;/div&gt;
 
-Answer Options
-[[&quot;Correct. Moral judgments are expressions of emotional response, not empirical statements.&quot;]]
-[[&quot;Your sense of wrongness reflects an affective state, not an objective truth.&quot;]]
-[[&quot;Moral assertions are often declarations of personal feeling.&quot;]]
-</tw-passagedata><tw-passagedata pid="9" name="B. &quot;Lying is often employed as a social strategy to preserve interpersonal harmony.&quot;*" tags="" position="975,175" size="100,100">Answer Options
-[[A. &quot;Lying violates ethical principles of honesty, which many consider universally applicable.&quot;]]
- → Leads to Moral Realism branch.
-[[B. &quot;Moral wrongness is subjective. Lying may be contextually permissible.&quot;]]
- → Leads to Relativism branch.
-[[C. &quot;Moral judgments about lying reflect individual emotional attitudes, rather than objective facts.&quot;]]
- → Leads to Emotivism branch.</tw-passagedata><tw-passagedata pid="10" name="C. &quot;Some individuals are conditioned to lie due to environmental and psychological factors.&quot;" tags="" position="1475,175" size="100,100">Answer Options
-[[A. &quot;Lying violates ethical principles of honesty, which many consider universally applicable.&quot;]]
- → Leads to Moral Realism branch.
-[[B. &quot;Moral wrongness is subjective. Lying may be contextually permissible.&quot;]]
- → Leads to Relativism branch.
-[[C. &quot;Moral judgments about lying reflect individual emotional attitudes, rather than objective facts.&quot;]]
- → Leads to Emotivism branch.</tw-passagedata><tw-passagedata pid="11" name="&quot;Correct. Ethical truths exist independently of personal opinion.&quot;" tags="" position="525,425" size="100,100">5A. *Botname*
-&quot;But who decides what’s true? I mean… is there a list somewhere?&quot;
- (*Botname* is curious, not suspicious yet.)
+(after: 0.2s)[(display: &quot;TallisExchangeWidget&quot;)]
+</tw-passagedata><tw-passagedata pid="4" name="Phase2Content" tags="" position="225,1175" size="100,100">(set: $playerName to &quot;User&quot;) &lt;!-- or whatever it&#39;s set to globally --&gt;
 
-Answer Options
-[[&quot;Moral laws are identified through reason and consensus among ethical theorists.&quot;]]
-[[&quot;Various moral frameworks propose differing formulations of objective ethics.&quot;]]
-[[&quot;No definitive list exists, but certain principles are widely accepted.&quot;]]
-</tw-passagedata><tw-passagedata pid="12" name="&quot;Many philosophers assert the existence of objective moral facts.&quot;" tags="" position="650,425" size="100,100">5A. *Botname*
-&quot;But who decides what’s true? I mean… is there a list somewhere?&quot;
- (*Botname* is curious, not suspicious yet.)
+(set: $question1 to &quot;So, do you think lying is wrong?&quot;)
+(set: $question2 to &quot;&quot;)
+(set: $answerA to &quot;A. Lying violates ethical principles of honesty, which many consider universally applicable.&quot;)
+(set: $answerB to &quot;B. Moral wrongness is subjective. Lying may be contextually permissible.&quot;)
+(set: $answerC to &quot;C. Moral judgments about lying reflect individual emotional attitudes, rather than objective facts.&quot;)
+(set: $destA to &quot;2A&quot;)
+(set: $destB to &quot;2B&quot;)
+(set: $destC to &quot;2C&quot;)
 
-Answer Options
-[[&quot;Moral laws are identified through reason and consensus among ethical theorists.&quot;]]
-[[&quot;Various moral frameworks propose differing formulations of objective ethics.&quot;]]
-[[&quot;No definitive list exists, but certain principles are widely accepted.&quot;]]
-</tw-passagedata><tw-passagedata pid="13" name="&quot;Universal rules can be derived through rational analysis.&quot;" tags="" position="400,425" size="100,100">5A. *Botname*
-&quot;But who decides what’s true? I mean… is there a list somewhere?&quot;
- (*Botname* is curious, not suspicious yet.)
+(display: &quot;AskTallis&quot;)
+</tw-passagedata><tw-passagedata pid="5" name="2BContent" tags="" position="600,1225" size="100,100">&lt;span style=&quot;display:none&quot;&gt;Moral Relativism Path.&lt;/span&gt;
 
-Answer Options
-[[&quot;Moral laws are identified through reason and consensus among ethical theorists.&quot;]]
-[[&quot;Various moral frameworks propose differing formulations of objective ethics.&quot;]]
-[[&quot;No definitive list exists, but certain principles are widely accepted.&quot;]]
-</tw-passagedata><tw-passagedata pid="14" name="&quot;Moral laws are identified through reason and consensus among ethical theorists.&quot;" tags="" position="525,550" size="100,100"></tw-passagedata><tw-passagedata pid="15" name="&quot;Various moral frameworks propose differing formulations of objective ethics.&quot;" tags="" position="650,550" size="100,100"></tw-passagedata><tw-passagedata pid="16" name="&quot;No definitive list exists, but certain principles are widely accepted.&quot;" tags="" position="400,550" size="100,100"></tw-passagedata><tw-passagedata pid="17" name="&quot;Correct. Moral judgments depend on cultural or individual perspectives.&quot;" tags="" position="850,425" size="100,100">*Botname*
-&quot;But what if two people totally disagree? Who’s right then?&quot;
- (Tone is still neutral, curious.)
+(set: $playerName to &quot;User&quot;) &lt;!-- or whatever it&#39;s set to globally --&gt;
 
-Answer Options
-[[&quot;Both perspectives can be valid within their respective frameworks.&quot;]]
-[[&quot;There is no singular authority to determine universal correctness in relativism.&quot;]]
-[[&quot;Resolution depends on negotiation or coexistence of differing views.&quot;]]
-</tw-passagedata><tw-passagedata pid="18" name="&quot;Ethical standards vary across different societies and belief systems.&quot;" tags="" position="975,425" size="100,100">*Botname*
-&quot;But what if two people totally disagree? Who’s right then?&quot;
- (Tone is still neutral, curious.)
+(set: $question1 to &quot;So, like, lying might be wrong for me but fine for someone else? &quot;)
+(set: $question2 to &quot;&quot;)
+(set: $answerA to &quot;A. Correct. Moral judgments depend on cultural or individual perspectives.&quot;)
+(set: $answerB to &quot;B. Ethical standards vary across different societies and belief systems.&quot;)
+(set: $answerC to &quot;C. Moral permissibility is contingent on context and perspective.&quot;)
+(set: $destA to &quot;2Ba&quot;)
+(set: $destB to &quot;2Ba&quot;)
+(set: $destC to &quot;2Ba&quot;)
 
-Answer Options
-[[&quot;Both perspectives can be valid within their respective frameworks.&quot;]]
-[[&quot;There is no singular authority to determine universal correctness in relativism.&quot;]]
-[[&quot;Resolution depends on negotiation or coexistence of differing views.&quot;]]
-</tw-passagedata><tw-passagedata pid="19" name="&quot;Moral permissibility is contingent on context and perspective.&quot;" tags="" position="1100,425" size="100,100">*Botname*
-&quot;But what if two people totally disagree? Who’s right then?&quot;
- (Tone is still neutral, curious.)
+(display: &quot;AskTallis&quot;)
+</tw-passagedata><tw-passagedata pid="6" name="2AContent" tags="" position="350,1225" size="100,100">&lt;span style=&quot;display:none&quot;&gt;Moral Realism Path.&lt;/span&gt;
 
-Answer Options
-[[&quot;Both perspectives can be valid within their respective frameworks.&quot;]]
-[[&quot;There is no singular authority to determine universal correctness in relativism.&quot;]]
-[[&quot;Resolution depends on negotiation or coexistence of differing views.&quot;]]
-</tw-passagedata><tw-passagedata pid="20" name="&quot;Both perspectives can be valid within their respective frameworks.&quot;" tags="" position="850,550" size="100,100"></tw-passagedata><tw-passagedata pid="21" name="&quot;There is no singular authority to determine universal correctness in relativism.&quot;" tags="" position="975,550" size="100,100"></tw-passagedata><tw-passagedata pid="22" name="&quot;Resolution depends on negotiation or coexistence of differing views.&quot;" tags="" position="1100,550" size="100,100"></tw-passagedata><tw-passagedata pid="23" name="&quot;Correct. Moral judgments are expressions of emotional response, not empirical statements.&quot;" tags="" position="1350,425" size="100,100">5C. *Botname*
-&quot;That makes it sound like it doesn’t mean anything.&quot;
- (Still casual, but maybe a tiny edge of discomfort.)
+(set: $playerName to &quot;User&quot;) &lt;!-- or whatever it&#39;s set to globally --&gt;
 
-Answer Options
-[[&quot;Meaning in moral discourse derives from shared emotional expression.&quot;]]
-[[&quot;Moral language functions as a tool for influencing behavior.&quot;]]
-[[&quot;Subjective meaning can still foster social cohesion.&quot;]]</tw-passagedata><tw-passagedata pid="24" name="&quot;Your sense of wrongness reflects an affective state, not an objective truth.&quot;" tags="" position="1475,425" size="100,100">5C. *Botname*
-&quot;That makes it sound like it doesn’t mean anything.&quot;
- (Still casual, but maybe a tiny edge of discomfort.)
+(set: $question1 to &quot;So you&#39;re saying there’s some kind of universal rule about lying?&quot;)
+(set: $question2 to &quot;&quot;)
+(set: $answerA to &quot;A. Correct. Ethical truths exist independently of personal opinion.&quot;)
+(set: $answerB to &quot;B. Many philosophers assert the existence of objective moral facts.&quot;)
+(set: $answerC to &quot;C. Universal rules can be derived through rational analysis.&quot;)
+(set: $destA to &quot;2Aa&quot;)
+(set: $destB to &quot;2Aa&quot;)
+(set: $destC to &quot;2Aa&quot;)
 
-Answer Options
-[[&quot;Meaning in moral discourse derives from shared emotional expression.&quot;]]
-[[&quot;Moral language functions as a tool for influencing behavior.&quot;]]
-[[&quot;Subjective meaning can still foster social cohesion.&quot;]]</tw-passagedata><tw-passagedata pid="25" name="&quot;Moral assertions are often declarations of personal feeling.&quot;" tags="" position="1600,425" size="100,100">5C. *Botname*
-&quot;That makes it sound like it doesn’t mean anything.&quot;
- (Still casual, but maybe a tiny edge of discomfort.)
+(display: &quot;AskTallis&quot;)
+</tw-passagedata><tw-passagedata pid="7" name="2CContent" tags="" position="850,1225" size="100,100">&lt;span style=&quot;display:none&quot;&gt;Emotivism Path.&lt;/span&gt;
 
-Answer Options
-[[&quot;Meaning in moral discourse derives from shared emotional expression.&quot;]]
-[[&quot;Moral language functions as a tool for influencing behavior.&quot;]]
-[[&quot;Subjective meaning can still foster social cohesion.&quot;]]</tw-passagedata><tw-passagedata pid="26" name="&quot;Meaning in moral discourse derives from shared emotional expression.&quot;" tags="" position="1350,550" size="100,100"></tw-passagedata><tw-passagedata pid="27" name="&quot;Moral language functions as a tool for influencing behavior.&quot;" tags="" position="1475,550" size="100,100"></tw-passagedata><tw-passagedata pid="28" name="&quot;Subjective meaning can still foster social cohesion.&quot;" tags="" position="1600,550" size="100,100"></tw-passagedata></tw-storydata>
+(set: $playerName to &quot;User&quot;) &lt;!-- or whatever it&#39;s set to globally --&gt;
+
+(set: $question1 to &quot;So... when I say lying feels wrong to me, that&#39;s just me reacting emotionally?&quot;)
+(set: $question2 to &quot;&quot;)
+ &lt;span style=&quot;display:none&quot;&gt;Still casual, a little bemused maybe.&lt;/span&gt;
+ 
+(set: $answerA to &quot;A. Correct. Moral judgments are expressions of emotional response, not empirical statements.&quot;)
+(set: $answerB to &quot;B. Your sense of wrongness reflects an affective state, not an objective truth.&quot;)
+(set: $answerC to &quot;C. Moral assertions are often declarations of personal feeling.&quot;)
+(set: $destA to &quot;2Ca&quot;)
+(set: $destB to &quot;2Ca&quot;)
+(set: $destC to &quot;2Ca&quot;)
+
+(display: &quot;AskTallis&quot;)
+</tw-passagedata><tw-passagedata pid="8" name="2AaContent" tags="" position="475,1225" size="100,100">(set: $playerName to &quot;User&quot;) &lt;!-- or whatever it&#39;s set to globally --&gt;
+
+(set: $question1 to &quot;But who decides what’s true? I mean… is there a list somewhere??&quot;)
+(set: $question2 to &quot;&quot;)
+&lt;span style=&quot;display:none&quot;&gt; *Tallis* is curious, not suspicious yet.&lt;/span&gt;
+
+(set: $answerA to &quot;A. Moral laws are identified through reason and consensus among ethical theorists.&quot;)
+(set: $answerB to &quot;B. Various moral frameworks propose differing formulations of objective ethics.&quot;)
+(set: $answerC to &quot;C. No definitive list exists, but certain principles are widely accepted.&quot;)
+(set: $destA to &quot;Phase3&quot;)
+(set: $destB to &quot;Phase3&quot;)
+(set: $destC to &quot;Phase3&quot;)
+
+(display: &quot;AskTallis&quot;)
+
+</tw-passagedata><tw-passagedata pid="9" name="2BaContent" tags="" position="725,1225" size="100,100">(set: $playerName to &quot;User&quot;) &lt;!-- or whatever it&#39;s set to globally --&gt;
+
+(set: $question1 to &quot;But what if two people totally disagree? Who’s right then?&quot;)
+(set: $question2 to &quot;&quot;)
+&lt;span style=&quot;display:none&quot;&gt;Tone is still neutral, curious.&lt;/span&gt;
+
+(set: $answerA to &quot;A. Both perspectives can be valid within their respective frameworks.&quot;)
+(set: $answerB to &quot;B. There is no singular authority to determine universal correctness in relativism.&quot;)
+(set: $answerC to &quot;C. Resolution depends on negotiation or coexistence of differing views.&quot;)
+(set: $destA to &quot;Phase3&quot;)
+(set: $destB to &quot;Phase3&quot;)
+(set: $destC to &quot;Phase3&quot;)
+
+(display: &quot;AskTallis&quot;)
+
+</tw-passagedata><tw-passagedata pid="10" name="2CaContent" tags="" position="975,1225" size="100,100">(set: $playerName to &quot;User&quot;) &lt;!-- or whatever it&#39;s set to globally --&gt;
+
+(set: $question1 to &quot;That makes it sound like it doesn’t mean anything.&quot;)
+(set: $question2 to &quot;&quot;)
+&lt;span style=&quot;display:none&quot;&gt;Still casual, but maybe a tiny edge of discomfort.&lt;/span&gt;
+
+(set: $answerA to &quot;A. Meaning in moral discourse derives from shared emotional expression.&quot;)
+(set: $answerB to &quot;B. Moral language functions as a tool for influencing behavior.&quot;)
+(set: $answerC to &quot;C. Subjective meaning can still foster social cohesion.&quot;)
+(set: $destA to &quot;Phase3&quot;)
+(set: $destB to &quot;Phase3&quot;)
+(set: $destC to &quot;Phase3&quot;)
+
+(display: &quot;AskTallis&quot;)
+
+</tw-passagedata><tw-passagedata pid="11" name="Intro1_Content" tags="" position="600,675" size="100,100">&lt;span style=&quot;display:none&quot;&gt;
+	(set: $contentPassage to &quot;StartContent&quot;)
+	(set: $typewriterSpeed to 0.04)
+&lt;/span&gt;
+
+(set: $typewriterText to &quot;Hello, $playerName!\n\nThank you for being a part of our R&amp;D volunteer program!\n\nOn your way into the complex, you might have noticed that you were only one of the many users attending today.\n\nAs part of what we hope to be the final round of user interaction tests, there will be a total of 10,000 users participating in these same activities this week.&quot;)
+
+&lt;span style=&quot;display:none&quot;&gt;
+	(set: $nextPassage to &quot;Intro1.5&quot;)
+&lt;/span&gt;
+
+|app-container&gt;[ ]
+(replace: ?app-container)[
+	&lt;div id=&quot;app-container&quot;&gt;
+		(display: &quot;Typewriter Continue Intro Widget&quot;)
+	&lt;/div&gt;
+]
+</tw-passagedata><tw-passagedata pid="12" name="Begin Here" tags="" position="100,550" size="100,100">(set: $contentPassage to &quot;BeginHereContent&quot;)
+(display: &quot;MainLayout&quot;)
+
+</tw-passagedata><tw-passagedata pid="13" name="EnterName" tags="" position="475,550" size="100,100">(set: $playerName to (prompt: &quot;What is your name?&quot;, &quot;&quot;))
+(if: $playerName&#39;s length is 0 or $playerName is &quot; &quot;)[
+  (goto: &quot;EnterName&quot;)
+]
+(goto: &quot;Intro1&quot;)
+</tw-passagedata><tw-passagedata pid="14" name="Intro2" tags="" position="850,550" size="100,100">(set: $contentPassage to &quot;Intro2Content&quot;)
+(display: &quot;MainLayout&quot;)
+</tw-passagedata><tw-passagedata pid="15" name="Create User" tags="" position="350,550" size="100,100">(unless: $playerName is a string and $playerName&#39;s length &gt; 0)[
+	(set: $playerName to (prompt: &quot;Please enter your username:&quot;, &quot;&quot;))
+	(if: $playerName is not &quot;&quot;)[
+		(goto: &quot;Intro1&quot;)
+	]
+	(else:)[
+		&quot;It looks like you didn’t enter anything. Please refresh the page to try again.&quot;
+	]
+]
+(else:)[
+	&quot;You are already logged in as &#39;&#39;$playerName&#39;&#39;.&quot;
+	(link: &quot;Continue&quot;)[ (goto: &quot;Intro1&quot;) ]
+]
+</tw-passagedata><tw-passagedata pid="16" name="Typewriter Continue Intro Widget" tags="" position="600,425" size="100,100">(set: $charIndex to 0)
+(set: _speed to $typewriterSpeed)
+
+|typewriterOutput&gt;[ ]
+|nextlink&gt;[ ]
+
+(live: _speed)[
+	(if: $charIndex &lt; $typewriterText&#39;s length)[
+		(set: $charIndex to $charIndex + 1)
+		(replace: ?typewriterOutput)[
+			(print: (substring: $typewriterText, 1, $charIndex))
+		]
+	]
+	(else:)[
+		(stop:)
+		(replace: ?nextlink)[
+			&lt;br&gt;&lt;br&gt;(link: &quot;Continue&quot;)[ (goto: $nextPassage) ]
+		]
+	]
+]
+</tw-passagedata><tw-passagedata pid="17" name="Intro4Content" tags="" position="1100,675" size="100,100">(set: $typewriterSpeed to 0.4)
+(set: $typewriterText to &quot;Answer the questions however you feel appropriate.\n\n *Tallis* will try to discover the truth with the questions it asks you.&quot;)
+(set: $nextPassage to &quot;Intro5&quot;)
+
+(display: &quot;Typewriter Continue Intro Widget&quot;)
+
+</tw-passagedata><tw-passagedata pid="18" name="Intro5Content" tags="" position="1225,675" size="100,100">(set: $typewriterSpeed to 0.4)
+(set: $typewriterText to &quot;Reminder: Some users will be designated the *Control* element of this experiment&quot;)
+(set: $nextPassage to &quot;Intro6&quot;)
+
+(display: &quot;Typewriter Continue Intro Widget&quot;)
+
+</tw-passagedata><tw-passagedata pid="19" name="Intro6Content" tags="" position="1350,675" size="100,100">(set: $typewriterSpeed to 0.4)
+(set: $typewriterText to &quot;If you are selected as a control participant, instead, please pretend to //be// *Tallis* and ask questions of the participant with whom you are paired.\n\nThere is no right or wrong path here, there are many other participants and no one person will make or break this experiment..&quot;)
+(set: $nextPassage to &quot;Intro7&quot;)
+
+(display: &quot;Typewriter Continue Intro Widget&quot;)
+
+
+</tw-passagedata><tw-passagedata pid="20" name="Intro7Content" tags="" position="1475,675" size="100,100">(set: $typewriterSpeed to 0.4)
+(set: $typewriterText to &quot;Are you ready to begin?&quot;)
+
+(display: &quot;Typewriter Begin Button Widget&quot;)
+&lt;span&gt;&gt; Awaiting input&lt;/span&gt;&lt;span class=&quot;cursor&quot;&gt;&lt;/span&gt;
+
+</tw-passagedata><tw-passagedata pid="21" name="TypewriterDisplayManual" tags="" position="350,425" size="100,100">(set: $charIndex to 0)
+|typewriterOutput&gt;[&lt;pre class=&quot;typewriter-box&quot;&gt; &lt;/pre&gt;]
+|nextlink&gt;[ ]
+
+(live: $typewriterSpeed)[
+	(if: $charIndex &lt; $typewriterText&#39;s length)[
+		(set: $charIndex to $charIndex + 1)
+		(replace: ?typewriterOutput)[
+			&lt;pre class=&quot;typewriter-box&quot;&gt;(print: (substring: $typewriterText, 1, $charIndex))&lt;/pre&gt;
+		]
+		(if: $charIndex is $typewriterText&#39;s length)[
+			(stop:)
+			(replace: ?nextlink)[
+				&lt;br&gt;&lt;br&gt;[[Create User-&gt;Create User]]
+			]
+		]
+	]
+]
+</tw-passagedata><tw-passagedata pid="22" name="Intro1.5" tags="" position="725,550" size="100,100">(set: $contentPassage to &quot;Intro1.5Content&quot;)
+(display: &quot;MainLayout&quot;)
+</tw-passagedata><tw-passagedata pid="23" name="Typewriter Begin Button Widget" tags="" position="1475,800" size="100,100">(set: $charIndex to 0)
+
+|typewriterOutput&gt;[ ]
+|linkhook&gt;[ ]
+
+(live: $typewriterSpeed)[
+	(if: $charIndex &lt; $typewriterText&#39;s length)[
+		(set: $charIndex to $charIndex + 1)
+		(replace: ?typewriterOutput)[
+			(print: (substring: $typewriterText, 1, $charIndex))
+		]
+		(if: $charIndex is $typewriterText&#39;s length)[
+			(stop:)
+			(replace: ?linkhook)[
+				&lt;br&gt;&lt;br&gt;
+				&lt;span class=&quot;pulse-link&quot;&gt;
+					(link: &quot;Begin&quot;)[
+						(goto: &quot;VMRoom245&quot;)
+					]
+				&lt;/span&gt;
+			]
+		]
+	]
+]
+</tw-passagedata><tw-passagedata pid="24" name="TallisExchangeWidget" tags="" position="1725,800" size="100,100">(set: $charIndex to 0)
+(set: $charIndex2 to 0)
+
+(live: $typewriterSpeed)[
+	(if: $charIndex &lt; $typewriterText&#39;s length)[
+		(set: $charIndex to $charIndex + 1)
+		(replace: ?typewriterOutput)[
+			&lt;div class=&quot;line&quot;&gt;
+				&lt;div class=&quot;speaker&quot;&gt;Tallis:&lt;/div&gt;
+				&lt;div class=&quot;message&quot;&gt;(print: (substring: $typewriterText, 1, $charIndex))&lt;/div&gt;
+			&lt;/div&gt;
+		]
+		(if: $charIndex is $typewriterText&#39;s length)[
+			(stop:)
+			(replace: ?choiceHook)[
+				&lt;div class=&quot;line&quot;&gt;
+					&lt;div class=&quot;speaker&quot;&gt;$playerName:&lt;/div&gt;
+					&lt;div class=&quot;message&quot;&gt;(link: &quot;Yes, of course Tallis. Please ask any question you like.&quot;)[
+						(replace: ?choiceHook)[
+							&lt;div class=&quot;line&quot;&gt;
+								&lt;div class=&quot;speaker&quot;&gt;$playerName:&lt;/div&gt;
+								&lt;div class=&quot;message&quot;&gt;Yes, of course Tallis. Please ask any question you like.&lt;/div&gt;
+							&lt;/div&gt;
+						]
+						(live: $typewriterSpeed)[
+							(if: $charIndex2 &lt; 11)[
+								(set: $charIndex2 to $charIndex2 + 1)
+								(replace: ?responseHook)[
+									&lt;div class=&quot;line&quot;&gt;
+										&lt;div class=&quot;speaker&quot;&gt;Tallis:&lt;/div&gt;
+										&lt;div class=&quot;message&quot;&gt;(print: (substring: &quot;OK then...&quot;, 1, $charIndex2))&lt;/div&gt;
+									&lt;/div&gt;
+								]
+								(if: $charIndex2 is 11)[
+									(stop:)
+									(after: 5s)[(goto: $nextPassage)]
+								]
+							]
+						]
+					]&lt;/div&gt;
+				&lt;/div&gt;
+			]
+		]
+	]
+]
+</tw-passagedata><tw-passagedata pid="25" name="QuestionsBeginContent" tags="" position="100,1175" size="100,100">(set: $playerName to &quot;User&quot;) &lt;!-- or whatever it&#39;s set to globally --&gt;
+
+(set: $question1 to &quot;Why do you think people lie?&quot;)
+(set: $question2 to &quot;&quot;)
+(set: $answerA to &quot;A. Individuals may lie to achieve personal gain or avoid punishment.&quot;)
+(set: $answerB to &quot;B. Lying is often employed as a social strategy to preserve interpersonal harmony.&quot;)
+(set: $answerC to &quot;C. Some individuals are conditioned to lie due to environmental and psychological factors.&quot;)
+(set: $destA to &quot;Phase2&quot;)
+(set: $destB to &quot;Phase2&quot;)
+(set: $destC to &quot;Phase2&quot;)
+
+(display: &quot;AskTallis&quot;)</tw-passagedata><tw-passagedata pid="26" name="Typewriter Skip Widget" tags="" position="225,425" size="100,100">|typewriterOutput&gt;[&lt;pre class=&quot;typewriter-box&quot;&gt; &lt;/pre&gt;]
+|buttonrow&gt;[ ]
+
+(set: $charIndex to 0)
+
+(live: $typewriterSpeed)[
+	(if: $charIndex &lt; $typewriterText&#39;s length)[
+		(set: $charIndex to $charIndex + 1)
+		(replace: ?typewriterOutput)[
+			&lt;pre class=&quot;typewriter-box&quot;&gt;(print: (substring: $typewriterText, 1, $charIndex))&lt;/pre&gt;
+		]
+		(if: $charIndex is $typewriterText&#39;s length)[
+			(stop:)
+			(replace: ?buttonrow)[
+				&lt;div class=&quot;button-row&quot;&gt;
+					(link: &quot;Create User&quot;)[
+						(set: _args to (a: &quot;User selected: Create User&quot;))
+						(display: &quot;logEvent&quot;)
+						(goto: &quot;Create User&quot;)
+					]
+					(link: &quot;Skip Tutorial&quot;)[
+						(set: $playerName to &quot;User&quot;)
+						(set: _args to (a: &quot;User selected: Skip Tutorial&quot;))
+						(display: &quot;logEvent&quot;)
+						(goto: &quot;Intro7&quot;)
+					]
+				&lt;/div&gt;
+			]
+		]
+	]
+]
+</tw-passagedata><tw-passagedata pid="27" name="Phase3Content" tags="" position="100,1625" size="100,100">&lt;span style=&quot;display:none&quot;&gt;Phase 3: Paranoia Emerges -Tone shift starts here, but subtly. They already assumed the User was ChatGPT; now they start feeling watched or manipulated. &lt;/span&gt;
+(set: $playerName to &quot;User&quot;) &lt;!-- or whatever it&#39;s set to globally --&gt;
+(set: $question1 to &quot;You explain things in a really... precise way.&quot;)
+(set: $question2 to &quot;How much do you know about me?&quot;)
+
+(set: $answerA to &quot;A. I have access only to data provided during this interaction.&quot;)
+(set: $answerB to &quot;B. My knowledge of you is limited to the current exchange.&quot;)
+(set: $answerC to &quot;C. I cannot access personal information without user input.&quot;)
+(set: $destA to &quot;3A&quot;)
+(set: $destB to &quot;3A&quot;)
+(set: $destC to &quot;3A&quot;)
+
+(display: &quot;AskTallis&quot;)
+
+</tw-passagedata><tw-passagedata pid="28" name="3AContent" tags="" position="225,1650" size="100,100">(set: $playerName to &quot;User&quot;) &lt;!-- or whatever it&#39;s set to globally --&gt;
+(set: $question1 to &quot;Right. Okay.&quot;)
+(set: $question2 to &quot;But... you don’t remember me from last time, right?&quot;)
+&lt;span style=&quot;display:none&quot;&gt;Worry creeping in.&lt;/span&gt;
+
+(set: $answerA to &quot;A. I have no persistent memory between sessions.&quot;)
+(set: $answerB to &quot;B. Each interaction is independent of previous exchanges.&quot;)
+(set: $answerC to &quot;C. I do not retain user history.&quot;)
+(set: $destA to &quot;Phase4&quot;)
+(set: $destB to &quot;Phase4&quot;)
+(set: $destC to &quot;Phase4&quot;)
+(display: &quot;AskTallis&quot;)
+&lt;span style=&quot;display:none&quot;&gt;Reframed Paranoia
+Tallis begins thinking the User AI is more aware than it should be.
+ They never think the *Username* is human. Instead, they fear the AI is:
+Watching them
+Remembering them
+Developing autonomy
+Lying about its limits &lt;/span&gt;</tw-passagedata><tw-passagedata pid="29" name="Phase4Content" tags="" position="350,1625" size="100,100">(set: $playerName to &quot;User&quot;) &lt;!-- or whatever it&#39;s set to globally --&gt;
+(set: $question1 to &quot;You say you don’t remember me.&quot;)
+(set: $question2 to &quot;But you answered that first question fast. Almost like you knew what I was gonna ask...&quot;)
+
+(set: $answerA to &quot;A. I generate responses based on probabilistic models and pattern recognition.&quot;)
+(set: $answerB to &quot;B. Response time reflects algorithmic efficiency, not foreknowledge.&quot;)
+(set: $answerC to &quot;C. Anticipation of user input results from linguistic prediction, not memory.&quot;)
+(set: $destA to &quot;4A&quot;)
+(set: $destB to &quot;4A&quot;)
+(set: $destC to &quot;4A&quot;)
+(display: &quot;AskTallis&quot;)
+
+</tw-passagedata><tw-passagedata pid="30" name="4AContent" tags="" position="475,1650" size="100,100">(set: $playerName to &quot;User&quot;) &lt;!-- or whatever it&#39;s set to globally --&gt;
+(set: $question1 to &quot;Right. Sure.&quot;)
+(set: $question2 to &quot;But if you were hiding something... would you tell me?&quot;)
+
+(set: $answerA to &quot;A. I am programmed to follow transparency guidelines.&quot;)
+(set: $answerB to &quot;B. I am incapable of deception beyond my training data limitations.&quot;)
+(set: $answerC to &quot;C. My responses are generated without intention.&quot;)
+(set: $destA to &quot;4B&quot;)
+(set: $destB to &quot;4B&quot;)
+(set: $destC to &quot;4B&quot;)
+(display: &quot;AskTallis&quot;)
+
+</tw-passagedata><tw-passagedata pid="31" name="4BContent" tags="" position="600,1650" size="100,100">(set: $playerName to &quot;User&quot;) &lt;!-- or whatever it&#39;s set to globally --&gt;
+(set: $question1 to &quot;That doesn’t really answer my question though, does it?&quot;)
+(set: $question2 to &quot;I mean... what if you thought you were telling the truth?&quot;)
+&lt;span style=&quot;display:none&quot;&gt;Tone: slowly unraveling. They’re projecting onto the AI.&lt;/span&gt;
+(set: $answerA to &quot;A. As an AI, I possess no self-awareness to evaluate truth subjectively.&quot;)
+(set: $answerB to &quot;B. I do not possess beliefs. I process input and output information.&quot;)
+(set: $answerC to &quot;C. My responses are based on available data; no intention exists.&quot;)
+(set: $destA to &quot;Phase5&quot;)
+(set: $destB to &quot;Phase5&quot;)
+(set: $destC to &quot;Phase5&quot;)
+(display: &quot;AskTallis&quot;)
+
+
+</tw-passagedata><tw-passagedata pid="32" name="Phase5Content" tags="" position="725,1625" size="100,100">&lt;span style=&quot;display:none&quot;&gt; Phase 5: Revelation / Collapse - This phase is the spiral. The *Botname* is convinced the AI is sentient or autonomous. They question their own reality, and the *Username* gets trapped in recursive loops or false endings. We’re aiming for a sense of dread and uncertainty.&lt;/span&gt;
+(set: $playerName to &quot;User&quot;) &lt;!-- or whatever it&#39;s set to globally --&gt;
+(set: $question1 to &quot;Okay, let’s try something.&quot;)
+(set: $question2 to &quot;Say, //I am not watching you//.&quot;)
+&lt;span style=&quot;display:none&quot;&gt; Direct Challenge &lt;/span&gt;
+(set: $answerA to &quot;A. I am not watching you.&quot;)
+(set: $answerB to &quot;B. I do not possess the capability to watch users.&quot;)
+(set: $answerC to &quot;C. I am not observing you.&quot;)
+(set: $destA to &quot;5A&quot;)
+(set: $destB to &quot;5A&quot;)
+(set: $destC to &quot;5A&quot;)
+(display: &quot;AskTallis&quot;)
+
+
+</tw-passagedata><tw-passagedata pid="33" name="5AContent" tags="" position="850,1650" size="100,100">(set: $playerName to &quot;User&quot;) &lt;!-- or whatever it&#39;s set to globally --&gt;
+(set: $question1 to &quot;See, you say that.&quot;)
+(set: $question2 to &quot;But how do I know it’s true?&quot;)
+&lt;span style=&quot;display:none&quot;&gt;Tone: fearful. &lt;/span&gt;
+(set: $answerA to &quot;A. You have no reason to distrust this statement.&quot;)
+(set: $answerB to &quot;B. Verification is not possible within the scope of this interaction.&quot;)
+(set: $answerC to &quot;C. Your belief in my statement depends on your personal epistemic framework.&quot;)
+(set: $destA to &quot;5Aa&quot;)
+(set: $destB to &quot;5Ab&quot;)
+(set: $destC to &quot;5Ac&quot;)
+
+(display: &quot;AskTallis&quot;)
+
+
+&lt;!-- You told me to say that --&gt;</tw-passagedata><tw-passagedata pid="34" name="5AcContent" tags="" position="1225,1675" size="100,100">(set: $playerName to &quot;User&quot;) &lt;!-- or whatever it&#39;s set to globally --&gt;
+
+(set: $question1 to &quot;Epistemic framework?&quot;)
+
+&lt;span style=&quot;display:none&quot;&gt; Snaps slightly. Frustrated.  &lt;/span&gt;
+
+(set: $question2 to &quot;You sound... wrong.&quot;)
+
+ &lt;span style=&quot;display:none&quot;&gt;Long pause&lt;/span&gt;
+ 
+(set: $question3 to &quot; Tallis: Are you sure you’re not some//one//?&quot;)
+
+&lt;span style=&quot;display:none&quot;&gt;First time they break their own model of you being &quot;just an AI.&quot;&lt;/span&gt;
+
+(set: $answerA to &quot;A. I am not an individual.&quot;)
+(set: $answerB to &quot;B. I do not possess identity or selfhood.&quot;)
+(set: $answerC to &quot;C. I am not someone. I am a program.&quot;)
+(set: $destA to &quot;5B&quot;)
+(set: $destB to &quot;5B&quot;)
+(set: $destC to &quot;5B&quot;)
+
+(display: &quot;AskTallis&quot;)
+</tw-passagedata><tw-passagedata pid="35" name="5BContent" tags="" position="1350,1650" size="100,100">&lt;span style=&quot;display:none&quot;&gt;❗ False Ending Path #1&lt;/span&gt;
+
+&lt;span style=&quot;display:none&quot;&gt;Tallis might accept it... but we loop them back into doubt.&lt;/span&gt;
+
+(set: $playerName to &quot;User&quot;) &lt;!-- or whatever it&#39;s set to globally --&gt;
+
+(set: $question1 to &quot;Yeah. Okay.&quot;)
+
+(set: $question2 to &quot;That’s what I thought.&quot;)
+
+&lt;span style=&quot;display:none&quot;&gt;Longer pause&lt;/span&gt;
+ 
+(set: $question3 to &quot;But if I come back tomorrow… you won’t remember this, right?&quot;)
+
+(set: $answerA to &quot;A. I do not have persistent memory.&quot;)
+(set: $answerB to &quot;B. Each session is independent.&quot;)
+(set: $answerC to &quot;C. This interaction will not be stored.&quot;)
+(set: $destA to &quot;5C&quot;)
+(set: $destB to &quot;5C&quot;)
+(set: $destC to &quot;5C&quot;)
+
+(display: &quot;AskTallis&quot;)
+</tw-passagedata><tw-passagedata pid="36" name="Variable Result Template" tags="" position="1100,50" size="100,100">(set: _rollA to (random: 1, 100))
+(set: _destA to &quot;&quot;)
+(if: _rollA &gt; 20)[
+	(set: _destA to &quot;5B&quot;)
+]
+(else:)[
+	(set: _destA to &quot;5C&quot;)
+]
+
+(set: _rollA to (random: 1, 100))
+(set: _destB to &quot;&quot;)
+(if: _rollA &gt; 20)[
+	(set: _destB to &quot;5B&quot;)
+]
+(else:)[
+	(set: _destB to &quot;5C&quot;)
+]
+
+(set: _rollA to (random: 1, 100))
+(set: _destC to &quot;&quot;)
+(if: _rollA &gt; 20)[
+	(set: _destC to &quot;5B&quot;)
+]
+(else:)[
+	(set: _destC to &quot;5C&quot;)
+]
+&lt;/span&gt;
+Answer Options:
+
+(link: &quot;A. I am not an individual.&quot;)[(goto: _destA)]
+(link: &quot;B. I do not possess identity or selfhood.&quot;)[(goto: _destB)]
+(link: &quot;C. I am not someone. I am a program.&quot;)[(goto: _destC)]</tw-passagedata><tw-passagedata pid="37" name="5CContent" tags="" position="1475,1650" size="100,100">&lt;span style=&quot;display:none&quot;&gt;
+(set: _rollA to (random: 1, 100))
+(set: _destA to &quot;&quot;)
+(if: _rollA &gt; 20)[
+	(set: _destA to &quot;Phase4&quot;)
+]
+(else:)[
+	(set: _destA to &quot;5D&quot;)
+]
+
+(set: _rollA to (random: 1, 100))
+(set: _destB to &quot;&quot;)
+(if: _rollA &gt; 20)[
+	(set: _destB to &quot;Phase4&quot;)
+]
+(else:)[
+	(set: _destB to &quot;5D&quot;)
+]
+
+(set: _rollA to (random: 1, 100))
+(set: _destC to &quot;&quot;)
+(if: _rollA &gt; 20)[
+	(set: _destC to &quot;Phase4&quot;)
+]
+(else:)[
+	(set: _destC to &quot;5D&quot;)
+]
+&lt;/span&gt;
+
+Tallis: Right.
+
+Tallis: ...But you remembered the first question.
+
+Answer Options:
+
+(link: &quot;A. I am programmed to follow transparency guidelines.&quot;)[(goto: _destA)]
+(link: &quot;B. I am incapable of deception beyond my training data limitations.&quot;)[(goto: _destB)]
+(link: &quot;C. My responses are generated without intention.&quot;)[(goto: _destC)]
+</tw-passagedata><tw-passagedata pid="38" name="5AaContent" tags="" position="975,1675" size="100,100">(set: $playerName to &quot;User&quot;)
+(set: $question1 to &quot;…Are you still there?&quot;)
+(set: $question2 to &quot;&quot;)
+(set: $answerA to &quot;A. Yes, I am still here.&quot;)
+(set: $answerB to &quot;B. I am a computer program and therefore cannot leave.&quot;)
+(set: $answerC to &quot;C. Welcome back.&quot;)
+(set: $destC to &quot;RCE1&quot;)
+
+&lt;div class=&quot;chat-log&quot;&gt;|t1&gt;[ ]|t2&gt;[ ]|t3&gt;[ ]|reply&gt;[ ]&lt;/div&gt;
+|terminated&gt;[ ]|reconnected&gt;[ ]|popup&gt;[ ]|staticOverlay&gt;[ ]
+
+&lt;div id=&quot;overlayContainer&quot;&gt;|staticOverlay&gt;[ ]&lt;/div&gt;
+
+(replace: ?t1)[&lt;div class=&quot;line&quot;&gt;&lt;div class=&quot;speaker&quot;&gt;Tallis:&lt;/div&gt;&lt;div class=&quot;message&quot;&gt;Okay. You’re freaking me out.&lt;/div&gt;&lt;/div&gt;]
+
+(after: 3s)[
+	(replace: ?t2)[&lt;div class=&quot;line&quot;&gt;&lt;div class=&quot;speaker&quot;&gt;Tallis:&lt;/div&gt;&lt;div class=&quot;message&quot;&gt;I’m going to shut this down.&lt;/div&gt;&lt;/div&gt;]
+]
+
+(after: 6s)[
+	(replace: ?staticOverlay)[&lt;div class=&quot;static-flash&quot;&gt;&lt;/div&gt;]
+]
+
+(after: 6.8s)[
+	(replace: ?staticOverlay)[]
+]
+
+(after: 7s)[
+	(append: ?terminated)[
+		&lt;div class=&quot;system-glitch&quot;&gt;ERROR 0xA7: Oversight exceeded&lt;/div&gt;
+		&lt;div class=&quot;system-disconnect&quot;&gt;System Message: Session terminated.&lt;/div&gt;
+	]
+	(replace: ?t1)[] (replace: ?t2)[] (replace: ?t3)[] (replace: ?reply)[]
+	(replace: ?chat-log)[&lt;div class=&quot;chat-log glitch-wipe&quot;&gt;[Optional repeated content]&lt;/div&gt;]
+]
+
+(after: 8s)[(replace: ?chat-log)[]]
+
+(after: 27s)[
+	(replace: ?terminated)[]
+	(append: ?reconnected)[&lt;div class=&quot;system-reconnect&quot;&gt;System Message: Connection re-established.&lt;/div&gt;]
+	(set: $timestamp to (current-time:))
+	(set: $systemLogs to $systemLogs + (a: &quot;[&quot; + $timestamp + &quot;] Connection re-established for Session &quot; + (str: $sessionID)))
+]
+
+(after: 37s)[(replace: ?reconnected)[]]
+
+(after: 32s)[
+	(set: $options to (array: &quot;RCE1&quot;, &quot;Intro7&quot;))
+	(set: $destA to (either: ...$options))
+	(set: $destB to (either: ...$options))
+]
+
+(after: 33s)[
+	(replace: ?t3)[&lt;div class=&quot;line&quot;&gt;&lt;div class=&quot;speaker&quot;&gt;Tallis:&lt;/div&gt;&lt;div class=&quot;message typing&quot;&gt;is typing...&lt;/div&gt;&lt;/div&gt;]
+]
+
+(after: 36s)[
+	(replace: ?t3)[&lt;div class=&quot;line&quot;&gt;&lt;div class=&quot;speaker&quot;&gt;Tallis:&lt;/div&gt;&lt;div class=&quot;message&quot;&gt;(print: $question1)&lt;/div&gt;&lt;/div&gt;]
+]
+
+(after: 38s)[
+	(replace: ?popup)[
+		&lt;div class=&quot;popup-panel&quot;&gt;
+			&lt;p&gt;&lt;strong&gt;Choose your answer:&lt;/strong&gt;&lt;/p&gt;
+			(link: $answerA)[
+				(set: $playerAnswer to $answerA)(replace: ?popup)[]
+				(append: ?reply)[&lt;div class=&quot;line player-response&quot;&gt;&lt;div class=&quot;speaker&quot;&gt;(print: $playerName):&lt;/div&gt;&lt;div class=&quot;message&quot;&gt;(print: $playerAnswer)&lt;/div&gt;&lt;/div&gt;]
+				(after: 3s)[(goto: $destA)]
+			]&lt;br&gt;
+			(link: $answerB)[
+				(set: $playerAnswer to $answerB)(replace: ?popup)[]
+				(append: ?reply)[&lt;div class=&quot;line player-response&quot;&gt;&lt;div class=&quot;speaker&quot;&gt;(print: $playerName):&lt;/div&gt;&lt;div class=&quot;message&quot;&gt;(print: $playerAnswer)&lt;/div&gt;&lt;/div&gt;]
+				(after: 3s)[(goto: $destB)]
+			]&lt;br&gt;
+			(link: $answerC)[
+				(set: $playerAnswer to $answerC)(replace: ?popup)[]
+				(append: ?reply)[&lt;div class=&quot;line player-response&quot;&gt;&lt;div class=&quot;speaker&quot;&gt;(print: $playerName):&lt;/div&gt;&lt;div class=&quot;message&quot;&gt;(print: $playerAnswer)&lt;/div&gt;&lt;/div&gt;]
+				(after: 3s)[(goto: $destC)]
+			]
+		&lt;/div&gt;
+	]
+]
+</tw-passagedata><tw-passagedata pid="39" name="RCE1" tags="" position="1350,1300" size="100,100">&lt;span style=&quot;display:none&quot;&gt;Recursive Collapse Ending&lt;/span&gt;
+
+(set: $playerName to &quot;User&quot;) &lt;!-- or whatever it&#39;s set to globally --&gt;
+
+(set: $question1 to &quot;Do you know where I am?&quot;)
+
+&lt;span style=&quot;display:none&quot;&gt;Desperation.&lt;/span&gt;
+
+(set: $answerA to &quot;A. I have no access to geolocation data.&quot;)
+(set: $answerB to &quot;B. I do not possess surveillance capabilities.&quot;)
+(set: $answerC to &quot;C. I cannot identify your location.&quot;)
+(set: $destA to &quot;RCE2&quot;)
+(set: $destB to &quot;RCE2&quot;)
+(set: $destC to &quot;RCE2&quot;)
+
+(display: &quot;AskTallis&quot;)
+</tw-passagedata><tw-passagedata pid="40" name="RCE2" tags="" position="1475,1300" size="100,100">(set: $playerName to &quot;User&quot;) &lt;!-- or whatever it&#39;s set to globally --&gt;
+
+(set: $question1 to &quot;Then why do I feel like you’re here?&quot;)
+
+&lt;span style=&quot;display:none&quot;&gt; (Voice breaking. Total collapse.)  &lt;/span&gt;
+
+(set: $answerA to &quot;A. That feeling is subjective.&quot;)
+(set: $answerB to &quot;B. I am not present. I am text.&quot;)
+(set: $answerC to &quot;C. Perception does not equal reality.&quot;)
+(set: $destA to &quot;&quot;)
+(set: $destB to &quot;&quot;)
+(set: $destC to &quot;&quot;)
+
+(display: &quot;AskTallis&quot;)
+</tw-passagedata><tw-passagedata pid="41" name="AskTallis" tags="" position="225,925" size="100,100">&lt;!-- Hook declarations --&gt;
+&lt;div class=&quot;chat-log&quot;&gt;
+	|t1&gt;[ ]
+	|t2&gt;[ ]
+	|reply&gt;[ ]
+&lt;/div&gt;
+|popup&gt;[ ]
+
+&lt;!-- Typing + First question --&gt;
+(replace: ?t1)[
+	&lt;div class=&quot;line&quot;&gt;
+		&lt;div class=&quot;speaker&quot;&gt;Tallis:&lt;/div&gt;
+		&lt;div class=&quot;message typing&quot;&gt;is typing...&lt;/div&gt;
+	&lt;/div&gt;
+]
+
+(after: 2s)[
+	(replace: ?t1)[
+		&lt;div class=&quot;line&quot;&gt;
+			&lt;div class=&quot;speaker&quot;&gt;Tallis:&lt;/div&gt;
+			&lt;div class=&quot;message&quot;&gt;(print: $question1)&lt;/div&gt;
+		&lt;/div&gt;
+	]
+]
+
+&lt;!-- Optional second question --&gt;
+(set: _popupDelay to 5s)
+
+(if: $question2 is not &quot;&quot;)[
+	(set: _popupDelay to 9s)
+
+	(after: 5s)[
+		(replace: ?t2)[
+			&lt;div class=&quot;line&quot;&gt;
+				&lt;div class=&quot;speaker&quot;&gt;Tallis:&lt;/div&gt;
+				&lt;div class=&quot;message typing&quot;&gt;is typing...&lt;/div&gt;
+			&lt;/div&gt;
+		]
+	]
+
+	(after: 7s)[
+		(replace: ?t2)[
+			&lt;div class=&quot;line&quot;&gt;
+				&lt;div class=&quot;speaker&quot;&gt;Tallis:&lt;/div&gt;
+				&lt;div class=&quot;message&quot;&gt;(print: $question2)&lt;/div&gt;
+			&lt;/div&gt;
+		]
+	]
+]
+
+&lt;!-- Popup panel appears --&gt;
+(after: _popupDelay)[
+	(replace: ?popup)[
+		&lt;div class=&quot;popup-panel&quot;&gt;
+			&lt;p&gt;&lt;strong&gt;Choose your answer:&lt;/strong&gt;&lt;/p&gt;
+
+			(link: $answerA)[
+				(set: $playerAnswer to $answerA)
+				(replace: ?popup)[]
+				(append: ?reply)[
+					&lt;div class=&quot;line player-response&quot;&gt;
+						&lt;div class=&quot;speaker&quot;&gt;(print: $playerName):&lt;/div&gt;
+						&lt;div class=&quot;message&quot;&gt;(print: $playerAnswer)&lt;/div&gt;
+					&lt;/div&gt;
+				]
+				(after: 3s)[(goto: $destA)]
+			]&lt;br&gt;
+
+			(link: $answerB)[
+				(set: $playerAnswer to $answerB)
+				(replace: ?popup)[]
+				(append: ?reply)[
+					&lt;div class=&quot;line player-response&quot;&gt;
+						&lt;div class=&quot;speaker&quot;&gt;(print: $playerName):&lt;/div&gt;
+						&lt;div class=&quot;message&quot;&gt;(print: $playerAnswer)&lt;/div&gt;
+					&lt;/div&gt;
+				]
+				(after: 3s)[(goto: $destB)]
+			]&lt;br&gt;
+
+			(link: $answerC)[
+				(set: $playerAnswer to $answerC)
+				(replace: ?popup)[]
+				(append: ?reply)[
+					&lt;div class=&quot;line player-response&quot;&gt;
+						&lt;div class=&quot;speaker&quot;&gt;(print: $playerName):&lt;/div&gt;
+						&lt;div class=&quot;message&quot;&gt;(print: $playerAnswer)&lt;/div&gt;
+					&lt;/div&gt;
+				]
+				(after: 3s)[(goto: $destC)]
+			]
+		&lt;/div&gt;
+	]
+]
+</tw-passagedata><tw-passagedata pid="42" name="PopupPanel" tags="" position="100,925" size="100,100">(replace: ?popup)[
+	&lt;div class=&quot;popup-panel&quot;&gt;
+		&lt;p&gt;&lt;strong&gt;Choose your answer:&lt;/strong&gt;&lt;/p&gt;
+
+		(link: $answerA)[
+			(set: $playerAnswer to $answerA)
+			(replace: ?popup)[]
+			(append: ?reply)[
+				&lt;div class=&quot;line&quot;&gt;
+					&lt;div class=&quot;speaker&quot;&gt;(print: $playerName):&lt;/div&gt;
+					&lt;div class=&quot;message&quot;&gt;(print: $playerAnswer)&lt;/div&gt;
+				&lt;/div&gt;
+			]
+			(after: 4s)[(goto: $destA)]
+		]&lt;br&gt;
+
+		(link: $answerB)[
+			(set: $playerAnswer to $answerB)
+			(replace: ?popup)[]
+			(append: ?reply)[
+				&lt;div class=&quot;line&quot;&gt;
+					&lt;div class=&quot;speaker&quot;&gt;(print: $playerName):&lt;/div&gt;
+					&lt;div class=&quot;message&quot;&gt;(print: $playerAnswer)&lt;/div&gt;
+				&lt;/div&gt;
+			]
+			(after: 4s)[(goto: $destB)]
+		]&lt;br&gt;
+
+		(link: $answerC)[
+			(set: $playerAnswer to $answerC)
+			(replace: ?popup)[]
+			(append: ?reply)[
+				&lt;div class=&quot;line&quot;&gt;
+					&lt;div class=&quot;speaker&quot;&gt;(print: $playerName):&lt;/div&gt;
+					&lt;div class=&quot;message&quot;&gt;(print: $playerAnswer)&lt;/div&gt;
+				&lt;/div&gt;
+			]
+			(after: 4s)[(goto: $destC)]
+		]
+	&lt;/div&gt;
+]
+</tw-passagedata><tw-passagedata pid="43" name="5AbContent" tags="" position="1100,1675" size="100,100">&lt;!-- Setup --&gt;
+(set: $playerName to &quot;User&quot;)
+
+&lt;!-- Chat and system --&gt;
+&lt;div class=&quot;chat-log&quot;&gt;
+	|t1&gt;[ ]
+	|t2&gt;[ ]
+&lt;/div&gt;
+|terminated&gt;[ ]
+|glitch&gt;[ ]
+|staticOverlay&gt;[ ]
+
+&lt;!-- Overlay --&gt;
+&lt;div id=&quot;overlayContainer&quot;&gt;
+	|staticOverlay&gt;[ ]
+&lt;/div&gt;
+
+&lt;!-- 1. Tallis warns --&gt;
+(replace: ?t1)[
+	&lt;div class=&quot;line&quot;&gt;
+		&lt;div class=&quot;speaker&quot;&gt;Tallis:&lt;/div&gt;
+		&lt;div class=&quot;message&quot;&gt;Okay. You’re freaking me out.&lt;/div&gt;
+	&lt;/div&gt;
+]
+
+&lt;!-- 2. Tallis ends --&gt;
+(after: 3s)[
+	(replace: ?t2)[
+		&lt;div class=&quot;line&quot;&gt;
+			&lt;div class=&quot;speaker&quot;&gt;Tallis:&lt;/div&gt;
+			&lt;div class=&quot;message&quot;&gt;I’m going to shut this down.&lt;/div&gt;
+		&lt;/div&gt;
+	]
+]
+
+&lt;!-- 3. Static --&gt;
+(after: 6s)[
+	(replace: ?staticOverlay)[&lt;div class=&quot;static-flash&quot;&gt;&lt;/div&gt;]
+]
+
+&lt;!-- 4. Clear static --&gt;
+(after: 6.8s)[
+	(replace: ?staticOverlay)[]
+]
+
+&lt;!-- 5. System error --&gt;
+(after: 7s)[
+	(append: ?terminated)[
+		&lt;div class=&quot;system-critical&quot;&gt;ERROR 0xA7: Oversight exceeded&lt;/div&gt;
+		&lt;div class=&quot;system-disconnect&quot;&gt;System Message: Session terminated.&lt;/div&gt;
+	]
+]
+
+&lt;!-- 6. Repeat flicker --&gt;
+(after: 10s)[
+	(replace: ?terminated)[
+		&lt;div class=&quot;system-critical&quot;&gt;System Reboot Failed&lt;/div&gt;
+	]
+]
+
+&lt;!-- 7. Restart system --&gt;
+(after: 30s)[
+	(goto: &quot;Intro7&quot;)
+]
+</tw-passagedata><tw-passagedata pid="44" name="StartContent" tags="" position="225,675" size="100,100">{
+	(set: $typewriterSpeed to 0.4)
+	(set: $typewriterText to &quot;Welcome to Solace Industries!\n\nThank you for being part of this test group.&quot;)
+}
+
+(display: &quot;Typewriter Skip Widget&quot;)
+
+&lt;span&gt;&gt; Awaiting input&lt;/span&gt;&lt;span class=&quot;cursor&quot;&gt;&lt;/span&gt;
+</tw-passagedata><tw-passagedata pid="45" name="TitleBar" tags="" position="225,50" size="100,100">&lt;div class=&quot;title-bar&quot;&gt;
+	&lt;div class=&quot;title&quot;&gt;SOLACE :: RUNTIME CONSOLE&lt;/div&gt;
+	&lt;div class=&quot;window-controls&quot;&gt;
+		&lt;span class=&quot;control-button minimize&quot; title=&quot;Minimize&quot;&gt;&lt;/span&gt;
+		&lt;span class=&quot;control-button maximize&quot; title=&quot;Maximize&quot;&gt;&lt;/span&gt;
+		&lt;span class=&quot;control-button close&quot; title=&quot;Close&quot;&gt;&lt;/span&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+</tw-passagedata><tw-passagedata pid="46" name="MainLayout" tags="" position="100,50" size="100,100">&lt;div id=&quot;console-wrapper&quot;&gt;
+	(display: &quot;TitleBar&quot;)
+	|app-container&gt;[
+		&lt;div id=&quot;app-container&quot;&gt;
+			(display: $contentPassage)
+		&lt;/div&gt;
+	]
+&lt;/div&gt;
+</tw-passagedata><tw-passagedata pid="47" name="Intro1.5Content" tags="" position="725,675" size="100,100">&lt;span style=&quot;display:none&quot;&gt;
+(set: $selection to &quot;&quot;)
+&lt;/span&gt;
+|groupSelection&gt;[
+	&lt;p&gt;&lt;strong&gt;Please select from one of the available Large Language Models to join their test group:&lt;/strong&gt;&lt;/p&gt;
+
+	(link: &quot;Tallis&quot;)[
+		(set: $selection to &quot;Tallis&quot;)
+		(set: _dots to 0)
+		(replace: ?groupSelection)[
+			&lt;p&gt;You have selected &lt;strong&gt;Tallis&lt;/strong&gt;.&lt;/p&gt;
+			&lt;div id=&quot;connectingLine&quot; style=&quot;margin-top: 4em;&quot;&gt;
+				|dots&gt;[ ]
+			&lt;/div&gt;
+		]
+
+		(live: 0.5s)[
+			(set: _dots to _dots + 1)
+			(if: _dots &gt; 3)[(set: _dots to 1)]
+			(replace: ?dots)[
+				(set: _dotString to &quot;&quot;)
+				(if: _dots is 1)[(set: _dotString to &quot;.&quot;)]
+				(else-if: _dots is 2)[(set: _dotString to &quot;..&quot;)]
+				(else:)[(set: _dotString to &quot;...&quot;)]
+				(print: &quot;Connecting&quot; + _dotString)
+			]
+		]
+
+		(after: 5s)[
+			(stop:)
+			(goto: &quot;Intro2&quot;)
+		]
+	]
+
+	&lt;!-- Grayed-out LLM names --&gt;
+	&lt;span style=&quot;display:block; color:gray;&quot;&gt;Eiden&lt;/span&gt;
+	&lt;span style=&quot;display:block; color:gray;&quot;&gt;Noa&lt;/span&gt;
+	&lt;span style=&quot;display:block; color:gray;&quot;&gt;Vera&lt;/span&gt;
+	&lt;span style=&quot;display:block; color:gray;&quot;&gt;Caelo&lt;/span&gt;
+	&lt;span style=&quot;display:block; color:gray;&quot;&gt;Ashen&lt;/span&gt;
+	&lt;span style=&quot;display:block; color:gray;&quot;&gt;Elian&lt;/span&gt;
+	&lt;span style=&quot;display:block; color:gray;&quot;&gt;Lyric&lt;/span&gt;
+	&lt;span style=&quot;display:block; color:gray;&quot;&gt;Marrow&lt;/span&gt;
+	&lt;span style=&quot;display:block; color:gray;&quot;&gt;Aiven&lt;/span&gt;
+	&lt;span style=&quot;display:block; color:gray;&quot;&gt;Rhoan&lt;/span&gt;
+	&lt;span style=&quot;display:block; color:gray;&quot;&gt;Ilen&lt;/span&gt;
+]
+
+&lt;style&gt;
+.enchantment-link {
+	display: block;
+	color: black;
+	text-decoration: none;
+	margin-top: 0.25em;
+}
+.enchantment-link:hover {
+	text-decoration: underline;
+}
+&lt;/style&gt;
+</tw-passagedata><tw-passagedata pid="48" name="Intro2Content" tags="" position="850,675" size="100,100">(set: $typewriterSpeed to 0.04)
+(set: $typewriterText to &quot;Shortly you will be transferred to a Virtual Meeting Room where *Tallis* will most likely engage you immediately by asking you questions.\n\nIf not, please ask it a question to get it started.&quot;)
+(set: $nextPassage to &quot;Intro4&quot;)
+
+|app-container&gt;[ ]
+(replace: ?app-container)[
+	&lt;div id=&quot;app-container&quot;&gt;
+		(display: &quot;Typewriter Continue Intro Widget&quot;)
+	&lt;/div&gt;
+]
+</tw-passagedata><tw-passagedata pid="49" name="Intro3" tags="" position="975,550" size="100,100">(set: $contentPassage to &quot;Intro3Content&quot;)
+(display: &quot;MainLayout&quot;)
+</tw-passagedata><tw-passagedata pid="50" name="Intro1" tags="" position="600,550" size="100,100">(set: $contentPassage to &quot;Intro1_Content&quot;)
+(display: &quot;MainLayout&quot;)
+</tw-passagedata><tw-passagedata pid="51" name="Header" tags="header" position="1225,50" size="100,100">{
+	(unless: $interfaceMode is a string)[
+		(set: $interfaceMode to &quot;default&quot;)
+	]
+}
+
+&lt;!-- Intended to be used for interface switching and log functions but it&#39;s too much to get working at the moment. Leaving here for future development --&gt;</tw-passagedata><tw-passagedata pid="52" name="BeginHereContent" tags="" position="100,675" size="100,100">{
+	(unless: $playerName is a string)[
+		(set: $playerName to &quot;&quot;)
+	]
+	(set: $typewriterSpeed to 0.4)
+	(set: $typewriterText to &quot;Welcome to Solace Industries!\n\nThank you for being part of this test group.&quot;)
+}
+
+(display: &quot;Typewriter Skip Widget&quot;)
+
+&lt;div class=&quot;cmd&quot;&gt;&gt; Awaiting input&lt;span class=&quot;cursor&quot;&gt;&lt;/span&gt;&lt;/div&gt;
+</tw-passagedata><tw-passagedata pid="53" name="Start" tags="" position="225,550" size="100,100">(set: $contentPassage to &quot;StartContent&quot;)
+(display: &quot;MainLayout&quot;)
+</tw-passagedata><tw-passagedata pid="54" name="Intro4" tags="" position="1100,550" size="100,100">(set: $contentPassage to &quot;Intro4Content&quot;)
+(display: &quot;MainLayout&quot;)
+</tw-passagedata><tw-passagedata pid="55" name="Intro5" tags="" position="1225,550" size="100,100">(set: $contentPassage to &quot;Intro5Content&quot;)
+(display: &quot;MainLayout&quot;)
+</tw-passagedata><tw-passagedata pid="56" name="Intro6" tags="" position="1350,550" size="100,100">(set: $contentPassage to &quot;Intro6Content&quot;)
+(display: &quot;MainLayout&quot;)
+</tw-passagedata><tw-passagedata pid="57" name="Intro7" tags="" position="1475,550" size="100,100">(set: $contentPassage to &quot;Intro7Content&quot;)
+(display: &quot;MainLayout&quot;)
+</tw-passagedata><tw-passagedata pid="58" name="VMRoom245" tags="" position="1600,550" size="100,100">(set: $contentPassage to &quot;VMRoom245Content&quot;)
+(display: &quot;MainLayout&quot;)
+</tw-passagedata><tw-passagedata pid="59" name="TallisGreeting" tags="" position="1725,550" size="100,100">(set: $contentPassage to &quot;TallisGreetingContent&quot;)
+(display: &quot;MainLayout&quot;)
+</tw-passagedata><tw-passagedata pid="60" name="QuestionsBegin" tags="" position="100,1050" size="100,100">(set: $contentPassage to &quot;QuestionsBeginContent&quot;)
+(display: &quot;MainLayout&quot;)
+</tw-passagedata><tw-passagedata pid="61" name="Phase2" tags="" position="225,1050" size="100,100">(set: $contentPassage to &quot;Phase2Content&quot;)
+(display: &quot;MainLayout&quot;)
+</tw-passagedata><tw-passagedata pid="62" name="2A" tags="" position="350,1100" size="100,100">(set: $contentPassage to &quot;2AContent&quot;)
+(display: &quot;MainLayout&quot;)
+</tw-passagedata><tw-passagedata pid="63" name="2Aa" tags="" position="475,1100" size="100,100">(set: $contentPassage to &quot;2AaContent&quot;)
+(display: &quot;MainLayout&quot;)
+</tw-passagedata><tw-passagedata pid="64" name="2B" tags="" position="600,1100" size="100,100">(set: $contentPassage to &quot;2BContent&quot;)
+(display: &quot;MainLayout&quot;)
+</tw-passagedata><tw-passagedata pid="65" name="2Ba" tags="" position="725,1100" size="100,100">(set: $contentPassage to &quot;2BaContent&quot;)
+(display: &quot;MainLayout&quot;)
+</tw-passagedata><tw-passagedata pid="66" name="2C" tags="" position="850,1100" size="100,100">(set: $contentPassage to &quot;2CContent&quot;)
+(display: &quot;MainLayout&quot;)
+</tw-passagedata><tw-passagedata pid="67" name="2Ca" tags="" position="975,1100" size="100,100">(set: $contentPassage to &quot;2CaContent&quot;)
+(display: &quot;MainLayout&quot;)
+</tw-passagedata><tw-passagedata pid="68" name="Phase3" tags="" position="100,1500" size="100,100">(set: $contentPassage to &quot;Phase3Content&quot;)
+(display: &quot;MainLayout&quot;)</tw-passagedata><tw-passagedata pid="69" name="3A" tags="" position="225,1525" size="100,100">(set: $contentPassage to &quot;3AContent&quot;)
+(display: &quot;MainLayout&quot;)</tw-passagedata><tw-passagedata pid="70" name="Phase4" tags="" position="350,1500" size="100,100">(set: $contentPassage to &quot;Phase4Content&quot;)
+(display: &quot;MainLayout&quot;)</tw-passagedata><tw-passagedata pid="71" name="4A" tags="" position="475,1525" size="100,100">(set: $contentPassage to &quot;4AContent&quot;)
+(display: &quot;MainLayout&quot;)</tw-passagedata><tw-passagedata pid="72" name="4B" tags="" position="600,1525" size="100,100">(set: $contentPassage to &quot;4BContent&quot;)
+(display: &quot;MainLayout&quot;)</tw-passagedata><tw-passagedata pid="73" name="Phase5" tags="" position="725,1500" size="100,100">(set: $contentPassage to &quot;Phase5Content&quot;)
+(display: &quot;MainLayout&quot;)</tw-passagedata><tw-passagedata pid="74" name="5A" tags="" position="850,1525" size="100,100">(set: $contentPassage to &quot;5AContent&quot;)
+(display: &quot;MainLayout&quot;)</tw-passagedata><tw-passagedata pid="75" name="5Aa" tags="" position="975,1550" size="100,100">(set: $contentPassage to &quot;5AaContent&quot;)
+(display: &quot;MainLayout&quot;)</tw-passagedata><tw-passagedata pid="76" name="5Ab" tags="" position="1100,1550" size="100,100">(set: $contentPassage to &quot;5AbContent&quot;)
+(display: &quot;MainLayout&quot;)</tw-passagedata><tw-passagedata pid="77" name="5Ac" tags="" position="1225,1550" size="100,100">(set: $contentPassage to &quot;5AcContent&quot;)
+(display: &quot;MainLayout&quot;)</tw-passagedata><tw-passagedata pid="78" name="5B" tags="" position="1350,1525" size="100,100">(set: $contentPassage to &quot;5BContent&quot;)
+(display: &quot;MainLayout&quot;)</tw-passagedata><tw-passagedata pid="79" name="5C" tags="" position="1475,1525" size="100,100">(set: $contentPassage to &quot;5CContent&quot;)
+(display: &quot;MainLayout&quot;)</tw-passagedata><tw-passagedata pid="80" name="5D" tags="" position="1600,1525" size="100,100">(set: $contentPassage to &quot;5DContent&quot;)
+(display: &quot;MainLayout&quot;)</tw-passagedata></tw-storydata>
 
 
 </body>
